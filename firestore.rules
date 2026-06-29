@@ -1,0 +1,93 @@
+rules_version = '2';
+
+/*
+ * Firestore Security Rules — Primrose Knowledge Studio
+ *
+ * Mirror of the access model in ARCHITECTURE.md section 3. This file is the
+ * single source of truth for what the database itself will let through,
+ * independent of the app layer. Server-side checks in Next.js are the second
+ * lock; these rules are the first.
+ */
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    /* ----- helpers ----- */
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isSelf(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isSignedIn() &&
+        exists(/databases/$(database)/documents/profiles/$(request.auth.uid)) &&
+        get(/databases/$(database)/documents/profiles/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    function hasActiveSubscription() {
+      return isSignedIn() &&
+        exists(/databases/$(database)/documents/subscriptions/$(request.auth.uid)) &&
+        get(/databases/$(database)/documents/subscriptions/$(request.auth.uid)).data.status in ['active', 'past_due', 'trialing'];
+    }
+
+    function allowedPillar(value) {
+      return value in ['workplace', 'financial', 'career', 'emotional', 'safety'];
+    }
+
+    /* ----- profiles/{userId} ----- */
+
+    match /profiles/{userId} {
+      allow read: if isSelf(userId) || isAdmin();
+      allow update: if isSelf(userId)
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['displayName']);
+      /* create and role/stripeCustomerId writes happen server-side via Admin SDK */
+      allow create, delete: if false;
+    }
+
+    /* ----- subscriptions/{userId} ----- */
+
+    match /subscriptions/{userId} {
+      allow read: if isSelf(userId);
+      /* never written by client — Stripe webhook syncs these via Admin SDK */
+      allow write: if false;
+    }
+
+    /* ----- videos/{videoId} ----- */
+
+    match /videos/{videoId} {
+      allow read: if (
+        resource.data.status == 'published'
+        && (
+          resource.data.youtubeVisibility == 'public'
+          || hasActiveSubscription()
+        )
+      ) || isAdmin();
+
+      allow create: if isAdmin()
+        && request.resource.data.keys().hasAll(['title', 'slug', 'pillar', 'youtubeVideoId', 'status'])
+        && allowedPillar(request.resource.data.pillar);
+
+      allow update: if isAdmin()
+        && allowedPillar(request.resource.data.pillar);
+
+      allow delete: if isAdmin();
+    }
+
+    /* ----- videoProgress/{userId}/items/{videoId} ----- */
+
+    match /videoProgress/{userId}/items/{videoId} {
+      allow read, write: if isSelf(userId);
+    }
+
+    /* ----- processedWebhookEvents/{eventId} ----- */
+
+    match /processedWebhookEvents/{eventId} {
+      /* server-only ledger; client never reads or writes */
+      allow read, write: if false;
+    }
+  }
+}

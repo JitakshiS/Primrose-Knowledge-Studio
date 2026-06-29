@@ -1,0 +1,20 @@
+rules_version = '2';
+
+/*
+ * Firebase Storage Security Rules.
+ *
+ * Toolkit PDFs are stored under /toolkits/{videoId}/{filename}.pdf and are
+ * NEVER readable by clients directly. The Next.js server (Admin SDK) mints
+ * short-lived signed URLs per request after verifying member access. The
+ * client-side read rule is therefore `if false`.
+ */
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /toolkits/{videoId}/{filename} {
+      allow read, write: if false;
+    }
+
+    /* Future asset buckets get added here with their own rules. */
+  }
+}

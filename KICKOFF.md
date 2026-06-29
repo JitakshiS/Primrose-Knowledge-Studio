@@ -1,94 +1,110 @@
 # Kickoff Checklist — Primrose Knowledge Studio
 
-**Status:** Client approved (2026-05-27). Build starts once SOW + contract are signed and the 50% deposit is received.
-
-Approach: **rebuild from scratch** on a clean architecture, pulling content and the Stripe setup from the current site. See [DECISIONS.md](./DECISIONS.md).
+**Status:** Build in progress. Contract signed. Awaiting $2,250 kickoff deposit before final stages. Visual direction LOCKED. Scaffold + design system + Porch + Firebase/Stripe wiring pushed to repo. See [DECISIONS.md](./DECISIONS.md) for the full timeline.
 
 ---
 
-## The sequence (build does not start until step 3)
+## Where we are right now
 
-1. [ ] Send SOW + contract + invoice (50% deposit = $4,250 CAD)
-2. [ ] Contract signed by both parties
-3. [ ] 50% deposit received → **build starts**
-4. [ ] Design call booked (lock brand direction) — week 1
-5. [ ] Access + content collected (see below)
-6. [ ] Build through the 3-week plan
-7. [ ] Preview review → DNS cutover → handover → 14-day support window
-
----
-
-## What I send her
-
-- [ ] **SOW** — scope, deliverables, timeline, out-of-scope, terms
-- [ ] **Contract / agreement** — align with her template, or use ours
-- [ ] **Invoice** — 50% of $8,500 = $4,250 CAD deposit
-
----
-
-## What we need from her — ACCESS
-
-Ownership model: every account stays under **her** name; we are added as collaborators. She owns her infrastructure, billing goes to her directly, nothing is held hostage.
-
-- [x] **GoDaddy (domain)** — received. Needed at launch for DNS cutover.
-- [ ] **Current website code** (her Claude Code build) — for content and structure reference, even though we rebuild fresh
-- [ ] **Stripe** — collaborator access or restricted API keys. Reuse her existing $29 product so billing isn't duplicated.
-- [ ] **Vimeo** — she creates / upgrades to the Advanced tier, then adds us as a team member
-- [ ] **Supabase** — we create the project on her organisation for ownership
-- [ ] **Vercel** — we create on her account (or ours, then transfer at handover)
-- [ ] **Email service** (Resend or Loops) — we set up on her account
+| Step | Status |
+|---|---|
+| Contract signed by both parties | Done |
+| Visual direction locked (Pillar Stack) | Done |
+| Scaffold pushed to repo (Next.js 16, Tailwind v4, design tokens baked) | Done |
+| The Porch (sales page) skeleton with full sections | Done |
+| Firebase + Stripe + Auth wiring (compiled, awaiting env vars) | Done |
+| Firestore Security Rules drafted (`firestore.rules`) | Done |
+| Vercel connected to GitHub repo | Done |
+| Kickoff deposit ($2,250) received | Pending |
+| Firebase project created under Primrose's Google account | **Blocker** |
+| `.env.local` populated with real Firebase + Stripe + Resend keys | Blocked on Firebase project |
+| Real Primrose headshot received | Pending |
+| Brand assets folder path received | Pending |
 
 ---
 
-## What we need from her — CONTENT
+## What we need from Primrose to unblock the next step
 
-- [ ] **Brand assets** from the tax-site project (logo, headshot, fonts, colours) for carry-over reference
-- [ ] **3–5 founding videos** uploaded to Vimeo, or at minimum the topics + scripts
-- [ ] **Toolkit PDFs** for each video (e.g. the F.A.C.T. cheatsheet)
-- [ ] **Her bio + credentials** for the sales page
-- [ ] **Sales page copy** — we draft, she approves (bar-association rules mean she holds final approval on all content)
-- [ ] **Confirmation of the $29/mo price** and that the Stripe product is set up correctly
+The single biggest blocker right now is **Firebase project creation under her Google account**. Everything else (auth, dashboard, video gating, admin panel) is wired and waiting for keys.
+
+### Firebase setup (her side — ~10 minutes, no code)
+
+1. [ ] Sign in to [console.firebase.google.com](https://console.firebase.google.com) with her Google account
+2. [ ] Create a new project called `primrose-knowledge-studio` (or similar)
+3. [ ] **Authentication** → enable the "Email link (passwordless sign-in)" provider
+4. [ ] **Firestore** → create database in *production mode*, region: `nam5` (US multi-region) or `northamerica-northeast1` (Montreal) for Canadian latency
+5. [ ] **Storage** → create the default bucket
+6. [ ] **Project Settings → General** → register a new Web App; copy the Firebase config object — these go into the `NEXT_PUBLIC_FIREBASE_*` env vars
+7. [ ] **Project Settings → Service Accounts** → generate a new private key (JSON download) — these credentials populate `FIREBASE_ADMIN_*` env vars
+8. [ ] Add Jitakshi as an Owner-role collaborator on the Firebase project so we can administer it during the build
+
+### Stripe (her side)
+
+9. [ ] Confirm the existing $29/month product + price are still live in her Stripe account, and share the price ID (starts with `price_...`)
+10. [ ] Add Jitakshi as a Developer or Read-only collaborator in Stripe → Team
+11. [ ] In Stripe → Webhooks, add an endpoint pointing to the eventual production URL `https://<domain>/api/stripe/webhook` — sharing the webhook signing secret with Jitakshi
+
+### Content + brand (her side, any time before launch)
+
+12. [ ] High-resolution headshot for the Porch hero panel and member dashboard
+13. [ ] Bio + Bar credentials text for the About section
+14. [ ] First 3–5 unlisted YouTube videos uploaded to her channel (video IDs we plug into Firestore)
+15. [ ] Toolkit PDFs (one per video)
+16. [ ] Approval pass on the Porch copy I drafted (currently placeholder in the spirit of plain-English-Canadian-Gen-Z — she gets final say on every word)
 
 ---
 
-## Decisions to lock at the design call (week 1)
+## What we need from Jitakshi (Primrose-account access)
 
-- [ ] Serif vs sans headlines (her brief says serif; default is Inter sans)
-- [ ] Palette within "Dark Academia meets Modern Digital Wellness"
-- [ ] Hero treatment: photography of her, typography-led, or hybrid
-- [ ] Member-facing tone of voice
-- [ ] Email service final pick (Resend vs Loops)
+- [x] GoDaddy (domain) — received
+- [ ] **Resend** — set up a Resend account under her email (or his) and verify the `primroseknowledgestudio.com` sending domain (SPF + DKIM DNS records)
+- [ ] **Vercel** — confirm the GitHub repo is connected (per his confirmation this is done)
+- [ ] Optionally: a `.env.local` template with the env vars he can drop into the repo once Firebase/Stripe/Resend keys are available
 
 ---
 
-## The 3-week build plan
+## How the env vars flow into the build
 
-### Week 1 — Foundation + design
-- Design call, lock the direction
-- Set up repo, Supabase, Vercel, Stripe (test mode), email service
-- Build the sales page (the Porch) with the new brand
-- Magic-link login working
+The repo has a `.env.example` documenting every key needed. Once the values are in `.env.local` (gitignored), the following routes start working end-to-end:
+
+- `/login` → magic-link sign-in
+- `/api/auth/session` → ID token exchange for HTTP-only session cookie
+- `/api/stripe/checkout` → Stripe-hosted Checkout Session
+- `/api/stripe/webhook` → Stripe → Firestore subscription sync (idempotent, signature-verified)
+- `/dashboard`, `/library/[pillar]`, `/video/[slug]`, `/admin` → become gated by the proxy + `verifyMemberAccess` helper
+
+Until then, the routes still build cleanly — they just throw at runtime when called because the env vars aren't there yet. This is intentional: the architecture is committed and ready, so the moment Firebase exists we plug in keys and the platform comes alive.
+
+---
+
+## The remaining 3-week build plan (post-deposit, post-Firebase)
+
+### Week 1 — Foundation (mostly done; finishing the auth flow)
+- [x] Scaffold + design system + Porch
+- [x] Firebase + Stripe wiring committed
+- [ ] Firebase project exists; env vars populated
+- [ ] `/login/callback` page completes the magic-link sign-in flow end-to-end
+- [ ] `/welcome` page handles post-Stripe-checkout magic-link trigger
 
 ### Week 2 — The product core
-- Member dashboard (the Fortress) with 5-Pillar navigation
-- Video player template + Vimeo embed
-- Admin panel (the upload form)
-- Subscription gating + Stripe webhooks
-- Checkout + login pages
+- [ ] Member dashboard (the Fortress) — five-pillar nav, Newest Addition feature card, resume-where-you-left-off
+- [ ] Video viewing template — unlisted YouTube embed, toolkit PDF download via signed URL, prev/next within a pillar
+- [ ] Admin panel — add/edit/delete videos, set Featured, upload toolkit PDFs
+- [ ] Welcome email via Resend
 
 ### Week 3 — Polish + launch
-- Welcome email
-- Run the full [SMOKE-TESTS.md](./SMOKE-TESTS.md) checklist end to end
-- Load her founding content
-- Preview review with her
-- Production cutover (point GoDaddy DNS to Vercel)
-- Record the admin playbook (Loom)
-- Open the 14-day support window
+- [ ] Run [SMOKE-TESTS.md](./SMOKE-TESTS.md) end-to-end
+- [ ] Load Primrose's founding content
+- [ ] Preview review with Primrose
+- [ ] DNS cutover (GoDaddy → Vercel)
+- [ ] Record the admin playbook (Loom)
+- [ ] Open the 14-day support window
 
 ---
 
 ## Open risks to clear early
 
-- **Live subscribers?** If she has any current paying members, their Stripe subscriptions must be preserved through the cutover. Confirm the count before build. If zero, the rebuild is clean and risk-free.
-- **Stripe product reuse.** Reuse her existing $29 product / price so we don't create duplicates or break existing billing.
-- **Zero downtime.** Build on a preview URL; flip DNS only after she signs off on the preview. The current site stays live until the moment we cut over.
+- **Live subscribers on the existing site?** If she has any current paying members, their Stripe subscriptions must be preserved through cutover. Confirm the count before launch. If zero, the rebuild is clean.
+- **Stripe product reuse.** Reuse her existing $29 product/price so billing isn't duplicated or broken at cutover.
+- **Zero downtime.** Build on the Vercel preview URL; flip DNS only after she signs off. Current site stays live until the cutover.
+- **YouTube unlisted leakage tolerance.** Acknowledged in Agreement Section A.8 — a member sharing a video URL externally makes it viewable to anyone with the link. Documented limitation, not a bug.
