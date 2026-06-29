@@ -89,7 +89,7 @@ const faqs = [
   },
   {
     q: "Who is Primrose?",
-    a: "A working lawyer based in Nova Scotia who has spent her career translating Canadian law into things people can actually use. She built the Knowledge Studio for the version of herself in her twenties — the one who did not know what she did not know.",
+    a: "A working lawyer based in Ottawa who has spent her career translating Canadian law into things people can actually use. She built the Knowledge Studio for the version of herself in her twenties — the one who did not know what she did not know.",
   },
 ];
 
@@ -174,7 +174,7 @@ export default function Home() {
                   Primrose Watson
                 </div>
                 <div className="text-[13px] opacity-85 mt-1">
-                  Lawyer · Nova Scotia
+                  Lawyer · Ottawa
                 </div>
               </div>
             </div>
@@ -196,7 +196,7 @@ export default function Home() {
       <section className="border-y border-ink/8 bg-card">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 py-6 flex flex-col sm:flex-row sm:justify-between items-center gap-4 text-center sm:text-left">
           <div className="font-mono text-[11px] tracking-[0.14em] uppercase text-muted">
-            Bar of Nova Scotia · in good standing
+            Canadian Bar · in good standing
           </div>
           <div className="font-mono text-[11px] tracking-[0.14em] uppercase text-muted">
             New videos every month
@@ -399,7 +399,7 @@ export default function Home() {
                 Primrose<br />Watson
               </div>
               <div className="text-[13px] opacity-85 mt-2">
-                Bar of Nova Scotia
+                Canadian Bar · in good standing
               </div>
             </div>
           </div>

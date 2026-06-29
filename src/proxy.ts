@@ -10,7 +10,13 @@ import { SESSION_COOKIE_NAME } from "@/lib/auth/constants";
  * page itself, not the proxy.
  */
 
-const PROTECTED_PATHS = ["/dashboard", "/library", "/video", "/admin"];
+/*
+ * NOTE — design-preview mode. Until Firebase auth is wired and we can test
+ * end-to-end, only /admin is gated so Jitakshi can review the Fortress,
+ * library, and video templates on the Vercel preview URL. When real data
+ * lands, restore the full list: ["/dashboard", "/library", "/video", "/admin"].
+ */
+const PROTECTED_PATHS = ["/admin"];
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -30,10 +36,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    "/dashboard/:path*",
-    "/library/:path*",
-    "/video/:path*",
-    "/admin/:path*",
-  ],
+  matcher: ["/admin/:path*"],
 };
