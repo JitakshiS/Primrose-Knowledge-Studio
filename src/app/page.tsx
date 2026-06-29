@@ -139,7 +139,7 @@ export default function Home() {
             <div className="font-mono text-[11px] tracking-[0.14em] uppercase text-career mb-5">
               $29 / month · five pillars · one library
             </div>
-            <h1 className="font-display font-black text-5xl sm:text-6xl lg:text-7xl leading-[0.9] tracking-[-0.045em] mb-7">
+            <h1 className="font-display font-black text-5xl sm:text-6xl lg:text-7xl leading-[0.9] tracking-[-0.025em] mb-7">
               Your rights,<br />
               your money,<br />
               <span className="bg-gradient-to-r from-career via-emotional to-workplace bg-clip-text text-transparent">
@@ -214,7 +214,7 @@ export default function Home() {
         <div className="font-mono text-[11px] tracking-[0.14em] uppercase text-muted mb-4">
           How it works
         </div>
-        <h2 className="font-display font-black text-4xl lg:text-5xl tracking-[-0.035em] leading-[0.95] mb-12 max-w-[18ch]">
+        <h2 className="font-display font-black text-4xl lg:text-5xl tracking-[-0.02em] leading-[0.95] mb-12 max-w-[18ch]">
           Three steps. No legal jargon.
         </h2>
         <div className="grid md:grid-cols-3 gap-4">
@@ -240,7 +240,7 @@ export default function Home() {
           ============================================================ */}
       <section id="pillars" className="max-w-7xl mx-auto px-6 lg:px-10 pb-24">
         <div className="flex justify-between items-end mb-7 pb-4 border-b border-ink/8">
-          <h2 className="font-display font-black text-3xl lg:text-4xl tracking-[-0.03em]">
+          <h2 className="font-display font-black text-3xl lg:text-4xl tracking-[-0.015em]">
             The framework.
           </h2>
           <span className="font-mono text-xs tracking-[0.12em] uppercase text-muted">
@@ -286,7 +286,7 @@ export default function Home() {
         <div className="font-mono text-[11px] tracking-[0.14em] uppercase text-muted mb-4">
           What you actually get
         </div>
-        <h2 className="font-display font-black text-3xl lg:text-4xl tracking-[-0.03em] leading-[1] mb-10 max-w-[22ch]">
+        <h2 className="font-display font-black text-3xl lg:text-4xl tracking-[-0.015em] leading-[1] mb-10 max-w-[22ch]">
           15-minute guides. Every one comes with a toolkit.
         </h2>
         <div className="grid lg:grid-cols-[1fr_0.9fr] gap-6">
@@ -305,7 +305,7 @@ export default function Home() {
                 <span className="block w-2 h-2 rounded-full bg-career" />
                 03 · CAREER WELLNESS
               </div>
-              <h3 className="font-display font-black text-3xl lg:text-4xl tracking-[-0.035em] leading-[0.95] mb-3 max-w-[20ch]">
+              <h3 className="font-display font-black text-3xl lg:text-4xl tracking-[-0.02em] leading-[0.95] mb-3 max-w-[20ch]">
                 Reading the fine print on your first job offer.
               </h3>
               <p className="text-[15px] leading-relaxed opacity-75 max-w-[42ch] mb-8">
@@ -374,7 +374,7 @@ export default function Home() {
             <div className="font-mono text-[11px] tracking-[0.14em] uppercase text-career mb-4">
               About · Primrose Watson
             </div>
-            <h2 className="font-display font-black text-3xl lg:text-5xl tracking-[-0.035em] leading-[0.95] mb-6 max-w-[20ch]">
+            <h2 className="font-display font-black text-3xl lg:text-5xl tracking-[-0.02em] leading-[0.95] mb-6 max-w-[20ch]">
               A working lawyer who actually wants you to understand it.
             </h2>
             <p className="text-base lg:text-lg leading-relaxed text-muted mb-5 max-w-[58ch]">
@@ -413,7 +413,7 @@ export default function Home() {
         <div className="font-mono text-[11px] tracking-[0.14em] uppercase text-muted mb-4 text-center">
           Membership
         </div>
-        <h2 className="font-display font-black text-4xl lg:text-5xl tracking-[-0.035em] leading-[0.95] mb-12 text-center max-w-[22ch] mx-auto">
+        <h2 className="font-display font-black text-4xl lg:text-5xl tracking-[-0.02em] leading-[0.95] mb-12 text-center max-w-[22ch] mx-auto">
           One plan. Five pillars. The whole library.
         </h2>
         <div className="max-w-2xl mx-auto bg-ink text-paper rounded-[24px] p-10 lg:p-12 relative overflow-hidden">
@@ -428,12 +428,12 @@ export default function Home() {
                 <div className="font-mono text-[11px] tracking-[0.14em] uppercase text-career mb-3">
                   Knowledge Studio · monthly
                 </div>
-                <h3 className="font-display font-black text-3xl lg:text-4xl tracking-[-0.03em] leading-none">
+                <h3 className="font-display font-black text-3xl lg:text-4xl tracking-[-0.015em] leading-none">
                   Full library access.
                 </h3>
               </div>
               <div className="text-right">
-                <div className="font-display font-black text-5xl lg:text-6xl tracking-[-0.04em] leading-none">
+                <div className="font-display font-black text-5xl lg:text-6xl tracking-[-0.02em] leading-none">
                   $29
                 </div>
                 <div className="font-mono text-[11px] opacity-65 mt-1">
@@ -478,7 +478,7 @@ export default function Home() {
         <div className="font-mono text-[11px] tracking-[0.14em] uppercase text-muted mb-4">
           FAQ
         </div>
-        <h2 className="font-display font-black text-3xl lg:text-4xl tracking-[-0.03em] leading-[1] mb-10">
+        <h2 className="font-display font-black text-3xl lg:text-4xl tracking-[-0.015em] leading-[1] mb-10">
           Questions, answered straight.
         </h2>
         <div className="space-y-3">
@@ -512,7 +512,7 @@ export default function Home() {
           ============================================================ */}
       <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-32">
         <div className="bg-card border border-ink/6 rounded-[24px] p-10 lg:p-16 text-center">
-          <h2 className="font-display font-black text-4xl lg:text-6xl tracking-[-0.045em] leading-[0.95] mb-6 max-w-[18ch] mx-auto">
+          <h2 className="font-display font-black text-4xl lg:text-6xl tracking-[-0.025em] leading-[0.95] mb-6 max-w-[18ch] mx-auto">
             Stop Googling at 2am.
           </h2>
           <p className="text-base lg:text-lg leading-relaxed text-muted mb-8 max-w-[48ch] mx-auto">

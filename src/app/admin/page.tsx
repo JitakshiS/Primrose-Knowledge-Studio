@@ -5,7 +5,7 @@ export default function AdminPage() {
         <div className="font-mono text-[11px] tracking-[0.14em] uppercase text-safety mb-5">
           Admin · Primrose only
         </div>
-        <h1 className="font-display font-black text-5xl tracking-[-0.045em] leading-[0.9] mb-6">
+        <h1 className="font-display font-black text-5xl tracking-[-0.025em] leading-[0.9] mb-6">
           Admin panel coming soon.
         </h1>
         <p className="text-lg text-muted leading-relaxed">

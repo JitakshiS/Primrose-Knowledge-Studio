@@ -37,7 +37,7 @@ export default function DashboardPage() {
             <div className="font-mono text-[11px] tracking-[0.14em] uppercase text-muted mb-2">
               Members · Library
             </div>
-            <h1 className="font-display font-black text-4xl lg:text-5xl tracking-[-0.04em] leading-[0.95]">
+            <h1 className="font-display font-black text-4xl lg:text-5xl tracking-[-0.02em] leading-[0.95]">
               Welcome back.
             </h1>
           </div>
@@ -68,7 +68,7 @@ export default function DashboardPage() {
                   />
                   Newest addition · {PILLAR_META[newest.pillar].name}
                 </div>
-                <h2 className="font-display font-black text-3xl lg:text-5xl tracking-[-0.04em] leading-[0.95] mb-5 max-w-[22ch]">
+                <h2 className="font-display font-black text-3xl lg:text-5xl tracking-[-0.02em] leading-[0.95] mb-5 max-w-[22ch]">
                   {newest.title}
                 </h2>
                 <p className="text-[15px] lg:text-base leading-relaxed opacity-75 max-w-[58ch]">

@@ -59,7 +59,7 @@ export default async function VideoPage({ params }: { params: Params }) {
             />
             {PILLAR_META[video.pillar].name}
           </div>
-          <h1 className="font-display font-black text-3xl lg:text-5xl tracking-[-0.035em] leading-[0.95] max-w-[24ch] mb-4">
+          <h1 className="font-display font-black text-3xl lg:text-5xl tracking-[-0.02em] leading-[0.95] max-w-[24ch] mb-4">
             {video.title}
           </h1>
           <div className="font-mono text-xs text-muted flex flex-wrap gap-x-5 gap-y-1">

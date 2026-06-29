@@ -52,7 +52,7 @@ export default async function PillarPage({ params }: { params: Params }) {
               <div className="font-mono text-[12px] tracking-[0.14em] uppercase opacity-80 mb-4">
                 Pillar {String(pillarIndex).padStart(2, "0")} of 05
               </div>
-              <h1 className="font-display font-black text-5xl lg:text-7xl tracking-[-0.045em] leading-[0.9] mb-6 max-w-[20ch]">
+              <h1 className="font-display font-black text-5xl lg:text-7xl tracking-[-0.025em] leading-[0.9] mb-6 max-w-[20ch]">
                 {meta.name}.
               </h1>
               <p className="text-lg lg:text-xl leading-relaxed opacity-85 max-w-[52ch]">
@@ -60,7 +60,7 @@ export default async function PillarPage({ params }: { params: Params }) {
               </p>
             </div>
             <div className="font-mono text-[11px] tracking-[0.14em] uppercase opacity-80">
-              <div className="text-3xl font-display font-black tracking-[-0.03em] mb-1 opacity-100">
+              <div className="text-3xl font-display font-black tracking-[-0.015em] mb-1 opacity-100">
                 {videos.length}
               </div>
               Videos in this pillar

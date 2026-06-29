@@ -71,7 +71,7 @@ export default function LoginPage() {
         <div className="font-mono text-[11px] tracking-[0.14em] uppercase text-career mb-4">
           Members · sign in
         </div>
-        <h1 className="font-display font-black text-4xl tracking-[-0.04em] leading-[0.95] mb-3">
+        <h1 className="font-display font-black text-4xl tracking-[-0.02em] leading-[0.95] mb-3">
           Sign in with a magic link.
         </h1>
         <p className="text-[15px] leading-relaxed text-muted mb-8">
