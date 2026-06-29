@@ -529,6 +529,23 @@ export default function Home() {
       </section>
 
       {/* ============================================================
+          DESIGN PREVIEW LINK STRIP — remove before launch
+          (single block, easy to delete in one edit)
+          ============================================================ */}
+      <div className="bg-stone/60 border-y border-ink/8">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 py-3 flex flex-wrap items-center gap-x-5 gap-y-2 justify-center text-center">
+          <span className="font-mono text-[10px] tracking-[0.16em] uppercase text-muted">
+            Design preview · direct links
+          </span>
+          <a href="/dashboard" className="font-mono text-[11px] text-ink hover:text-career transition-colors">/dashboard</a>
+          <a href="/library/workplace" className="font-mono text-[11px] text-ink hover:text-career transition-colors">/library/workplace</a>
+          <a href="/library/safety" className="font-mono text-[11px] text-ink hover:text-career transition-colors">/library/safety</a>
+          <a href="/video/reading-the-fine-print-job-offer" className="font-mono text-[11px] text-ink hover:text-career transition-colors">/video/sample</a>
+          <a href="/login" className="font-mono text-[11px] text-ink hover:text-career transition-colors">/login</a>
+        </div>
+      </div>
+
+      {/* ============================================================
           FOOTER
           ============================================================ */}
       <footer className="border-t border-ink/8">
@@ -559,7 +576,7 @@ export default function Home() {
               </div>
               <div className="space-y-1.5">
                 <a href="/dashboard" className="block text-muted hover:text-ink transition-colors">Members</a>
-                <a href="#" className="block text-muted hover:text-ink transition-colors">Sign in</a>
+                <a href="/login" className="block text-muted hover:text-ink transition-colors">Sign in</a>
               </div>
             </div>
           </div>
