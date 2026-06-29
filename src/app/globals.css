@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Primrose Knowledge Studio — Design System
+   Pillar Stack · LOCKED 2026-06-29
+   Source of truth: ./design-system.html
+   ============================================================ */
+
+:root {
+  /* Surfaces */
+  --paper: #F8F6F1;
+  --card: #FFFEFA;
+  --stone: #E7E3D8;
+  --ink: #0F0F0F;
+  --muted: #5A5A55;
+  --soft: #B4B4AC;
+
+  /* Pillar identity colours */
+  --pillar-workplace: #2640D9;
+  --pillar-financial: #1F5C45;
+  --pillar-career: #DC5B3F;
+  --pillar-emotional: #7A4B6E;
+  --pillar-safety: #7C3036;
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-card: var(--card);
+  --color-stone: var(--stone);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-soft: var(--soft);
+
+  --color-workplace: var(--pillar-workplace);
+  --color-financial: var(--pillar-financial);
+  --color-career: var(--pillar-career);
+  --color-emotional: var(--pillar-emotional);
+  --color-safety: var(--pillar-safety);
+
+  --color-background: var(--paper);
+  --color-foreground: var(--ink);
+
+  --font-display: var(--font-outfit);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-feature-settings: "ss01", "cv01";
+}
+
+::selection {
+  background: var(--pillar-career);
+  color: var(--paper);
+}

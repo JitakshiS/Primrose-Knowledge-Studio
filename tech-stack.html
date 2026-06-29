@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Primrose Knowledge Studio — The Tech Stack</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAF8F5;
+    --surface: #FFFFFF;
+    --ink: #1A1A1A;
+    --muted: #666666;
+    --soft: #999999;
+    --line: rgba(0, 0, 0, 0.08);
+    --accent: #722F37;
+    --accent-soft: #F4E8E9;
+    --accent-line: rgba(114, 47, 55, 0.18);
+    --success: #2D5A3D;
+    --success-soft: #E8F0EA;
+    --warn: #8B5A2B;
+    --warn-soft: #F5EBE0;
+    --radius: 16px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .container { max-width: 920px; margin: 0 auto; padding: 56px 32px 80px; }
+
+  /* Header */
+  .doc-header { margin-bottom: 48px; }
+  .doc-eyebrow {
+    display: inline-block;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent); padding: 6px 12px;
+    background: var(--accent-soft); border-radius: 999px;
+    margin-bottom: 18px;
+  }
+  .doc-title {
+    font-size: 38px; font-weight: 700;
+    letter-spacing: -0.025em; line-height: 1.1; margin-bottom: 12px;
+  }
+  .doc-subtitle { font-size: 16px; color: var(--muted); max-width: 620px; }
+
+  /* Sections */
+  section { margin-bottom: 56px; }
+  .section-head { margin-bottom: 24px; }
+  .section-num {
+    font-size: 12px; font-weight: 600; letter-spacing: 0.1em;
+    color: var(--accent); text-transform: uppercase; margin-bottom: 6px;
+  }
+  .section-title { font-size: 23px; font-weight: 600; letter-spacing: -0.015em; }
+
+  /* SVG */
+  .icn { stroke: currentColor; stroke-width: 1.7; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* Supabase callout */
+  .callout {
+    background: var(--surface);
+    border: 1px solid var(--accent-line);
+    border-radius: var(--radius);
+    padding: 28px;
+  }
+  .callout-head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .callout-icon {
+    width: 42px; height: 42px; border-radius: 10px;
+    background: var(--accent-soft); color: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .callout-icon .icn { width: 22px; height: 22px; }
+  .callout-title { font-size: 17px; font-weight: 600; }
+  .callout-body { font-size: 14.5px; line-height: 1.6; color: var(--ink); }
+  .callout-body p + p { margin-top: 12px; }
+  .callout-body strong { font-weight: 600; }
+  .tag-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+  .tag {
+    font-size: 12px; font-weight: 500;
+    padding: 6px 12px; border-radius: 999px;
+    background: var(--success-soft); color: var(--success);
+  }
+  .tag.warn { background: var(--warn-soft); color: var(--warn); }
+
+  /* Stack cards */
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .stack-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .stack-icon {
+    flex-shrink: 0;
+    width: 40px; height: 40px; border-radius: 10px;
+    background: var(--bg); color: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .stack-icon .icn { width: 22px; height: 22px; }
+  .stack-name { font-size: 15px; font-weight: 600; margin-bottom: 3px; }
+  .stack-role { font-size: 13.5px; color: var(--muted); line-height: 1.5; }
+  .stack-cost {
+    display: inline-block; margin-top: 8px;
+    font-size: 11px; font-weight: 600;
+    color: var(--soft);
+  }
+
+  /* Architecture diagram */
+  .diagram {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 36px 28px;
+  }
+  .node {
+    margin: 0 auto;
+    max-width: 340px;
+    text-align: center;
+    border-radius: 14px;
+    padding: 16px 20px;
+  }
+  .node-browser { background: var(--bg); border: 1px solid var(--line); }
+  .node-brain { background: var(--accent); color: white; max-width: 380px; }
+  .node-title { font-size: 15px; font-weight: 600; }
+  .node-sub { font-size: 12.5px; opacity: 0.8; margin-top: 2px; }
+  .node-browser .node-sub { color: var(--muted); opacity: 1; }
+
+  .connector {
+    width: 2px; height: 28px;
+    background: var(--accent-line);
+    margin: 0 auto;
+  }
+  .connector-label {
+    text-align: center;
+    font-size: 12px; color: var(--soft);
+    padding: 4px 0;
+  }
+
+  .services {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .svc {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 12px;
+    text-align: center;
+  }
+  .svc-icon {
+    width: 36px; height: 36px; margin: 0 auto 10px;
+    border-radius: 9px;
+    background: var(--surface); color: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .svc-icon .icn { width: 19px; height: 19px; }
+  .svc-name { font-size: 13.5px; font-weight: 600; margin-bottom: 3px; }
+  .svc-role { font-size: 12px; color: var(--muted); line-height: 1.4; }
+
+  .fan {
+    display: flex; align-items: center; justify-content: center;
+    gap: 4px; color: var(--accent-line);
+    margin: 8px 0 4px;
+  }
+  .fan .icn { width: 18px; height: 18px; color: var(--accent); opacity: 0.5; }
+
+  .sync-note {
+    margin-top: 20px; padding: 14px 18px;
+    background: var(--accent-soft);
+    border-radius: 12px;
+    font-size: 13px; color: var(--ink);
+    display: flex; gap: 10px; align-items: center;
+  }
+  .sync-note .icn { width: 18px; height: 18px; color: var(--accent); flex-shrink: 0; }
+  .sync-note strong { font-weight: 600; }
+
+  /* Flows */
+  .flow {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 14px;
+  }
+  .flow-title {
+    font-size: 15px; font-weight: 600;
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .flow-title .dot {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--accent-soft); color: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .flow-title .dot .icn { width: 15px; height: 15px; }
+  .flow-steps { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .chip {
+    font-size: 13px;
+    padding: 8px 12px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    white-space: nowrap;
+  }
+  .chip strong { font-weight: 600; color: var(--accent); }
+  .chip-arrow { color: var(--soft); display: flex; align-items: center; }
+  .chip-arrow .icn { width: 16px; height: 16px; }
+
+  /* Footer */
+  .doc-footer {
+    margin-top: 56px; padding-top: 24px;
+    border-top: 1px solid var(--line);
+    color: var(--soft); font-size: 12px;
+  }
+
+  /* Responsive */
+  @media (max-width: 760px) {
+    .container { padding: 44px 20px 60px; }
+    .doc-title { font-size: 30px; }
+    .stack-grid { grid-template-columns: 1fr; }
+    .services { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  }
+  @media (max-width: 460px) {
+    .services { grid-template-columns: 1fr; }
+    .flow-steps { flex-direction: column; align-items: stretch; }
+    .chip-arrow { transform: rotate(90deg); align-self: center; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header class="doc-header">
+    <div class="doc-eyebrow">Primrose Knowledge Studio</div>
+    <h1 class="doc-title">The tech stack &amp; how it connects</h1>
+    <p class="doc-subtitle">Everything we're using, what each piece does, and how they talk to each other. So we both know exactly what we're dealing with.</p>
+  </header>
+
+  <!-- Supabase question -->
+  <section>
+    <div class="section-head">
+      <div class="section-num">First — the Supabase question</div>
+      <h2 class="section-title">Why Supabase, and why it won't pause this time</h2>
+    </div>
+    <div class="callout">
+      <div class="callout-head">
+        <div class="callout-icon"><svg class="icn" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg></div>
+        <div class="callout-title">Supabase Pro, from launch</div>
+      </div>
+      <div class="callout-body">
+        <p>Supabase only pauses projects on the <strong>free tier</strong>, after 7 days of inactivity. That's what bit us on the earlier project, where we moved to Firebase to avoid it.</p>
+        <p>This one is a live paid product, so we put it on <strong>Supabase Pro</strong> (~CAD 35/mo). Pro never pauses. We build on free, then flip to Pro right before launch.</p>
+        <p>We pick Supabase over Firebase here because the data is relational — members linked to subscriptions, videos grouped by pillar — which fits Supabase's database cleanly. Firebase made sense last time because that project didn't justify a paid tier; this one does.</p>
+      </div>
+      <div class="tag-row">
+        <span class="tag">Pro tier never pauses</span>
+        <span class="tag">Fits relational data</span>
+        <span class="tag warn">Free tier pauses after 7 days idle</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- The stack -->
+  <section>
+    <div class="section-head">
+      <div class="section-num">The pieces</div>
+      <h2 class="section-title">What we're using, and what each does</h2>
+    </div>
+    <div class="stack-grid">
+      <div class="stack-card">
+        <div class="stack-icon"><svg class="icn" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+        <div>
+          <div class="stack-name">Next.js</div>
+          <div class="stack-role">The website itself, plus the server brain that checks who's allowed to see what.</div>
+        </div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-icon"><svg class="icn" viewBox="0 0 24 24"><polygon points="12 2 22 20 2 20 12 2"/></svg></div>
+        <div>
+          <div class="stack-name">Vercel</div>
+          <div class="stack-role">Where the website lives and runs. Fast, reliable hosting.</div>
+          <span class="stack-cost">Free to start</span>
+        </div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-icon"><svg class="icn" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg></div>
+        <div>
+          <div class="stack-name">Supabase</div>
+          <div class="stack-role">Member logins, the database, and storage for toolkit PDFs.</div>
+          <span class="stack-cost">~CAD 35/mo (Pro)</span>
+        </div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-icon"><svg class="icn" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
+        <div>
+          <div class="stack-name">Stripe</div>
+          <div class="stack-role">Takes payments and runs the monthly subscription.</div>
+          <span class="stack-cost">2.9% + $0.30 per sale</span>
+        </div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-icon"><svg class="icn" viewBox="0 0 24 24"><path d="M23 7l-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+        <div>
+          <div class="stack-name">Vimeo Advanced</div>
+          <div class="stack-role">Hosts the videos and locks them to her site only.</div>
+          <span class="stack-cost">~CAD 90/mo</span>
+        </div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-icon"><svg class="icn" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2 6 12 13 22 6"/></svg></div>
+        <div>
+          <div class="stack-name">Email (Resend)</div>
+          <div class="stack-role">Sends welcome emails and login links.</div>
+          <span class="stack-cost">Free to start</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Architecture diagram -->
+  <section>
+    <div class="section-head">
+      <div class="section-num">How it connects</div>
+      <h2 class="section-title">The website is the brain. Everything else plugs into it.</h2>
+    </div>
+    <div class="diagram">
+      <div class="node node-browser">
+        <div class="node-title">Member's browser</div>
+        <div class="node-sub">Phone or laptop</div>
+      </div>
+
+      <div class="connector"></div>
+      <div class="connector-label">talks only to</div>
+      <div class="connector"></div>
+
+      <div class="node node-brain">
+        <div class="node-title">The website — Next.js on Vercel</div>
+        <div class="node-sub">Checks "are you a paying member?" before sending anything</div>
+      </div>
+
+      <div class="fan">
+        <svg class="icn" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+      </div>
+
+      <div class="services">
+        <div class="svc">
+          <div class="svc-icon"><svg class="icn" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg></div>
+          <div class="svc-name">Supabase</div>
+          <div class="svc-role">Logins, data, PDFs</div>
+        </div>
+        <div class="svc">
+          <div class="svc-icon"><svg class="icn" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
+          <div class="svc-name">Stripe</div>
+          <div class="svc-role">Payments</div>
+        </div>
+        <div class="svc">
+          <div class="svc-icon"><svg class="icn" viewBox="0 0 24 24"><path d="M23 7l-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+          <div class="svc-name">Vimeo</div>
+          <div class="svc-role">The videos</div>
+        </div>
+        <div class="svc">
+          <div class="svc-icon"><svg class="icn" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2 6 12 13 22 6"/></svg></div>
+          <div class="svc-name">Email</div>
+          <div class="svc-role">Welcome &amp; login</div>
+        </div>
+      </div>
+
+      <div class="sync-note">
+        <svg class="icn" viewBox="0 0 24 24"><path d="M2 12a10 10 0 1 0 4-8"/><polyline points="2 4 2 9 7 9"/></svg>
+        <span><strong>Stripe also talks directly to Supabase:</strong> every time someone pays or cancels, Stripe quietly updates the database so the website always knows who's a paying member.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key flows -->
+  <section>
+    <div class="section-head">
+      <div class="section-num">Two flows, traced through the stack</div>
+      <h2 class="section-title">Who does what, step by step</h2>
+    </div>
+
+    <div class="flow">
+      <div class="flow-title">
+        <span class="dot"><svg class="icn" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span>
+        When someone subscribes
+      </div>
+      <div class="flow-steps">
+        <span class="chip">Browser</span>
+        <span class="chip-arrow"><svg class="icn" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
+        <span class="chip"><strong>Stripe</strong> takes the $29</span>
+        <span class="chip-arrow"><svg class="icn" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
+        <span class="chip"><strong>Stripe</strong> tells Supabase "they paid"</span>
+        <span class="chip-arrow"><svg class="icn" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
+        <span class="chip"><strong>Supabase</strong> creates their account</span>
+        <span class="chip-arrow"><svg class="icn" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
+        <span class="chip"><strong>Email</strong> sends a welcome</span>
+        <span class="chip-arrow"><svg class="icn" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
+        <span class="chip">They're in</span>
+      </div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-title">
+        <span class="dot"><svg class="icn" viewBox="0 0 24 24"><polygon points="6 4 20 12 6 20 6 4"/></svg></span>
+        When someone watches a video
+      </div>
+      <div class="flow-steps">
+        <span class="chip">Browser asks for a video</span>
+        <span class="chip-arrow"><svg class="icn" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
+        <span class="chip"><strong>Next.js</strong> asks Supabase "are they paying?"</span>
+        <span class="chip-arrow"><svg class="icn" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
+        <span class="chip">If yes → sends the <strong>Vimeo</strong> player</span>
+        <span class="chip-arrow"><svg class="icn" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
+        <span class="chip">If no → resubscribe page</span>
+      </div>
+    </div>
+  </section>
+
+  <footer class="doc-footer">
+    Internal — Primrose Knowledge Studio tech stack. Full technical spec in ARCHITECTURE.md. Updated May 2026.
+  </footer>
+
+</div>
+</body>
+</html>

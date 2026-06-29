@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Knowledge Studio — Design System (Locked)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@400..900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F8F6F1;
+    --ink: #0F0F0F;
+    --stone: #E7E3D8;
+    --muted: #5A5A55;
+    --soft: #B4B4AC;
+    --line: rgba(15, 15, 15, 0.08);
+
+    /* Pillar colours — LOCKED */
+    --pillar-workplace: #2640D9;
+    --pillar-financial: #1F5C45;
+    --pillar-career: #DC5B3F;
+    --pillar-emotional: #7A4B6E;
+    --pillar-safety: #7C3036;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  html, body { font-family: 'Inter', -apple-system, sans-serif; background: var(--paper); color: var(--ink); line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  .container { max-width: 1280px; margin: 0 auto; padding: 80px 56px 120px; }
+
+  /* Top status bar */
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 10px 20px;
+    border-radius: 999px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--pillar-career);
+  }
+
+  .doc-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 72px;
+    font-weight: 900;
+    letter-spacing: -0.045em;
+    line-height: 0.95;
+    margin-bottom: 16px;
+  }
+  .doc-lede {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 64ch;
+    line-height: 1.6;
+    margin-bottom: 64px;
+  }
+  .doc-lede strong { color: var(--ink); font-weight: 600; }
+
+  /* Section blocks */
+  .section { margin-bottom: 80px; }
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .section-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+  }
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* The pillar palette — hero of this doc */
+  .pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .pillar {
+    border-radius: 16px;
+    padding: 28px 24px;
+    aspect-ratio: 0.78;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #F8F6F1;
+    position: relative;
+  }
+  .pillar-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    opacity: 0.8;
+  }
+  .pillar-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+  .pillar-hex {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    opacity: 0.75;
+  }
+  .pillar-1 { background: var(--pillar-workplace); }
+  .pillar-2 { background: var(--pillar-financial); }
+  .pillar-3 { background: var(--pillar-career); }
+  .pillar-4 { background: var(--pillar-emotional); }
+  .pillar-5 { background: var(--pillar-safety); }
+
+  /* "What changed" callout */
+  .changed {
+    display: flex;
+    gap: 16px;
+    background: #FFFEFA;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 20px 24px;
+    align-items: flex-start;
+  }
+  .changed-pill {
+    flex-shrink: 0;
+    padding: 8px 12px;
+    background: var(--pillar-safety);
+    color: var(--paper);
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .changed-text {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+  .changed-text strong { color: var(--ink); font-weight: 600; }
+
+  /* Pillar emotional brief */
+  .pillar-brief {
+    margin-top: 32px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+  }
+  .brief-card {
+    background: #FFFEFA;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 20px;
+  }
+  .brief-pillar {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .brief-feel {
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+  }
+  .brief-note {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .brief-1 .brief-pillar { color: var(--pillar-workplace); }
+  .brief-2 .brief-pillar { color: var(--pillar-financial); }
+  .brief-3 .brief-pillar { color: var(--pillar-career); }
+  .brief-4 .brief-pillar { color: var(--pillar-emotional); }
+  .brief-5 .brief-pillar { color: var(--pillar-safety); }
+
+  /* Neutrals */
+  .neutrals {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .neutral {
+    border-radius: 12px;
+    padding: 20px;
+    height: 110px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .neutral-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .neutral-hex {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    opacity: 0.85;
+  }
+  .neutral-1 { background: var(--paper); color: var(--ink); border: 1px solid var(--line); }
+  .neutral-2 { background: var(--ink); color: var(--paper); }
+  .neutral-3 { background: var(--stone); color: var(--ink); }
+  .neutral-4 { background: #FFFEFA; color: var(--ink); border: 1px solid var(--line); }
+
+  /* Typography */
+  .type-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .type-card {
+    border-radius: 16px;
+    padding: 32px;
+  }
+  .type-display {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .type-body {
+    background: #FFFEFA;
+    border: 1px solid var(--line);
+  }
+  .type-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 14px;
+  }
+  .display-sample {
+    font-family: 'Outfit', sans-serif;
+    font-size: 56px;
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.045em;
+  }
+  .body-sample {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ink);
+    margin-bottom: 18px;
+  }
+  .mono-sample {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* Type scale */
+  .scale {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 8px;
+    margin-top: 32px;
+    background: #FFFEFA;
+    border-radius: 16px;
+    border: 1px solid var(--line);
+    padding: 24px 32px;
+  }
+  .scale-row {
+    display: contents;
+  }
+  .scale-row > div {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .scale-row:last-child > div { border-bottom: none; }
+  .scale-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .scale-sample {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .scale-display-1 { font-size: 80px; letter-spacing: -0.045em; line-height: 0.9; }
+  .scale-display-2 { font-size: 56px; letter-spacing: -0.04em; }
+  .scale-display-3 { font-size: 40px; letter-spacing: -0.03em; }
+  .scale-h1 { font-size: 32px; letter-spacing: -0.025em; }
+  .scale-h2 { font-size: 22px; letter-spacing: -0.02em; }
+  .scale-body { font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 400; line-height: 1.55; }
+  .scale-small { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 400; color: var(--muted); }
+  .scale-mono { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+
+  /* Tokens table */
+  .tokens {
+    margin-top: 24px;
+    background: #FFFEFA;
+    border-radius: 16px;
+    border: 1px solid var(--line);
+    overflow: hidden;
+  }
+  .token-row {
+    display: grid;
+    grid-template-columns: 220px 200px 1fr;
+    border-bottom: 1px solid var(--line);
+  }
+  .token-row:last-child { border-bottom: none; }
+  .token-row > div {
+    padding: 14px 20px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .token-row.header { background: #F0EDE4; }
+  .token-row.header > div {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .token-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--ink);
+  }
+  .token-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--pillar-career);
+  }
+
+  /* Hero preview at the bottom for "looks like" feel */
+  .preview {
+    background: #FFFEFA;
+    border-radius: 24px;
+    padding: 48px 56px;
+    border: 1px solid var(--line);
+  }
+  .preview-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 48px;
+  }
+  .preview-logo {
+    font-family: 'Outfit', sans-serif;
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-dots {
+    display: inline-flex;
+    gap: 3px;
+  }
+  .logo-dots i {
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+  }
+  .logo-dots i:nth-child(1) { background: var(--pillar-workplace); }
+  .logo-dots i:nth-child(2) { background: var(--pillar-financial); }
+  .logo-dots i:nth-child(3) { background: var(--pillar-career); }
+  .logo-dots i:nth-child(4) { background: var(--pillar-emotional); }
+  .logo-dots i:nth-child(5) { background: var(--pillar-safety); }
+  .preview-nav-links {
+    display: flex;
+    gap: 28px;
+    font-size: 13px;
+    color: var(--muted);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+  }
+  .preview-cta {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: 'Outfit', sans-serif;
+  }
+  .preview-hero {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 48px;
+    align-items: stretch;
+  }
+  .preview-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--pillar-career);
+    margin-bottom: 20px;
+  }
+  .preview-headline {
+    font-family: 'Outfit', sans-serif;
+    font-size: 72px;
+    font-weight: 900;
+    line-height: 0.88;
+    letter-spacing: -0.045em;
+    color: var(--ink);
+    margin-bottom: 28px;
+  }
+  .preview-headline-grad {
+    background: linear-gradient(95deg, var(--pillar-career) 0%, var(--pillar-emotional) 55%, var(--pillar-workplace) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .preview-sub {
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--muted);
+    max-width: 46ch;
+    margin-bottom: 32px;
+  }
+  .preview-cta-row { display: flex; align-items: center; gap: 18px; }
+  .preview-main-cta {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 16px 28px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 800;
+    font-family: 'Outfit', sans-serif;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .preview-cta-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .preview-photo {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 8px;
+  }
+  .preview-photo-top {
+    background: linear-gradient(135deg, var(--pillar-workplace) 0%, var(--pillar-emotional) 100%);
+    border-radius: 12px;
+    padding: 24px;
+    color: var(--paper);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .preview-photo-bottom {
+    background: var(--pillar-safety);
+    border-radius: 12px;
+    padding: 24px;
+    color: var(--paper);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .pp-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    opacity: 0.85;
+  }
+  .pp-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .pp-cred {
+    font-size: 13px;
+    opacity: 0.85;
+    margin-top: 4px;
+  }
+
+  .doc-footer {
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--soft);
+    letter-spacing: 0.08em;
+    text-align: center;
+  }
+
+  @media (max-width: 1100px) {
+    .container { padding: 56px 28px 80px; }
+    .pillar-grid, .pillar-brief, .neutrals { grid-template-columns: repeat(2, 1fr); }
+    .type-grid { grid-template-columns: 1fr; }
+    .preview { padding: 32px 24px; }
+    .preview-hero { grid-template-columns: 1fr; }
+    .preview-headline { font-size: 44px; }
+    .doc-title { font-size: 44px; }
+    .token-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="status">
+    <span class="status-dot"></span>
+    Design Direction · LOCKED · Pillar Stack
+  </div>
+  <h1 class="doc-title">Knowledge Studio Design System.</h1>
+  <p class="doc-lede">The locked design direction for the Phase 1 build. Pillar Stack confirmed by Jitakshi. <strong>Personal Safety colour resolved to Garnet</strong> (honey/yellow read sunny and wrong-register for safety). Everything below — palette, type, scale, tokens — gets baked directly into the Tailwind config when the Next.js project scaffolds.</p>
+
+  <!-- ============================================================
+       1. THE FIVE PILLARS · LOCKED PALETTE
+       ============================================================ -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-title">The five pillars.</div>
+      <div class="section-num">01 · Pillar palette</div>
+    </div>
+
+    <div class="pillar-grid">
+      <div class="pillar pillar-1">
+        <div class="pillar-num">01</div>
+        <div>
+          <div class="pillar-name">Workplace<br>Wellness</div>
+          <div class="pillar-hex">#2640D9 · COBALT</div>
+        </div>
+      </div>
+      <div class="pillar pillar-2">
+        <div class="pillar-num">02</div>
+        <div>
+          <div class="pillar-name">Financial<br>Wellness</div>
+          <div class="pillar-hex">#1F5C45 · FOREST</div>
+        </div>
+      </div>
+      <div class="pillar pillar-3">
+        <div class="pillar-num">03</div>
+        <div>
+          <div class="pillar-name">Career<br>Wellness</div>
+          <div class="pillar-hex">#DC5B3F · CLAY</div>
+        </div>
+      </div>
+      <div class="pillar pillar-4">
+        <div class="pillar-num">04</div>
+        <div>
+          <div class="pillar-name">Emotional<br>Wellness</div>
+          <div class="pillar-hex">#7A4B6E · PLUM</div>
+        </div>
+      </div>
+      <div class="pillar pillar-5">
+        <div class="pillar-num">05</div>
+        <div>
+          <div class="pillar-name">Personal<br>Safety</div>
+          <div class="pillar-hex">#7C3036 · GARNET</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="changed">
+      <span class="changed-pill">Changed · 05</span>
+      <div class="changed-text"><strong>Honey → Garnet.</strong> Personal Safety is heavy material — domestic situations, harassment, knowing when to involve law enforcement. Honey reads warm and sunny; that's the wrong emotional signal. Garnet is a jewel-tone deep red that reads protective and serious without alarming. Distinct from Clay's bright orange-red (different temperature, deeper saturation, no overlap in use).</div>
+    </div>
+
+    <div class="pillar-brief">
+      <div class="brief-card brief-1">
+        <div class="brief-pillar">01 · Cobalt</div>
+        <div class="brief-feel">Structural</div>
+        <div class="brief-note">Workplace = rules, contracts, what you're owed. Cool, electric, professional.</div>
+      </div>
+      <div class="brief-card brief-2">
+        <div class="brief-pillar">02 · Forest</div>
+        <div class="brief-feel">Grounded</div>
+        <div class="brief-note">Financial = growth, stability, the long game. Deep, considered.</div>
+      </div>
+      <div class="brief-card brief-3">
+        <div class="brief-pillar">03 · Clay</div>
+        <div class="brief-feel">Alive</div>
+        <div class="brief-note">Career = ambition, energy, moves you make. Warm, decisive.</div>
+      </div>
+      <div class="brief-card brief-4">
+        <div class="brief-pillar">04 · Plum</div>
+        <div class="brief-feel">Inward</div>
+        <div class="brief-note">Emotional = recognizing trauma, accessing support. Dusty, soft, introspective.</div>
+      </div>
+      <div class="brief-card brief-5">
+        <div class="brief-pillar">05 · Garnet</div>
+        <div class="brief-feel">Protective</div>
+        <div class="brief-note">Personal Safety = serious material, protective signal. Deep, considered.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       2. NEUTRALS
+       ============================================================ -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-title">Neutrals.</div>
+      <div class="section-num">02 · Surface system</div>
+    </div>
+
+    <div class="neutrals">
+      <div class="neutral neutral-1">
+        <span class="neutral-name">Paper</span>
+        <span class="neutral-hex">#F8F6F1</span>
+      </div>
+      <div class="neutral neutral-4">
+        <span class="neutral-name">Card</span>
+        <span class="neutral-hex">#FFFEFA</span>
+      </div>
+      <div class="neutral neutral-3">
+        <span class="neutral-name">Stone</span>
+        <span class="neutral-hex">#E7E3D8</span>
+      </div>
+      <div class="neutral neutral-2">
+        <span class="neutral-name">Ink</span>
+        <span class="neutral-hex">#0F0F0F</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       3. TYPOGRAPHY
+       ============================================================ -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-title">Typography.</div>
+      <div class="section-num">03 · Type system</div>
+    </div>
+
+    <div class="type-grid">
+      <div class="type-card type-display">
+        <div class="type-label">Display · Outfit</div>
+        <div class="display-sample">Know your<br>rights.</div>
+        <div class="mono-sample" style="color: rgba(248, 246, 241, 0.5); margin-top: 24px;">900 / 100% / -0.045em</div>
+      </div>
+      <div class="type-card type-body">
+        <div class="type-label">Body · Inter</div>
+        <p class="body-sample">A subscription library of in-depth videos on your rights, your money, and your safety. Taught by a working lawyer in plain English.</p>
+        <div class="mono-sample">400 + 600 / 16/1.6 / -0.005em</div>
+      </div>
+    </div>
+
+    <div class="scale">
+      <div class="scale-row">
+        <div class="scale-name">Display 1</div>
+        <div class="scale-sample scale-display-1">Big idea.</div>
+      </div>
+      <div class="scale-row">
+        <div class="scale-name">Display 2</div>
+        <div class="scale-sample scale-display-2">Section opener.</div>
+      </div>
+      <div class="scale-row">
+        <div class="scale-name">Display 3</div>
+        <div class="scale-sample scale-display-3">Mid-page headline.</div>
+      </div>
+      <div class="scale-row">
+        <div class="scale-name">H1</div>
+        <div class="scale-sample scale-h1">Page title.</div>
+      </div>
+      <div class="scale-row">
+        <div class="scale-name">H2</div>
+        <div class="scale-sample scale-h2">Card title or pillar name.</div>
+      </div>
+      <div class="scale-row">
+        <div class="scale-name">Body</div>
+        <div class="scale-sample scale-body">Standard paragraph copy. Inter regular, 16px, 1.55 line height — sized for comfortable reading on both mobile and desktop. The library copy and most marketing text lives here.</div>
+      </div>
+      <div class="scale-row">
+        <div class="scale-name">Small</div>
+        <div class="scale-sample scale-small">Captions, footnotes, and supporting copy.</div>
+      </div>
+      <div class="scale-row">
+        <div class="scale-name">Mono</div>
+        <div class="scale-sample scale-mono">01 · Section labels and metadata</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       4. DESIGN TOKENS
+       ============================================================ -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-title">Tokens.</div>
+      <div class="section-num">04 · Bake into Tailwind</div>
+    </div>
+
+    <div class="tokens">
+      <div class="token-row header">
+        <div>Token</div>
+        <div>Value</div>
+        <div>Use</div>
+      </div>
+      <div class="token-row">
+        <div class="token-name">--paper</div>
+        <div class="token-value">#F8F6F1</div>
+        <div>Page background. Off-white with warmth.</div>
+      </div>
+      <div class="token-row">
+        <div class="token-name">--card</div>
+        <div class="token-value">#FFFEFA</div>
+        <div>Card and elevated surface background.</div>
+      </div>
+      <div class="token-row">
+        <div class="token-name">--ink</div>
+        <div class="token-value">#0F0F0F</div>
+        <div>Primary text and ink-on-paper accent moments.</div>
+      </div>
+      <div class="token-row">
+        <div class="token-name">--stone</div>
+        <div class="token-value">#E7E3D8</div>
+        <div>Subtle backgrounds, dividers, hover states.</div>
+      </div>
+      <div class="token-row">
+        <div class="token-name">--muted</div>
+        <div class="token-value">#5A5A55</div>
+        <div>Secondary text, captions, supporting copy.</div>
+      </div>
+      <div class="token-row">
+        <div class="token-name">--pillar-workplace</div>
+        <div class="token-value">#2640D9</div>
+        <div>Workplace pillar identity.</div>
+      </div>
+      <div class="token-row">
+        <div class="token-name">--pillar-financial</div>
+        <div class="token-value">#1F5C45</div>
+        <div>Financial pillar identity.</div>
+      </div>
+      <div class="token-row">
+        <div class="token-name">--pillar-career</div>
+        <div class="token-value">#DC5B3F</div>
+        <div>Career pillar identity. Also the brand "alive" accent.</div>
+      </div>
+      <div class="token-row">
+        <div class="token-name">--pillar-emotional</div>
+        <div class="token-value">#7A4B6E</div>
+        <div>Emotional pillar identity.</div>
+      </div>
+      <div class="token-row">
+        <div class="token-name">--pillar-safety</div>
+        <div class="token-value">#7C3036</div>
+        <div>Personal Safety pillar identity. Resolved from honey.</div>
+      </div>
+      <div class="token-row">
+        <div class="token-name">--radius-sm</div>
+        <div class="token-value">8px</div>
+        <div>Buttons, small chips.</div>
+      </div>
+      <div class="token-row">
+        <div class="token-name">--radius-md</div>
+        <div class="token-value">12px</div>
+        <div>Cards, list rows, secondary containers.</div>
+      </div>
+      <div class="token-row">
+        <div class="token-name">--radius-lg</div>
+        <div class="token-value">16px</div>
+        <div>Default for images, video frames, primary cards. The "Jitakshi 16px rule."</div>
+      </div>
+      <div class="token-row">
+        <div class="token-name">--radius-xl</div>
+        <div class="token-value">24px</div>
+        <div>Hero panels, large feature blocks.</div>
+      </div>
+      <div class="token-row">
+        <div class="token-name">font-display</div>
+        <div class="token-value">'Outfit'</div>
+        <div>All headlines and display moments. 900 weight default.</div>
+      </div>
+      <div class="token-row">
+        <div class="token-name">font-body</div>
+        <div class="token-value">'Inter'</div>
+        <div>All body copy. 400 default, 600 for emphasis.</div>
+      </div>
+      <div class="token-row">
+        <div class="token-name">font-mono</div>
+        <div class="token-value">'JetBrains Mono'</div>
+        <div>Metadata, labels, timestamps, section numbers.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       5. PREVIEW — what it looks like in motion
+       ============================================================ -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-title">In motion.</div>
+      <div class="section-num">05 · Locked palette in context</div>
+    </div>
+
+    <div class="preview">
+      <nav class="preview-nav">
+        <div class="preview-logo">
+          <span class="logo-dots"><i></i><i></i><i></i><i></i><i></i></span>
+          Primrose Studio
+        </div>
+        <div class="preview-nav-links">
+          <span>How it works</span>
+          <span>Pillars</span>
+          <span>About</span>
+        </div>
+        <div class="preview-cta">Become a member</div>
+      </nav>
+      <div class="preview-hero">
+        <div>
+          <div class="preview-tag">$29 / month · five pillars · one library</div>
+          <h3 class="preview-headline">Your rights, your money,<br><span class="preview-headline-grad">your safety.</span></h3>
+          <p class="preview-sub">A subscription library of in-depth videos organised into the five categories of wellness that actually map to your twenties. Taught by a working Canadian lawyer in plain English.</p>
+          <div class="preview-cta-row">
+            <div class="preview-main-cta">Start watching →</div>
+            <span class="preview-cta-meta">First video free · Cancel anytime</span>
+          </div>
+        </div>
+        <div class="preview-photo">
+          <div class="preview-photo-top">
+            <div>
+              <div class="pp-num">01 · TAUGHT BY</div>
+              <div class="pp-name" style="margin-top: 8px;">Primrose Watson</div>
+              <div class="pp-cred">Lawyer · Nova Scotia</div>
+            </div>
+          </div>
+          <div class="preview-photo-bottom">
+            <div class="pp-num">05 · YOU'RE PROTECTED</div>
+            <div class="pp-name">Personal<br>Safety<br>included.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="doc-footer">
+    Design System · Locked · Pillar Stack with Garnet · 2026-06-29 · prepared by Jitakshi
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Knowledge Studio — Visual Direction v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..900&family=Geist+Mono:wght@400..700&family=Inter:wght@400..800&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@400..900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #141414;
+    --paper: #FAFAF7;
+    --muted: #6E6E68;
+    --soft: #B4B4AC;
+    --line: rgba(0,0,0,0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  html, body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--paper); color: var(--ink); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+
+  .container { max-width: 1280px; margin: 0 auto; padding: 80px 56px 120px; }
+
+  /* ---- Cover ---- */
+  .cover { margin-bottom: 80px; }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 28px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .eyebrow::before {
+    content: '';
+    width: 18px;
+    height: 1px;
+    background: var(--ink);
+  }
+  .cover-title {
+    font-size: 56px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    max-width: 14ch;
+    margin-bottom: 24px;
+  }
+  .cover-lede {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 60ch;
+    line-height: 1.6;
+  }
+  .cover-lede strong { color: var(--ink); font-weight: 600; }
+
+  .reset-grid {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .reset-card {
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 24px;
+  }
+  .reset-card .rc-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .reset-card .rc-body {
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .reset-card .rc-body strong { font-weight: 600; }
+
+  .direction {
+    margin-bottom: 80px;
+    border-radius: 28px;
+    overflow: hidden;
+  }
+
+  /* ============================================================
+     DIRECTION C — LATE NIGHT
+     dark cinematic premium · trust through gravity
+     ============================================================ */
+  .c-section {
+    background: #0B0E0D;
+    color: #ECE5D5;
+    font-family: 'Inter', sans-serif;
+    padding: 72px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .c-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at top right, rgba(245, 169, 58, 0.05) 0%, transparent 50%),
+      radial-gradient(ellipse at bottom left, rgba(232, 112, 75, 0.04) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .c-section > * { position: relative; }
+
+  .c-eyebrow {
+    font-family: 'Geist Mono', 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #F5A93A;
+    margin-bottom: 24px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .c-eyebrow::before {
+    content: '';
+    width: 18px;
+    height: 1px;
+    background: #F5A93A;
+  }
+  .c-title {
+    font-family: 'Geist', 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 112px;
+    line-height: 0.88;
+    letter-spacing: -0.05em;
+    color: #ECE5D5;
+    margin-bottom: 24px;
+  }
+  .c-tagline {
+    font-family: 'Geist', 'Outfit', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: rgba(236, 229, 213, 0.85);
+    max-width: 36ch;
+    line-height: 1.3;
+    margin-bottom: 18px;
+    letter-spacing: -0.01em;
+  }
+  .c-rationale {
+    font-size: 15px;
+    color: rgba(236, 229, 213, 0.65);
+    max-width: 60ch;
+    line-height: 1.65;
+    margin-bottom: 56px;
+  }
+
+  /* Palette */
+  .palette-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-bottom: 56px;
+  }
+  .swatch {
+    border-radius: 16px;
+    padding: 18px;
+    aspect-ratio: 1.1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .swatch-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.65;
+  }
+  .swatch-hex {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    opacity: 0.85;
+  }
+  .c-sw-1 { background: #0B0E0D; color: #ECE5D5; border: 1px solid rgba(236, 229, 213, 0.12); }
+  .c-sw-2 { background: #1B1F1D; color: #ECE5D5; border: 1px solid rgba(236, 229, 213, 0.12); }
+  .c-sw-3 { background: #ECE5D5; color: #0B0E0D; }
+  .c-sw-4 { background: #F5A93A; color: #0B0E0D; }
+  .c-sw-5 { background: #E8704B; color: #ECE5D5; }
+
+  /* Type pairing */
+  .type-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 64px;
+  }
+  .type-card {
+    border-radius: 16px;
+    padding: 32px;
+  }
+  .c-type-display {
+    background: #1B1F1D;
+    color: #ECE5D5;
+    border: 1px solid rgba(236, 229, 213, 0.1);
+  }
+  .c-type-body {
+    background: rgba(236, 229, 213, 0.04);
+    color: #ECE5D5;
+    border: 1px solid rgba(236, 229, 213, 0.1);
+  }
+  .type-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 16px;
+  }
+  .c-display-sample {
+    font-family: 'Geist', 'Outfit', sans-serif;
+    font-size: 56px;
+    font-weight: 800;
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+  }
+  .c-display-meta {
+    font-family: 'Geist Mono', 'JetBrains Mono', monospace;
+    font-size: 11px;
+    opacity: 0.55;
+    margin-top: 24px;
+  }
+  .c-body-sample {
+    font-family: 'Inter', sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: rgba(236, 229, 213, 0.9);
+    margin-bottom: 24px;
+  }
+  .c-body-meta {
+    font-family: 'Geist Mono', 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: rgba(236, 229, 213, 0.5);
+  }
+
+  /* C Porch mockup */
+  .mockup-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .c-mockup-label { color: rgba(236, 229, 213, 0.55); }
+
+  .c-porch {
+    background: #11140F;
+    border-radius: 20px;
+    padding: 40px 48px;
+    border: 1px solid rgba(236, 229, 213, 0.08);
+    margin-bottom: 24px;
+  }
+  .c-porch-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 28px;
+    border-bottom: 1px solid rgba(236, 229, 213, 0.08);
+    margin-bottom: 48px;
+  }
+  .c-porch-logo {
+    font-family: 'Geist', 'Outfit', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #ECE5D5;
+  }
+  .c-porch-logo span { color: #F5A93A; font-weight: 800; }
+  .c-porch-nav-links {
+    display: flex;
+    gap: 28px;
+    font-size: 13px;
+    color: rgba(236, 229, 213, 0.65);
+    font-family: 'Geist', 'Outfit', sans-serif;
+    font-weight: 500;
+  }
+  .c-porch-nav-cta {
+    background: #ECE5D5;
+    color: #0B0E0D;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'Geist', 'Outfit', sans-serif;
+  }
+  .c-porch-hero {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 48px;
+    align-items: stretch;
+    min-height: 480px;
+  }
+  .c-porch-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .c-porch-tag {
+    font-family: 'Geist Mono', 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #F5A93A;
+    margin-bottom: 24px;
+  }
+  .c-porch-headline {
+    font-family: 'Geist', 'Outfit', sans-serif;
+    font-size: 64px;
+    font-weight: 800;
+    line-height: 0.93;
+    letter-spacing: -0.045em;
+    color: #ECE5D5;
+    margin-bottom: 24px;
+  }
+  .c-porch-headline-em {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-style: italic;
+    color: #F5A93A;
+    font-size: 1.05em;
+    /* serif allowed here ONLY as accent flourish; we'll discuss */
+  }
+  .c-porch-sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(236, 229, 213, 0.7);
+    max-width: 42ch;
+    margin-bottom: 32px;
+  }
+  .c-porch-cta-row {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .c-porch-cta {
+    background: #F5A93A;
+    color: #0B0E0D;
+    padding: 16px 28px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Geist', 'Outfit', sans-serif;
+  }
+  .c-porch-cta-meta {
+    font-family: 'Geist Mono', 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: rgba(236, 229, 213, 0.55);
+  }
+  .c-porch-photo {
+    background:
+      radial-gradient(ellipse at 30% 30%, rgba(245, 169, 58, 0.18) 0%, transparent 55%),
+      radial-gradient(ellipse at 70% 70%, rgba(232, 112, 75, 0.12) 0%, transparent 55%),
+      linear-gradient(160deg, #1B1F1D 0%, #0B0E0D 100%);
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 24px;
+    border: 1px solid rgba(236, 229, 213, 0.08);
+  }
+  .c-porch-photo-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .c-porch-photo-num {
+    font-family: 'Geist Mono', 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: rgba(236, 229, 213, 0.5);
+    letter-spacing: 0.14em;
+  }
+  .c-porch-photo-status {
+    font-family: 'Geist Mono', 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #F5A93A;
+    letter-spacing: 0.12em;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .c-porch-photo-status::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #F5A93A;
+  }
+  .c-porch-photo-name {
+    font-family: 'Geist', 'Outfit', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #ECE5D5;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .c-porch-photo-credentials {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: rgba(236, 229, 213, 0.55);
+    margin-top: 6px;
+  }
+
+  /* C Pillars */
+  .c-pillars {
+    background: #11140F;
+    border-radius: 20px;
+    padding: 40px 48px;
+    border: 1px solid rgba(236, 229, 213, 0.08);
+  }
+  .c-pillars-head {
+    font-family: 'Geist', 'Outfit', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: #ECE5D5;
+    margin-bottom: 8px;
+  }
+  .c-pillars-sub {
+    font-size: 14px;
+    color: rgba(236, 229, 213, 0.55);
+    margin-bottom: 36px;
+  }
+  .c-pillar-list {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+  }
+  .c-pillar {
+    background: #1B1F1D;
+    border: 1px solid rgba(236, 229, 213, 0.08);
+    border-radius: 16px;
+    padding: 24px 20px;
+    aspect-ratio: 0.85;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: border-color 0.15s;
+  }
+  .c-pillar-num {
+    font-family: 'Geist Mono', 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: #F5A93A;
+  }
+  .c-pillar-name {
+    font-family: 'Geist', 'Outfit', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: #ECE5D5;
+  }
+
+  /* C why */
+  .why {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .c-why-card {
+    border-radius: 16px;
+    padding: 24px;
+    background: rgba(236, 229, 213, 0.04);
+    border: 1px solid rgba(236, 229, 213, 0.08);
+  }
+  .why-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .c-why-card .why-label { color: #F5A93A; }
+  .c-why-card .why-text { font-size: 13.5px; line-height: 1.6; color: rgba(236, 229, 213, 0.85); }
+
+  /* ============================================================
+     DIRECTION D — PILLAR STACK
+     5-colour brand system · the pillars ARE the identity
+     ============================================================ */
+  .d-section {
+    background: #F8F6F1;
+    color: #0F0F0F;
+    font-family: 'Inter', sans-serif;
+    padding: 72px 64px;
+  }
+  .d-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #DC5B3F;
+    margin-bottom: 24px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .d-eyebrow::before {
+    content: '';
+    width: 18px;
+    height: 1px;
+    background: #DC5B3F;
+  }
+  .d-title {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 900;
+    font-size: 112px;
+    line-height: 0.88;
+    letter-spacing: -0.045em;
+    color: #0F0F0F;
+    margin-bottom: 8px;
+  }
+  .d-title-color {
+    display: inline-block;
+    background:
+      linear-gradient(95deg, #2640D9 0%, #1F5C45 22%, #DC5B3F 50%, #7A4B6E 78%, #D9A647 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .d-tagline {
+    font-family: 'Outfit', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: #3A3A3A;
+    max-width: 38ch;
+    line-height: 1.3;
+    margin-bottom: 18px;
+    margin-top: 16px;
+    letter-spacing: -0.01em;
+  }
+  .d-rationale {
+    font-size: 15px;
+    color: #5A5A55;
+    max-width: 62ch;
+    line-height: 1.65;
+    margin-bottom: 56px;
+  }
+
+  /* D palette — the 5 pillars ARE the palette */
+  .d-palette-row {
+    margin-bottom: 56px;
+  }
+  .d-palette-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #6E6E66;
+    margin-bottom: 18px;
+  }
+  .d-palette {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+  }
+  .d-sw {
+    border-radius: 16px;
+    padding: 24px 20px;
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #F8F6F1;
+  }
+  .d-sw-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .d-sw-pillar {
+    font-family: 'Outfit', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+  .d-sw-hex {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    opacity: 0.7;
+    margin-top: 6px;
+  }
+  .d-sw-1 { background: #2640D9; }
+  .d-sw-2 { background: #1F5C45; }
+  .d-sw-3 { background: #DC5B3F; }
+  .d-sw-4 { background: #7A4B6E; }
+  .d-sw-5 { background: #D9A647; }
+
+  .d-neutrals {
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .d-neutral {
+    border-radius: 12px;
+    padding: 18px 20px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .d-n-1 { background: #F8F6F1; color: #0F0F0F; border: 1px solid rgba(0,0,0,0.08); }
+  .d-n-2 { background: #0F0F0F; color: #F8F6F1; }
+  .d-n-3 { background: #E7E3D8; color: #0F0F0F; }
+
+  /* D type */
+  .d-type-display {
+    background: #0F0F0F;
+    color: #F8F6F1;
+  }
+  .d-type-body {
+    background: rgba(15, 15, 15, 0.04);
+    color: #0F0F0F;
+    border: 1px solid rgba(15, 15, 15, 0.1);
+  }
+  .d-display-sample {
+    font-family: 'Outfit', sans-serif;
+    font-size: 60px;
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.045em;
+  }
+  .d-display-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    opacity: 0.6;
+    margin-top: 24px;
+  }
+  .d-body-sample {
+    font-family: 'Inter', sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: #0F0F0F;
+    margin-bottom: 24px;
+  }
+  .d-body-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #5A5A55;
+  }
+
+  /* D Porch */
+  .d-porch {
+    background: #FFFEFA;
+    border-radius: 20px;
+    padding: 40px 48px;
+    border: 1px solid rgba(15, 15, 15, 0.06);
+    margin-bottom: 24px;
+  }
+  .d-mockup-label { color: #5A5A55; }
+  .d-porch-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 28px;
+    border-bottom: 1px solid rgba(15, 15, 15, 0.08);
+    margin-bottom: 48px;
+  }
+  .d-porch-logo {
+    font-family: 'Outfit', sans-serif;
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: #0F0F0F;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .d-porch-logo-dots {
+    display: inline-flex;
+    gap: 3px;
+  }
+  .d-porch-logo-dots i {
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+  }
+  .d-porch-logo-dots i:nth-child(1) { background: #2640D9; }
+  .d-porch-logo-dots i:nth-child(2) { background: #1F5C45; }
+  .d-porch-logo-dots i:nth-child(3) { background: #DC5B3F; }
+  .d-porch-logo-dots i:nth-child(4) { background: #7A4B6E; }
+  .d-porch-logo-dots i:nth-child(5) { background: #D9A647; }
+  .d-porch-nav-links {
+    display: flex;
+    gap: 28px;
+    font-size: 13px;
+    color: #3A3A3A;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+  }
+  .d-porch-nav-cta {
+    background: #0F0F0F;
+    color: #F8F6F1;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: 'Outfit', sans-serif;
+  }
+  .d-porch-hero {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 48px;
+    align-items: stretch;
+  }
+  .d-porch-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #DC5B3F;
+    margin-bottom: 20px;
+  }
+  .d-porch-headline {
+    font-family: 'Outfit', sans-serif;
+    font-size: 72px;
+    font-weight: 900;
+    line-height: 0.88;
+    letter-spacing: -0.045em;
+    color: #0F0F0F;
+    margin-bottom: 28px;
+  }
+  .d-porch-headline-color {
+    background: linear-gradient(95deg, #DC5B3F 0%, #7A4B6E 60%, #2640D9 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .d-porch-sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: #4A4A45;
+    max-width: 46ch;
+    margin-bottom: 32px;
+  }
+  .d-porch-cta-row {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .d-porch-cta {
+    background: #0F0F0F;
+    color: #F8F6F1;
+    padding: 16px 28px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Outfit', sans-serif;
+  }
+  .d-porch-cta-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: #5A5A55;
+  }
+  .d-porch-photo {
+    border-radius: 16px;
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 8px;
+  }
+  .d-porch-photo-top {
+    background:
+      linear-gradient(135deg, #2640D9 0%, #7A4B6E 100%);
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #F8F6F1;
+    position: relative;
+  }
+  .d-porch-photo-bottom {
+    background: #DC5B3F;
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #F8F6F1;
+  }
+  .d-porch-photo-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    opacity: 0.85;
+  }
+  .d-porch-photo-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .d-porch-photo-credentials {
+    font-size: 13px;
+    opacity: 0.85;
+    margin-top: 4px;
+  }
+  .d-porch-photo-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    background: rgba(15, 15, 15, 0.25);
+    padding: 6px 10px;
+    border-radius: 4px;
+    align-self: flex-start;
+  }
+
+  /* D Pillars — these ARE the brand */
+  .d-pillars {
+    background: transparent;
+    margin-bottom: 0;
+  }
+  .d-pillars-head-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 24px;
+  }
+  .d-pillars-head {
+    font-family: 'Outfit', sans-serif;
+    font-size: 40px;
+    font-weight: 900;
+    letter-spacing: -0.035em;
+    color: #0F0F0F;
+  }
+  .d-pillars-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: #6E6E66;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .d-pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+  }
+  .d-pillar {
+    border-radius: 16px;
+    padding: 28px 24px;
+    aspect-ratio: 0.78;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #F8F6F1;
+  }
+  .d-pillar-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    opacity: 0.85;
+  }
+  .d-pillar-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+  .d-pillar-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    opacity: 0.75;
+    margin-top: 6px;
+  }
+  .d-pillar:nth-child(1) { background: #2640D9; }
+  .d-pillar:nth-child(2) { background: #1F5C45; }
+  .d-pillar:nth-child(3) { background: #DC5B3F; }
+  .d-pillar:nth-child(4) { background: #7A4B6E; }
+  .d-pillar:nth-child(5) { background: #D9A647; color: #0F0F0F; }
+
+  /* D why */
+  .d-why-card {
+    border-radius: 16px;
+    padding: 24px;
+    background: #FFFEFA;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .d-why-card .why-label { color: #DC5B3F; }
+  .d-why-card .why-text { font-size: 13.5px; line-height: 1.6; color: #0F0F0F; }
+
+  /* ============================================================
+     COMPARISON BACK TO CHANNEL
+     ============================================================ */
+  .compare {
+    margin-bottom: 80px;
+    padding: 48px;
+    border-radius: 24px;
+    border: 1px solid var(--line);
+    background: #F1EDE5;
+  }
+  .compare-head {
+    font-family: 'Geist', 'Outfit', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    margin-bottom: 8px;
+    color: #0F0F0F;
+  }
+  .compare-sub {
+    font-family: 'Geist Mono', 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #C95B3A;
+    margin-bottom: 24px;
+  }
+  .compare-body {
+    font-size: 15px;
+    line-height: 1.65;
+    color: #2A2A2A;
+    max-width: 64ch;
+  }
+  .compare-body strong { font-weight: 700; }
+  .compare-tags {
+    display: flex;
+    gap: 8px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+  .compare-tag {
+    font-family: 'Geist Mono', 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 6px;
+    background: rgba(15, 15, 15, 0.06);
+    color: #0F0F0F;
+  }
+
+  /* ============================================================
+     RECOMMENDATION + NEXT STEPS
+     ============================================================ */
+  .recommendation {
+    border-top: 1px solid var(--line);
+    padding-top: 56px;
+  }
+  .reco-title {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+  .reco-lede {
+    font-size: 16px;
+    color: var(--muted);
+    margin-bottom: 32px;
+    max-width: 64ch;
+    line-height: 1.6;
+  }
+  .reco-table {
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .reco-row {
+    display: grid;
+    grid-template-columns: 140px 1fr 1fr 1fr;
+    border-bottom: 1px solid var(--line);
+  }
+  .reco-row:last-child { border-bottom: none; }
+  .reco-row > div {
+    padding: 16px 20px;
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+  .reco-row > div:not(:last-child) { border-right: 1px solid var(--line); }
+  .reco-row.header { background: #F0EDE4; }
+  .reco-row.header > div {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .reco-row > div:first-child {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .doc-footer {
+    margin-top: 80px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--soft);
+    letter-spacing: 0.06em;
+    text-align: center;
+  }
+
+  /* responsive */
+  @media (max-width: 1100px) {
+    .container { padding: 60px 32px 80px; }
+    .c-section, .d-section { padding: 48px 32px; }
+    .reset-grid { grid-template-columns: 1fr; }
+    .palette-grid, .type-grid, .why, .d-palette { grid-template-columns: 1fr 1fr; }
+    .c-pillar-list, .d-pillar-grid { grid-template-columns: repeat(2, 1fr); }
+    .c-porch-hero, .d-porch-hero { grid-template-columns: 1fr; }
+    .c-porch-headline { font-size: 44px; }
+    .d-porch-headline { font-size: 50px; }
+    .cover-title { font-size: 38px; }
+    .c-title, .d-title { font-size: 76px; }
+    .reco-row { grid-template-columns: 1fr; }
+    .reco-row > div { border-right: none !important; border-bottom: 1px solid var(--line); }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ============================================================
+       COVER
+       ============================================================ -->
+  <header class="cover">
+    <div class="eyebrow">Visual Direction · v2</div>
+    <h1 class="cover-title">Two wider swings — and Channel still on the table.</h1>
+    <p class="cover-lede">Studio carried too much DNA from the tax site. So we go genuinely different. Two new directions below: one dark and cinematic, one built on the pillars as a five-colour brand system. <strong>Channel from v1 stays in the conversation</strong> — you said you preferred it, so it's the baseline these two have to beat. Pick one of the three at the end, I scaffold around it the moment the deposit lands.</p>
+
+    <div class="reset-grid">
+      <div class="reset-card">
+        <div class="rc-label">What stays out</div>
+        <div class="rc-body"><strong>Anything warm-cream-editorial.</strong> The tax site already owns that territory and we don't want Knowledge Studio reading like a sibling. No Bricolage, no Playfair, no muted earth palettes.</div>
+      </div>
+      <div class="reset-card">
+        <div class="rc-label">What stays in</div>
+        <div class="rc-body"><strong>The non-negotiables hold.</strong> 16px rounded, no UI serifs, photography of Primrose anchors trust, monospace details where they add flavour, audience-first not client-first.</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       DIRECTION C — LATE NIGHT
+       ============================================================ -->
+  <section class="direction c-section">
+    <div class="c-eyebrow">Direction C · v2</div>
+    <h2 class="c-title">LATE NIGHT</h2>
+    <p class="c-tagline">A focused, premium reading room — trust through gravity and atmosphere.</p>
+    <p class="c-rationale">Dark backgrounds carry premium and seriousness in a way few light brands can. Knowledge Studio's audience is anxious-at-11pm Googling their rights — Late Night meets them where they are. Warm cream type sits against deep ink, sodium amber punches the CTAs and accent moments, and photography of Primrose becomes the warm anchor against the dark — like the lamp in a study. Reads cinematic, premium, and unmistakably designed. Closest energy: Apple TV+ subscription pages meets Substack Notes meets a premium creator's reading platform.</p>
+
+    <!-- Palette -->
+    <div class="palette-grid">
+      <div class="swatch c-sw-1"><span class="swatch-name">Ink</span><span class="swatch-hex">#0B0E0D</span></div>
+      <div class="swatch c-sw-2"><span class="swatch-name">Char</span><span class="swatch-hex">#1B1F1D</span></div>
+      <div class="swatch c-sw-3"><span class="swatch-name">Cream</span><span class="swatch-hex">#ECE5D5</span></div>
+      <div class="swatch c-sw-4"><span class="swatch-name">Amber</span><span class="swatch-hex">#F5A93A</span></div>
+      <div class="swatch c-sw-5"><span class="swatch-name">Coral</span><span class="swatch-hex">#E8704B</span></div>
+    </div>
+
+    <!-- Type -->
+    <div class="type-grid">
+      <div class="type-card c-type-display">
+        <div class="type-label">Display · Geist 800</div>
+        <div class="c-display-sample">Know your<br>rights at<br>2am.</div>
+        <div class="c-display-meta">800 / -0.04em / -0.92 leading</div>
+      </div>
+      <div class="type-card c-type-body">
+        <div class="type-label">Body · Inter</div>
+        <p class="c-body-sample">A library of in-depth videos for the moments you wished you'd known the answer already. Built quietly, watched late.</p>
+        <div class="c-body-meta">17 / 1.6 / 400 + 600</div>
+      </div>
+    </div>
+
+    <!-- Porch mockup -->
+    <div class="mockup-label c-mockup-label">The Porch · sales page hero</div>
+    <div class="c-porch">
+      <nav class="c-porch-nav">
+        <div class="c-porch-logo">Primrose<span>·</span>Studio</div>
+        <div class="c-porch-nav-links">
+          <span>How it works</span>
+          <span>Pillars</span>
+          <span>About</span>
+        </div>
+        <div class="c-porch-nav-cta">Sign in</div>
+      </nav>
+      <div class="c-porch-hero">
+        <div class="c-porch-text">
+          <div class="c-porch-tag">$29 / month · cancel anytime</div>
+          <h3 class="c-porch-headline">The knowledge<br>they didn't<br>teach you in <span class="c-porch-headline-em">school.</span></h3>
+          <p class="c-porch-sub">A library of in-depth videos on your rights, your money, and your safety. Taught by a working Canadian lawyer who actually wants you to understand it.</p>
+          <div class="c-porch-cta-row">
+            <div class="c-porch-cta">Become a member →</div>
+            <span class="c-porch-cta-meta">First video free · No card to preview</span>
+          </div>
+        </div>
+        <div class="c-porch-photo">
+          <div class="c-porch-photo-top">
+            <span class="c-porch-photo-num">01 · TAUGHT BY</span>
+            <span class="c-porch-photo-status">Live in studio</span>
+          </div>
+          <div>
+            <div class="c-porch-photo-name">Primrose<br>Watson</div>
+            <div class="c-porch-photo-credentials">Lawyer · Bar of Nova Scotia</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pillars mockup -->
+    <div class="mockup-label c-mockup-label">The Five Pillars · navigation</div>
+    <div class="c-pillars">
+      <div class="c-pillars-head">Five places to start.</div>
+      <p class="c-pillars-sub">Each video sits inside one of these. Pick what's on your mind tonight.</p>
+      <div class="c-pillar-list">
+        <div class="c-pillar"><div class="c-pillar-num">01</div><div class="c-pillar-name">Workplace Wellness</div></div>
+        <div class="c-pillar"><div class="c-pillar-num">02</div><div class="c-pillar-name">Financial Wellness</div></div>
+        <div class="c-pillar"><div class="c-pillar-num">03</div><div class="c-pillar-name">Career Wellness</div></div>
+        <div class="c-pillar"><div class="c-pillar-num">04</div><div class="c-pillar-name">Emotional Wellness</div></div>
+        <div class="c-pillar"><div class="c-pillar-num">05</div><div class="c-pillar-name">Personal Safety</div></div>
+      </div>
+    </div>
+
+    <!-- Why -->
+    <div class="why">
+      <div class="c-why-card">
+        <div class="why-label">Why · 01</div>
+        <div class="why-text">Dark is a confident move in a sea of light SaaS brands. It instantly says premium, focused, designed-by-someone.</div>
+      </div>
+      <div class="c-why-card">
+        <div class="why-label">Why · 02</div>
+        <div class="why-text">The "late night, 2am, Googling my rights" framing is exactly the audience moment. The brand meets them where they are.</div>
+      </div>
+      <div class="c-why-card">
+        <div class="why-label">Why · 03</div>
+        <div class="why-text">Primrose's portrait becomes the warm focal point — the lamp in the study. Photography does the heavy lifting on trust.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       DIRECTION D — PILLAR STACK
+       ============================================================ -->
+  <section class="direction d-section">
+    <div class="d-eyebrow">Direction D · v2</div>
+    <h2 class="d-title"><span class="d-title-color">PILLAR</span><br>STACK.</h2>
+    <p class="d-tagline">Five pillars, five confident colours — the framework <em>is</em> the identity.</p>
+    <p class="d-rationale">Most education platforms decorate their categories with stock icons. Pillar Stack does the opposite — the five categories <strong>are</strong> the brand. Each pillar gets a confident, curated colour. Together they form a system you remember after one visit. Off-white paper and near-black ink keep the colours sharp. The brand mark is a stack of five dots. The hero leans on the framework, not on photography. Reads like a small, careful publishing house that figured out how to package an OS. Closest energy: Stripe's colour-block marketing meets a modern indie magazine meets a confident brand identity.</p>
+
+    <!-- Palette -->
+    <div class="d-palette-row">
+      <div class="d-palette-label">Five pillars · five colours</div>
+      <div class="d-palette">
+        <div class="d-sw d-sw-1">
+          <div>
+            <div class="d-sw-name">01 · Workplace</div>
+            <div class="d-sw-pillar">Cobalt</div>
+          </div>
+          <div class="d-sw-hex">#2640D9</div>
+        </div>
+        <div class="d-sw d-sw-2">
+          <div>
+            <div class="d-sw-name">02 · Financial</div>
+            <div class="d-sw-pillar">Forest</div>
+          </div>
+          <div class="d-sw-hex">#1F5C45</div>
+        </div>
+        <div class="d-sw d-sw-3">
+          <div>
+            <div class="d-sw-name">03 · Career</div>
+            <div class="d-sw-pillar">Clay</div>
+          </div>
+          <div class="d-sw-hex">#DC5B3F</div>
+        </div>
+        <div class="d-sw d-sw-4">
+          <div>
+            <div class="d-sw-name">04 · Emotional</div>
+            <div class="d-sw-pillar">Plum</div>
+          </div>
+          <div class="d-sw-hex">#7A4B6E</div>
+        </div>
+        <div class="d-sw d-sw-5">
+          <div>
+            <div class="d-sw-name">05 · Safety</div>
+            <div class="d-sw-pillar">Honey</div>
+          </div>
+          <div class="d-sw-hex">#D9A647</div>
+        </div>
+      </div>
+      <div class="d-neutrals">
+        <div class="d-neutral d-n-1">
+          <span class="swatch-name">Paper</span>
+          <span class="swatch-hex">#F8F6F1</span>
+        </div>
+        <div class="d-neutral d-n-2">
+          <span class="swatch-name">Ink</span>
+          <span class="swatch-hex">#0F0F0F</span>
+        </div>
+        <div class="d-neutral d-n-3">
+          <span class="swatch-name">Stone</span>
+          <span class="swatch-hex">#E7E3D8</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Type -->
+    <div class="type-grid">
+      <div class="type-card d-type-display">
+        <div class="type-label">Display · Outfit 900</div>
+        <div class="d-display-sample">Five pillars.<br>One library.<br>Total clarity.</div>
+        <div class="d-display-meta">900 / -0.045em / 0.9 leading</div>
+      </div>
+      <div class="type-card d-type-body">
+        <div class="type-label">Body · Inter</div>
+        <p class="d-body-sample">An in-depth video library on your rights, your money, and your safety — organised into five categories that map to the moments your life actually throws at you.</p>
+        <div class="d-body-meta">17 / 1.6 / 400 + 600</div>
+      </div>
+    </div>
+
+    <!-- Porch mockup -->
+    <div class="mockup-label d-mockup-label">The Porch · sales page hero</div>
+    <div class="d-porch">
+      <nav class="d-porch-nav">
+        <div class="d-porch-logo">
+          <span class="d-porch-logo-dots"><i></i><i></i><i></i><i></i><i></i></span>
+          Primrose Studio
+        </div>
+        <div class="d-porch-nav-links">
+          <span>How it works</span>
+          <span>Pillars</span>
+          <span>About</span>
+        </div>
+        <div class="d-porch-nav-cta">Become a member</div>
+      </nav>
+      <div class="d-porch-hero">
+        <div>
+          <div class="d-porch-tag">$29 / month · five pillars · one library</div>
+          <h3 class="d-porch-headline">Your rights, your money,<br><span class="d-porch-headline-color">your safety.</span></h3>
+          <p class="d-porch-sub">A subscription library of in-depth videos organised into the five categories of wellness that actually map to your twenties. Taught by a working Canadian lawyer in plain English.</p>
+          <div class="d-porch-cta-row">
+            <div class="d-porch-cta">Start watching →</div>
+            <span class="d-porch-cta-meta">First video free · Cancel anytime</span>
+          </div>
+        </div>
+        <div class="d-porch-photo">
+          <div class="d-porch-photo-top">
+            <div>
+              <div class="d-porch-photo-num">01 · TAUGHT BY</div>
+              <div class="d-porch-photo-name">Primrose Watson</div>
+              <div class="d-porch-photo-credentials">Lawyer · Nova Scotia</div>
+            </div>
+            <span class="d-porch-photo-tag">Photo</span>
+          </div>
+          <div class="d-porch-photo-bottom">
+            <div class="d-porch-photo-num">02 · WHAT YOU GET</div>
+            <div class="d-porch-photo-name">15-minute<br>guides &amp;<br>toolkits</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pillars treatment -->
+    <div class="d-pillars">
+      <div class="d-pillars-head-row">
+        <div class="d-pillars-head">The framework.</div>
+        <div class="d-pillars-sub">5 categories · 24 videos</div>
+      </div>
+      <div class="d-pillar-grid">
+        <div class="d-pillar">
+          <div class="d-pillar-num">01</div>
+          <div>
+            <div class="d-pillar-name">Workplace<br>Wellness</div>
+            <div class="d-pillar-count">12 videos →</div>
+          </div>
+        </div>
+        <div class="d-pillar">
+          <div class="d-pillar-num">02</div>
+          <div>
+            <div class="d-pillar-name">Financial<br>Wellness</div>
+            <div class="d-pillar-count">9 videos →</div>
+          </div>
+        </div>
+        <div class="d-pillar">
+          <div class="d-pillar-num">03</div>
+          <div>
+            <div class="d-pillar-name">Career<br>Wellness</div>
+            <div class="d-pillar-count">7 videos →</div>
+          </div>
+        </div>
+        <div class="d-pillar">
+          <div class="d-pillar-num">04</div>
+          <div>
+            <div class="d-pillar-name">Emotional<br>Wellness</div>
+            <div class="d-pillar-count">5 videos →</div>
+          </div>
+        </div>
+        <div class="d-pillar">
+          <div class="d-pillar-num">05</div>
+          <div>
+            <div class="d-pillar-name">Personal<br>Safety</div>
+            <div class="d-pillar-count">8 videos →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Why -->
+    <div class="why">
+      <div class="d-why-card">
+        <div class="why-label">Why · 01</div>
+        <div class="why-text">The pillars become the brand instead of decoration on top of it. Most memorable identity move possible — you remember the colour stack after one visit.</div>
+      </div>
+      <div class="d-why-card">
+        <div class="why-label">Why · 02</div>
+        <div class="why-text">Doesn't depend on photography to carry the brand. Primrose's portrait is the warm anchor, not the entire identity.</div>
+      </div>
+      <div class="d-why-card">
+        <div class="why-label">Why · 03</div>
+        <div class="why-text">Confident colour discipline reads as designed-by-humans. Five carefully curated hues feel intentional, not template.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CHANNEL — still on the table
+       ============================================================ -->
+  <section class="compare">
+    <div class="compare-sub">Reminder · the baseline</div>
+    <div class="compare-head">Channel is still on the table.</div>
+    <p class="compare-body">You said you preferred Channel from v1. Late Night and Pillar Stack don't replace it — they're the two genuinely different swings that earn a comparison. <strong>If neither of them lands harder than Channel did, we go with Channel.</strong> No ego on this side. Open <span style="font-family: 'Geist Mono', monospace; font-size: 13px;">visual-direction.html</span> in another tab if you want to look at it again side-by-side.</p>
+    <div class="compare-tags">
+      <span class="compare-tag">Off-white paper</span>
+      <span class="compare-tag">Clay accent</span>
+      <span class="compare-tag">Geist heavy</span>
+      <span class="compare-tag">Type-led hero</span>
+      <span class="compare-tag">Numbered pillars</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       RECOMMENDATION
+       ============================================================ -->
+  <section class="recommendation">
+    <div class="eyebrow">How they compare</div>
+    <h2 class="reco-title">Three directions, three different bets.</h2>
+    <p class="reco-lede">All three clear the brief. The question is which strategic bet you want the brand to make.</p>
+
+    <div class="reco-table">
+      <div class="reco-row header">
+        <div></div>
+        <div>Channel</div>
+        <div>Late Night</div>
+        <div>Pillar Stack</div>
+      </div>
+      <div class="reco-row">
+        <div>Bet</div>
+        <div>Modern dev-tools premium. Clean, confident, type-led.</div>
+        <div>Cinematic premium. Dark, focused, photography-led.</div>
+        <div>System-led identity. Colour does the heavy lifting.</div>
+      </div>
+      <div class="reco-row">
+        <div>Trust via</div>
+        <div>Precision and craft</div>
+        <div>Gravity and atmosphere</div>
+        <div>Discipline and intentional system</div>
+      </div>
+      <div class="reco-row">
+        <div>Risk</div>
+        <div>Reads "dev tools" not "education"</div>
+        <div>Reads "streaming service" not "library"</div>
+        <div>Reads "brand identity" more than "video platform"</div>
+      </div>
+      <div class="reco-row">
+        <div>Wins if</div>
+        <div>Modern + premium are the conversion levers</div>
+        <div>Audience is anxious, late-night, mobile-heavy</div>
+        <div>Recognisable identity drives word-of-mouth</div>
+      </div>
+      <div class="reco-row">
+        <div>Member area</div>
+        <div>Calm, app-like, type-forward</div>
+        <div>Dark reading room, focused single video</div>
+        <div>Colour-coded navigation, pillar-as-home-row</div>
+      </div>
+      <div class="reco-row">
+        <div>Carry-over from tax site</div>
+        <div>None — totally different</div>
+        <div>None — totally different</div>
+        <div>None — totally different</div>
+      </div>
+    </div>
+
+    <div style="margin-top: 32px; padding: 32px; background: #F0EDE4; border-radius: 16px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px;">My honest read</div>
+      <p style="font-size: 15px; line-height: 1.65; color: var(--ink); max-width: 64ch;">If you still like Channel after seeing these — go with Channel. It already clears the brief and you have conviction on it. If <strong>Late Night</strong> grabs you, it's the most distinctive of the three (dark education brands are rare) but it leans on photography, so it needs a great portrait of Primrose to land. If <strong>Pillar Stack</strong> grabs you, it's the most identity-led — the brand becomes the system itself, which is memorable and shareable, but it asks Primrose to commit to a confident colour world she may want to react to first.</p>
+    </div>
+  </section>
+
+  <div class="doc-footer">
+    Visual Direction v2 · Primrose Knowledge Studio · prepared by Jitakshi
+  </div>
+</div>
+</body>
+</html>

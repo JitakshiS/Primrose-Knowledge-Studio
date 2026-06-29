@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Primrose Knowledge Studio — What It Costs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAF8F5;
+    --surface: #FFFFFF;
+    --ink: #1A1A1A;
+    --muted: #666666;
+    --soft: #999999;
+    --line: rgba(0, 0, 0, 0.08);
+    --accent: #722F37;
+    --accent-soft: #F4E8E9;
+    --accent-line: rgba(114, 47, 55, 0.18);
+    --success: #2D5A3D;
+    --success-soft: #E8F0EA;
+    --muted-soft: #EFEDEA;
+    --radius: 16px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 56px 32px 80px;
+  }
+
+  /* Header */
+  .doc-header { margin-bottom: 48px; }
+  .doc-eyebrow {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding: 6px 12px;
+    background: var(--accent-soft);
+    border-radius: 999px;
+    margin-bottom: 18px;
+  }
+  .doc-title {
+    font-size: 38px;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .doc-subtitle {
+    font-size: 16px;
+    color: var(--muted);
+  }
+
+  /* Sections */
+  section { margin-bottom: 40px; }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .section-title {
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .section-tag {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--soft);
+  }
+
+  /* The build — hero cost card */
+  .build {
+    background: var(--surface);
+    border: 1px solid var(--accent-line);
+    border-radius: var(--radius);
+    padding: 28px;
+  }
+  .build-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 20px;
+  }
+  .build-amount {
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--accent);
+  }
+  .build-split {
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .build-split strong { color: var(--ink); font-weight: 600; }
+  .build-inc-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .inc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 20px;
+  }
+  .inc {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    font-size: 14px;
+  }
+  .inc svg {
+    flex-shrink: 0;
+    width: 15px; height: 15px;
+    stroke: var(--success);
+    stroke-width: 2.4;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    margin-top: 3px;
+  }
+
+  /* Cost rows */
+  .rows {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--line);
+  }
+  .row:last-child { border-bottom: none; }
+  .row-icon {
+    flex-shrink: 0;
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    background: var(--bg);
+    color: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .row-icon svg {
+    width: 20px; height: 20px;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .row-body { flex-grow: 1; min-width: 0; }
+  .row-name {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .row-desc {
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .row-right {
+    flex-shrink: 0;
+    text-align: right;
+  }
+  .row-cost {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    white-space: nowrap;
+  }
+  .badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 6px;
+  }
+  .badge.req { background: var(--accent-soft); color: var(--accent); }
+  .badge.free { background: var(--success-soft); color: var(--success); }
+  .badge.owned { background: var(--muted-soft); color: var(--muted); }
+
+  /* Small note card (Stripe) */
+  .note-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .note-icon {
+    flex-shrink: 0;
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    background: var(--bg);
+    color: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .note-icon svg {
+    width: 20px; height: 20px;
+    stroke: currentColor; stroke-width: 1.7; fill: none;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
+  .note-body { font-size: 14px; line-height: 1.55; }
+  .note-body strong { font-weight: 600; }
+  .note-body .keep { color: var(--success); font-weight: 600; }
+
+  /* Bottom line */
+  .bottomline {
+    background: var(--accent);
+    color: white;
+    border-radius: var(--radius);
+    padding: 28px;
+  }
+  .bl-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+  }
+  .bl-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .bl-row:first-child { padding-top: 0; }
+  .bl-label { font-size: 14px; opacity: 0.85; }
+  .bl-value { font-size: 17px; font-weight: 600; }
+  .bl-compare {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    font-size: 13px;
+    opacity: 0.85;
+    line-height: 1.5;
+  }
+
+  /* Optional note */
+  .optional {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 18px 22px;
+    background: var(--bg);
+    border: 1px dashed var(--accent-line);
+    border-radius: var(--radius);
+  }
+  .optional-icon {
+    flex-shrink: 0;
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .optional-icon svg {
+    width: 18px; height: 18px;
+    stroke: currentColor; stroke-width: 1.8; fill: none;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
+  .optional-text {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+  .optional-text strong { color: var(--ink); font-weight: 600; }
+
+  /* Footer */
+  .doc-footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    color: var(--soft);
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .container { padding: 40px 18px 56px; }
+    .doc-title { font-size: 30px; }
+    .inc-grid { grid-template-columns: 1fr; }
+    .row { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header class="doc-header">
+    <div class="doc-eyebrow">Primrose Knowledge Studio</div>
+    <h1 class="doc-title">What it costs to build and run</h1>
+    <p class="doc-subtitle">One clear number from me, plus a few small tools you pay for directly. Everything on one page so there are no surprises.</p>
+  </header>
+
+  <!-- The build -->
+  <section>
+    <div class="section-head">
+      <span class="section-tag">One-time</span>
+      <h2 class="section-title">The build</h2>
+    </div>
+    <div class="build">
+      <div class="build-top">
+        <div class="build-amount">$8,500 CAD</div>
+        <div class="build-split"><strong>50%</strong> to start · <strong>25%</strong> at delivery · <strong>25%</strong> at handover</div>
+      </div>
+      <div class="build-inc-label">What's included</div>
+      <div class="inc-grid">
+        <div class="inc"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Sales page</div>
+        <div class="inc"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Member area</div>
+        <div class="inc"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Video player template</div>
+        <div class="inc"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Checkout and login</div>
+        <div class="inc"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Admin panel for adding videos</div>
+        <div class="inc"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Paywall tied to Stripe</div>
+        <div class="inc"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Full brand design</div>
+        <div class="inc"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Welcome email</div>
+        <div class="inc"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>14 days of fixes after launch</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Monthly tools -->
+  <section>
+    <div class="section-head">
+      <span class="section-tag">Monthly</span>
+      <h2 class="section-title">Tools you pay for directly</h2>
+    </div>
+    <div class="rows">
+      <div class="row">
+        <div class="row-icon"><svg viewBox="0 0 24 24"><path d="M23 7l-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+        <div class="row-body">
+          <div class="row-name">Vimeo Advanced</div>
+          <div class="row-desc">Hosts and protects your videos.</div>
+        </div>
+        <div class="row-right">
+          <div class="row-cost">~CAD 90/mo</div>
+          <span class="badge req">Required</span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="row-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 22 20 2 20 12 2"/></svg></div>
+        <div class="row-body">
+          <div class="row-name">Vercel</div>
+          <div class="row-desc">Runs the website.</div>
+        </div>
+        <div class="row-right">
+          <div class="row-cost">Free to start</div>
+          <span class="badge req">Required</span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="row-icon"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg></div>
+        <div class="row-body">
+          <div class="row-name">Supabase</div>
+          <div class="row-desc">Logins, member data, and PDF storage.</div>
+        </div>
+        <div class="row-right">
+          <div class="row-cost">Free to start</div>
+          <span class="badge req">Required</span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="row-icon"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2 6 12 13 22 6"/></svg></div>
+        <div class="row-body">
+          <div class="row-name">Email service</div>
+          <div class="row-desc">Sends welcome and login emails.</div>
+        </div>
+        <div class="row-right">
+          <div class="row-cost">Free to start</div>
+          <span class="badge req">Required</span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="row-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></svg></div>
+        <div class="row-body">
+          <div class="row-name">Domain name</div>
+          <div class="row-desc">primroseknowledgestudio.com</div>
+        </div>
+        <div class="row-right">
+          <div class="row-cost">~CAD 20/yr</div>
+          <span class="badge owned">Owned</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stripe per-sale -->
+  <section>
+    <div class="section-head">
+      <span class="section-tag">Per sale</span>
+      <h2 class="section-title">Stripe payment fees</h2>
+    </div>
+    <div class="note-card">
+      <div class="note-icon"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
+      <div class="note-body">
+        No monthly fee. Stripe takes <strong>2.9% + $0.30</strong> on each payment. On a $29 subscription, you keep <span class="keep">about $27.86</span>.
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom line -->
+  <section>
+    <div class="section-head">
+      <span class="section-tag">Summary</span>
+      <h2 class="section-title">The bottom line</h2>
+    </div>
+    <div class="bottomline">
+      <div class="bl-row">
+        <span class="bl-label">Month one (basically just Vimeo)</span>
+        <span class="bl-value">~CAD 90/mo</span>
+      </div>
+      <div class="bl-row">
+        <span class="bl-label">As you grow (more members, bigger library)</span>
+        <span class="bl-value">~CAD 120–155/mo</span>
+      </div>
+      <div class="bl-compare">
+        For comparison, an all-in-one platform like Kajabi runs $200–400/mo and takes a cut of every sale, with far less control over your brand.
+      </div>
+    </div>
+  </section>
+
+  <!-- Optional -->
+  <div class="optional">
+    <div class="optional-icon"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+    <div class="optional-text">
+      <strong>Optional, only if you ever need it:</strong> stronger video protection (Cloudflare Stream) at ~CAD 20–50/mo. Not needed to launch.
+    </div>
+  </div>
+
+  <footer class="doc-footer">
+    Tool prices are current estimates in Canadian dollars and may shift slightly when you sign up. Everything except the build fee is billed by each company directly to you, with no markup. Primrose Knowledge Studio · Prepared May 2026.
+  </footer>
+
+</div>
+</body>
+</html>
