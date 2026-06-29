@@ -68,6 +68,20 @@ body {
   font-feature-settings: "ss01", "cv01";
 }
 
+/*
+ * Anti-orphan rules. text-wrap: balance distributes lines so the last line
+ * doesn't end with a single word — applied to every display heading so we
+ * don't have to remember it per component. text-wrap: pretty does the same
+ * for paragraphs but cheaper, preventing single-word last lines on long copy.
+ */
+h1, h2, h3, h4 {
+  text-wrap: balance;
+}
+
+p, li {
+  text-wrap: pretty;
+}
+
 ::selection {
   background: var(--pillar-career);
   color: var(--paper);
