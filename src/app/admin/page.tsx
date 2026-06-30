@@ -103,32 +103,34 @@ export default function AdminOverviewPage() {
           {recent.map((v, i) => (
             <div
               key={v.slug}
-              className={`grid grid-cols-[auto_1fr_auto_auto_auto] gap-4 items-center px-5 py-4 ${i < recent.length - 1 ? "border-b border-ink/6" : ""}`}
+              className={`flex items-start gap-3 sm:gap-4 px-4 sm:px-5 py-4 ${i < recent.length - 1 ? "border-b border-ink/6" : ""}`}
             >
               <span
-                className={`block w-2 h-2 rounded-full ${PILLAR_BG_CLASS[v.pillar]}`}
+                className={`block w-2 h-2 rounded-full mt-2 flex-shrink-0 ${PILLAR_BG_CLASS[v.pillar]}`}
                 aria-hidden
               />
-              <div className="min-w-0">
+              <div className="min-w-0 flex-1">
                 <Link
                   href={`/admin/videos/${v.slug}`}
-                  className="font-display font-bold text-[15px] leading-tight tracking-[-0.01em] hover:text-career transition-colors truncate block"
+                  className="font-display font-bold text-[14px] sm:text-[15px] leading-tight tracking-[-0.01em] hover:text-career transition-colors block"
                 >
                   {v.title}
                 </Link>
-                <div className={`font-mono text-[10px] tracking-[0.12em] uppercase mt-0.5 ${PILLAR_TEXT_CLASS[v.pillar]}`}>
-                  {PILLAR_META[v.pillar].name}
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1">
+                  <span className={`font-mono text-[10px] tracking-[0.12em] uppercase ${PILLAR_TEXT_CLASS[v.pillar]}`}>
+                    {PILLAR_META[v.pillar].name}
+                  </span>
+                  <span className="font-mono text-[10px] text-muted">
+                    {formatDuration(v.durationSeconds)}
+                  </span>
+                  <span className="font-mono text-[10px] text-muted hidden sm:inline">
+                    {formatDate(v.publishedAt)}
+                  </span>
                 </div>
-              </div>
-              <div className="font-mono text-[11px] text-muted hidden sm:block">
-                {formatDuration(v.durationSeconds)}
-              </div>
-              <div className="font-mono text-[11px] text-muted hidden md:block">
-                {formatDate(v.publishedAt)}
               </div>
               <Link
                 href={`/admin/videos/${v.slug}`}
-                className="font-mono text-[10px] tracking-[0.14em] uppercase text-muted hover:text-ink transition-colors"
+                className="font-mono text-[10px] tracking-[0.14em] uppercase text-muted hover:text-ink transition-colors flex-shrink-0 mt-1"
               >
                 Edit →
               </Link>

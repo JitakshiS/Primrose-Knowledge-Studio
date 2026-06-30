@@ -247,11 +247,11 @@ export default function Home() {
             5 categories · one library
           </span>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3 mb-8">
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 mb-8">
           {pillars.map((p) => (
             <div
               key={p.num}
-              className={`${p.colorClass} text-paper rounded-[16px] p-6 aspect-[0.78] flex flex-col justify-between`}
+              className={`${p.colorClass} text-paper rounded-[16px] p-5 lg:p-6 aspect-[0.78] flex flex-col justify-between`}
             >
               <div className="font-mono text-[11px] tracking-[0.14em] opacity-85">
                 {p.num}
@@ -267,12 +267,15 @@ export default function Home() {
             </div>
           ))}
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-x-3 gap-y-4">
           {pillars.map((p) => (
             <p
               key={`${p.num}-blurb`}
               className="text-[13.5px] leading-[1.5] text-muted px-1"
             >
+              <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-soft block mb-1 lg:hidden">
+                {p.num} · {p.name}
+              </span>
               {p.blurb}
             </p>
           ))}
@@ -369,7 +372,7 @@ export default function Home() {
           ABOUT PRIMROSE
           ============================================================ */}
       <section id="about" className="max-w-7xl mx-auto px-6 lg:px-10 pb-24">
-        <div className="bg-card border border-ink/6 rounded-[24px] p-10 lg:p-16 grid lg:grid-cols-[1.3fr_1fr] gap-10 lg:gap-14 items-center">
+        <div className="bg-card border border-ink/6 rounded-[24px] p-7 sm:p-10 lg:p-16 grid lg:grid-cols-[1.3fr_1fr] gap-10 lg:gap-14 items-center">
           <div>
             <div className="font-mono text-[11px] tracking-[0.14em] uppercase text-career mb-4">
               About · Primrose Watson
@@ -416,7 +419,7 @@ export default function Home() {
         <h2 className="font-display font-black text-4xl lg:text-5xl tracking-[-0.02em] leading-[0.95] mb-12 text-center max-w-[22ch] mx-auto">
           One plan. Five pillars. The whole library.
         </h2>
-        <div className="max-w-2xl mx-auto bg-ink text-paper rounded-[24px] p-10 lg:p-12 relative overflow-hidden">
+        <div className="max-w-2xl mx-auto bg-ink text-paper rounded-[24px] p-7 sm:p-10 lg:p-12 relative overflow-hidden">
           <div
             className="absolute -top-20 -right-20 w-[300px] h-[300px] rounded-full opacity-30 blur-3xl"
             style={{ background: "var(--pillar-career)" }}
@@ -428,12 +431,12 @@ export default function Home() {
                 <div className="font-mono text-[11px] tracking-[0.14em] uppercase text-career mb-3">
                   Knowledge Studio · monthly
                 </div>
-                <h3 className="font-display font-black text-3xl lg:text-4xl tracking-[-0.015em] leading-none">
+                <h3 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl tracking-[-0.015em] leading-none">
                   Full library access.
                 </h3>
               </div>
-              <div className="text-right">
-                <div className="font-display font-black text-5xl lg:text-6xl tracking-[-0.02em] leading-none">
+              <div className="text-right flex-shrink-0">
+                <div className="font-display font-black text-4xl sm:text-5xl lg:text-6xl tracking-[-0.02em] leading-none">
                   $29
                 </div>
                 <div className="font-mono text-[11px] opacity-65 mt-1">
@@ -511,7 +514,7 @@ export default function Home() {
           FINAL CTA
           ============================================================ */}
       <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-32">
-        <div className="bg-card border border-ink/6 rounded-[24px] p-10 lg:p-16 text-center">
+        <div className="bg-card border border-ink/6 rounded-[24px] p-8 sm:p-10 lg:p-16 text-center">
           <h2 className="font-display font-black text-4xl lg:text-6xl tracking-[-0.025em] leading-[0.95] mb-6 max-w-[18ch] mx-auto">
             Stop Googling at 2am.
           </h2>

@@ -113,33 +113,51 @@ export default async function AdminVideosPage({
           videos.map((v, i) => (
             <div
               key={v.slug}
-              className={`grid md:grid-cols-[1fr_140px_120px_100px_80px] gap-2 md:gap-4 items-center px-5 py-4 ${i < videos.length - 1 ? "border-b border-ink/6" : ""}`}
+              className={`md:grid md:grid-cols-[1fr_140px_120px_100px_80px] md:gap-4 md:items-center flex items-start gap-3 px-4 sm:px-5 py-4 ${i < videos.length - 1 ? "border-b border-ink/6" : ""}`}
             >
-              <div className="min-w-0">
+              <div className="min-w-0 flex-1">
                 <Link
                   href={`/admin/videos/${v.slug}`}
-                  className="font-display font-bold text-[15px] leading-tight tracking-[-0.01em] hover:text-career transition-colors truncate block"
+                  className="font-display font-bold text-[14px] sm:text-[15px] leading-tight tracking-[-0.01em] hover:text-career transition-colors block"
                 >
                   {v.title}
                 </Link>
+                {/* Mobile-only inline meta strip */}
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1.5 md:hidden">
+                  <span className={`font-mono text-[10px] tracking-[0.12em] uppercase ${PILLAR_TEXT_CLASS[v.pillar]} inline-flex items-center gap-1.5`}>
+                    <span
+                      className={`block w-1 h-1 rounded-full ${PILLAR_BG_CLASS[v.pillar]}`}
+                      aria-hidden
+                    />
+                    {PILLAR_META[v.pillar].name.split(" ")[0]}
+                  </span>
+                  <span className="font-mono text-[10px] text-muted">
+                    {formatDate(v.publishedAt)}
+                  </span>
+                  <span className="font-mono text-[10px] text-muted">
+                    {formatDuration(v.durationSeconds)}
+                  </span>
+                </div>
+                {/* Toolkit name (both mobile + desktop) */}
                 <div className="font-mono text-[10px] text-muted mt-1 truncate">
                   {v.toolkitName}
                 </div>
               </div>
-              <div className={`font-mono text-[11px] tracking-[0.12em] uppercase ${PILLAR_TEXT_CLASS[v.pillar]} inline-flex items-center gap-2`}>
+              {/* Desktop-only meta columns */}
+              <div className={`hidden md:inline-flex font-mono text-[11px] tracking-[0.12em] uppercase ${PILLAR_TEXT_CLASS[v.pillar]} items-center gap-2`}>
                 <span
                   className={`block w-1.5 h-1.5 rounded-full ${PILLAR_BG_CLASS[v.pillar]}`}
                   aria-hidden
                 />
                 {PILLAR_META[v.pillar].name.split(" ")[0]}
               </div>
-              <div className="font-mono text-[11px] text-muted">
+              <div className="hidden md:block font-mono text-[11px] text-muted">
                 {formatDate(v.publishedAt)}
               </div>
-              <div className="font-mono text-[11px] text-muted">
+              <div className="hidden md:block font-mono text-[11px] text-muted">
                 {formatDuration(v.durationSeconds)}
               </div>
-              <div className="text-right">
+              <div className="md:text-right flex-shrink-0 mt-1 md:mt-0">
                 <Link
                   href={`/admin/videos/${v.slug}`}
                   className="font-mono text-[10px] tracking-[0.14em] uppercase text-muted hover:text-ink transition-colors"
