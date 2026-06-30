@@ -26,7 +26,7 @@ export const PILLAR_META: Record<
   workplace: {
     name: "Workplace Wellness",
     colorVar: "var(--pillar-workplace)",
-    tagline: "Your rights at work — contracts, overtime, harassment, leaving well.",
+    tagline: "Your rights at work. Contracts, overtime, harassment, leaving well.",
   },
   financial: {
     name: "Financial Wellness",
@@ -88,7 +88,7 @@ export const PLACEHOLDER_VIDEOS: PlaceholderVideo[] = [
   },
   {
     slug: "overtime-laws-canada",
-    title: "Overtime laws — when you're owed and when you're not",
+    title: "Overtime laws: when you're owed and when you're not",
     pillar: "workplace",
     description:
       "The federal and provincial rules that decide when overtime kicks in, how the math actually works, and what to do if it's not showing up on your pay stub.",
@@ -99,7 +99,7 @@ export const PLACEHOLDER_VIDEOS: PlaceholderVideo[] = [
   },
   {
     slug: "off-the-clock-messaging",
-    title: "Off-the-clock messaging — what the law actually says",
+    title: "Off-the-clock messaging: what the law actually says",
     pillar: "workplace",
     description:
       "When your boss texts at 10pm, what your obligations actually are, and the language to use when you need to set a boundary without burning the relationship.",
@@ -110,7 +110,7 @@ export const PLACEHOLDER_VIDEOS: PlaceholderVideo[] = [
   },
   {
     slug: "rrsps-explained",
-    title: "How RRSPs actually work — the version nobody explained",
+    title: "How RRSPs actually work: the version nobody explained",
     pillar: "financial",
     description:
       "What an RRSP is, what the contribution limit means, when to contribute versus when to wait, and the one mistake that costs people thousands by the time they file.",
@@ -132,7 +132,7 @@ export const PLACEHOLDER_VIDEOS: PlaceholderVideo[] = [
   },
   {
     slug: "debt-vs-investing",
-    title: "Debt vs investing — the math, not the vibes",
+    title: "Debt vs investing: the math, not the vibes",
     pillar: "financial",
     description:
       "When paying down a credit card beats every investment in the market, when it doesn't, and the simple rule for deciding when both options are competing for your next dollar.",
@@ -143,7 +143,7 @@ export const PLACEHOLDER_VIDEOS: PlaceholderVideo[] = [
   },
   {
     slug: "first-raise-negotiation",
-    title: "Negotiating a first raise — language that lands",
+    title: "Negotiating a first raise: language that lands",
     pillar: "career",
     description:
       "The exact opening line, the silence after, and the three responses to 'we don't have the budget.' Plus what to do if they ghost the conversation for two weeks.",
@@ -176,7 +176,7 @@ export const PLACEHOLDER_VIDEOS: PlaceholderVideo[] = [
   },
   {
     slug: "accessing-support",
-    title: "Accessing support — provincial mental health programs",
+    title: "Accessing support: provincial mental health programs",
     pillar: "emotional",
     description:
       "Free and low-cost programs by province, what they actually cover, and the wait-time realities. Includes the three questions to ask any first appointment.",
@@ -187,7 +187,7 @@ export const PLACEHOLDER_VIDEOS: PlaceholderVideo[] = [
   },
   {
     slug: "domestic-situations-first-48",
-    title: "Domestic situations — the first 48 hours",
+    title: "Domestic situations: the first 48 hours",
     pillar: "safety",
     description:
       "The protective steps that buy you time and options, the documentation that matters later, and the three numbers worth knowing before you need them.",
@@ -198,7 +198,7 @@ export const PLACEHOLDER_VIDEOS: PlaceholderVideo[] = [
   },
   {
     slug: "stalking-when-to-involve-police",
-    title: "Stalking and harassment — when to involve police",
+    title: "Stalking and harassment: when to involve police",
     pillar: "safety",
     description:
       "What counts as criminal harassment in Canada, the threshold for a protection order, and what to bring with you when you go to the station.",

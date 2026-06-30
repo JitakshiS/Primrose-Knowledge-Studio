@@ -15,7 +15,7 @@ import type { SubscriptionStatus } from "@/lib/firebase/types";
  *   - invoice.paid
  *   - invoice.payment_failed
  *
- * Important: this route handler MUST NOT be Edge — firebase-admin is Node-only.
+ * Important: this route handler MUST NOT be Edge, firebase-admin is Node-only.
  * The default runtime is Node, but we lock it explicitly below.
  *
  * NOTE: This is the scaffolded handler. Production wiring of new-member
@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "invalid-signature" }, { status: 400 });
   }
 
-  /* Idempotency ledger — if we've already processed this event, ack and skip. */
+  /* Idempotency ledger, if we've already processed this event, ack and skip. */
   const db = adminDb();
   const processedRef = db.collection("processedWebhookEvents").doc(event.id);
   const processedDoc = await processedRef.get();
@@ -91,7 +91,7 @@ export async function POST(request: NextRequest) {
         break;
     }
   } catch (err) {
-    /* Don't mark as processed on failure — Stripe will retry. */
+    /* Don't mark as processed on failure, Stripe will retry. */
     const message = err instanceof Error ? err.message : "handler-error";
     return NextResponse.json({ error: message }, { status: 500 });
   }
@@ -105,7 +105,7 @@ export async function POST(request: NextRequest) {
 
 async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   /* If a Firebase UID was passed through, link the Stripe customer to the
-   * existing profile. If not — anonymous checkout flow — we'll create the
+   * existing profile. If not, anonymous checkout flow, we'll create the
    * Firebase Auth user lazily on first magic-link sign-in (the /welcome page
    * triggers the magic link using the email Stripe collected). */
   const firebaseUid =
@@ -144,7 +144,7 @@ async function syncSubscriptionToFirestore(subscription: Stripe.Subscription) {
   }
 
   if (!firebaseUid) {
-    /* We don't have a Firebase user yet — the /welcome page will create the
+    /* We don't have a Firebase user yet, the /welcome page will create the
      * link on first sign-in. Skip writing the sub doc for now. */
     return;
   }

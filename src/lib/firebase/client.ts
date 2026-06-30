@@ -1,5 +1,5 @@
 /*
- * Firebase client SDK — for browser-side usage only (sign-in flow, listening
+ * Firebase client SDK, for browser-side usage only (sign-in flow, listening
  * to Firestore changes from member-side UI, etc.). Never use Admin SDK here.
  *
  * The `NEXT_PUBLIC_*` keys are intentionally exposed to the client bundle;

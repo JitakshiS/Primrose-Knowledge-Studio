@@ -1,5 +1,5 @@
 /*
- * Stripe SDK — server-only. Used by /api/stripe/checkout, /api/stripe/portal,
+ * Stripe SDK, server-only. Used by /api/stripe/checkout, /api/stripe/portal,
  * and /api/stripe/webhook. Never import from a client component.
  */
 
@@ -12,7 +12,7 @@ export function stripeServer(): Stripe {
   const key = process.env.STRIPE_SECRET_KEY;
   if (!key) {
     throw new Error(
-      "STRIPE_SECRET_KEY missing — populate it in .env.local before exercising any Stripe route.",
+      "STRIPE_SECRET_KEY missing, populate it in .env.local before exercising any Stripe route.",
     );
   }
   cached = new Stripe(key, {

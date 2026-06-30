@@ -13,7 +13,7 @@ import { sendSignInLinkToEmail } from "firebase/auth";
  *     cookie via the Admin SDK.
  *  4. We redirect to the `next` query param or /dashboard.
  *
- * The callback page is NOT YET BUILT — comes in the next commit once we have
+ * The callback page is NOT YET BUILT, comes in the next commit once we have
  * a Firebase project to test against end-to-end.
  */
 

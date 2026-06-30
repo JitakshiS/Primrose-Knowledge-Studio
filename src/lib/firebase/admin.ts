@@ -1,5 +1,5 @@
 /*
- * Firebase Admin SDK — server-only. Privileged access to Firestore, Auth,
+ * Firebase Admin SDK, server-only. Privileged access to Firestore, Auth,
  * and Storage. Never import this from a client component or route file that
  * runs in the Edge runtime (middleware). See ARCHITECTURE.md section 3.
  */

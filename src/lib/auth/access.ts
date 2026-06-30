@@ -1,5 +1,5 @@
 /*
- * verifyMemberAccess — the single canonical server-side gate. Every
+ * verifyMemberAccess, the single canonical server-side gate. Every
  * protected page or route handler calls this before rendering a video
  * embed, a PDF signed URL, or any member-only data. See ARCHITECTURE.md
  * section 3.
@@ -34,7 +34,7 @@ export async function verifyMemberAccess(): Promise<AccessResult> {
 
   const role = (profileSnap.data()?.role as Role) ?? "member";
 
-  /* Admin bypasses subscription requirement — Primrose still has read access
+  /* Admin bypasses subscription requirement, Primrose still has read access
    * to everything she's publishing, regardless of whether she also has a sub. */
   if (role === "admin") {
     return { ok: true, uid: session.uid, email: session.email, role };

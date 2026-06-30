@@ -1,4 +1,4 @@
-# Smoke Tests — Primrose Knowledge Studio
+# Smoke Tests, Primrose Knowledge Studio
 
 Every key user flow listed below. Both desktop and mobile. Run the entire list before any change ships to production. Failures get logged in `DECISIONS.md` with the fix.
 
@@ -11,11 +11,11 @@ This list grows as the project develops. Anything new in production has to be ad
 ### Signup and first session
 
 - [ ] Land on the home page from a cold link (TikTok bio URL pattern)
-- [ ] Click "Become a Member" — Stripe Checkout opens with the correct price ($29/month)
+- [ ] Click "Become a Member", Stripe Checkout opens with the correct price ($29/month)
 - [ ] Complete payment with a Stripe test card
 - [ ] Redirected back to the member dashboard, already logged in
 - [ ] Dashboard shows the correct welcome message and the "Newest Addition" feature slot
-- [ ] Click into a video — player loads and plays cleanly
+- [ ] Click into a video, player loads and plays cleanly
 - [ ] Toolkit PDF downloads successfully
 - [ ] Next/Previous navigation moves within the same pillar
 - [ ] Welcome email arrives in the inbox within two minutes
@@ -23,28 +23,28 @@ This list grows as the project develops. Anything new in production has to be ad
 ### Returning member
 
 - [ ] Visit the home page when already a member but logged out
-- [ ] Click "Login" — magic link is sent
-- [ ] Click the link in the email — logged in, lands on the dashboard
+- [ ] Click "Login", magic link is sent
+- [ ] Click the link in the email, logged in, lands on the dashboard
 - [ ] All five pillars are accessible from the dashboard
 - [ ] Session persists across a page refresh
 - [ ] Session persists across closing and reopening the browser
 
 ### Cancellation
 
-- [ ] Click "Manage Subscription" in the account area — Stripe Customer Portal opens
-- [ ] Cancel the subscription — Stripe confirms cancellation
+- [ ] Click "Manage Subscription" in the account area, Stripe Customer Portal opens
+- [ ] Cancel the subscription, Stripe confirms cancellation
 - [ ] Access is retained until the end of the current billing period
 - [ ] After the period ends, the dashboard shows a resubscribe prompt
 - [ ] Resubscribing restores access cleanly without re-creating the account
 
 ### Edge cases
 
-- [ ] Failed payment / card declined at checkout — clear error UI, no half-created account
-- [ ] Card expires mid-subscription — `past_due` state handled, UI prompts to update payment
-- [ ] Webhook delay between payment and access grant — temporary "setting up your account" state shows, then resolves
-- [ ] Direct URL to a video page without a subscription — redirected to the sales page
-- [ ] Direct URL to a video page with an expired subscription — redirected to the resubscribe prompt
-- [ ] Same email subscribing twice — handled gracefully, not a duplicate account
+- [ ] Failed payment / card declined at checkout, clear error UI, no half-created account
+- [ ] Card expires mid-subscription, `past_due` state handled, UI prompts to update payment
+- [ ] Webhook delay between payment and access grant, temporary "setting up your account" state shows, then resolves
+- [ ] Direct URL to a video page without a subscription, redirected to the sales page
+- [ ] Direct URL to a video page with an expired subscription, redirected to the resubscribe prompt
+- [ ] Same email subscribing twice, handled gracefully, not a duplicate account
 
 ---
 
@@ -56,16 +56,16 @@ This list grows as the project develops. Anything new in production has to be ad
 - [ ] Open the "new video" form
 - [ ] Fill title, pillar (dropdown of 5), description, YouTube video ID (unlisted)
 - [ ] Upload a toolkit PDF
-- [ ] Save as draft — video appears in the admin drafts list, NOT in the member library
-- [ ] Publish — video appears in the member library, in the correct pillar
+- [ ] Save as draft, video appears in the admin drafts list, NOT in the member library
+- [ ] Publish, video appears in the member library, in the correct pillar
 - [ ] Featured / "Newest Addition" toggle works as expected
 
 ### Editing a video
 
 - [ ] Open an existing published video in the admin
 - [ ] Edit title, description, or pillar
-- [ ] Save — changes reflect immediately in the member library
-- [ ] Replace the toolkit PDF — the new file downloads correctly, old file is no longer accessible
+- [ ] Save, changes reflect immediately in the member library
+- [ ] Replace the toolkit PDF, the new file downloads correctly, old file is no longer accessible
 
 ### Deleting a video
 
@@ -75,11 +75,11 @@ This list grows as the project develops. Anything new in production has to be ad
 
 ### Admin edge cases
 
-- [ ] Non-admin user attempts to access `/admin` — denied, redirected to the sales page or login
-- [ ] Form submitted with a missing required field — clear inline error, no silent failure
-- [ ] Form submitted with an invalid YouTube video ID — clear error, video not created
-- [ ] Form submitted with a video ID for a *public* YouTube video (not unlisted) — admin gets a warning prompting confirmation that this video is meant to be visible to non-members
-- [ ] Two videos pinned as "Newest Addition" — only the most recently pinned one displays
+- [ ] Non-admin user attempts to access `/admin`, denied, redirected to the sales page or login
+- [ ] Form submitted with a missing required field, clear inline error, no silent failure
+- [ ] Form submitted with an invalid YouTube video ID, clear error, video not created
+- [ ] Form submitted with a video ID for a *public* YouTube video (not unlisted), admin gets a warning prompting confirmation that this video is meant to be visible to non-members
+- [ ] Two videos pinned as "Newest Addition", only the most recently pinned one displays
 - [ ] Admin panel works on mobile (does not need to be optimised for it, but must not break)
 
 ---
@@ -119,7 +119,7 @@ This list grows as the project develops. Anything new in production has to be ad
 - [ ] Color contrast meets WCAG AA on body text and CTAs
 - [ ] Video player has keyboard controls (YouTube IFrame Player provides this by default)
 - [ ] YouTube embed parameters applied: `rel=0` (no unrelated suggestions), `modestbranding=1`, `playsinline=1`
-- [ ] Member sharing a video URL outside the platform results in the YouTube watch page being viewable to anyone with the link — this is acknowledged in Agreement Section A.8 and is the documented limitation of unlisted YouTube
+- [ ] Member sharing a video URL outside the platform results in the YouTube watch page being viewable to anyone with the link, this is acknowledged in Agreement Section A.8 and is the documented limitation of unlisted YouTube
 
 ---
 
@@ -128,7 +128,7 @@ This list grows as the project develops. Anything new in production has to be ad
 Before any production push:
 
 1. Open this file
-2. Walk through every checkbox manually — both Jitakshi clicks through, and ideally Primrose does a separate pass on the customer flows
+2. Walk through every checkbox manually, both Jitakshi clicks through, and ideally Primrose does a separate pass on the customer flows
 3. Anything that fails gets fixed before cutover
 4. New flows added to the project get new checkboxes added here
 5. Anything that breaks after launch and is caught in the 14-day window adds a new checkbox so the same break cannot happen twice

@@ -6,7 +6,7 @@ import { adminDb } from "@/lib/firebase/admin";
 /*
  * Create a Stripe Checkout Session for the $29/mo membership.
  *
- * The Porch CTA hits this as a GET — we redirect (303) to Stripe's hosted
+ * The Porch CTA hits this as a GET, we redirect (303) to Stripe's hosted
  * checkout. Two paths:
  *   - Anonymous visitor: Stripe collects email at checkout. On
  *     checkout.session.completed the webhook will (a) create a Firebase Auth

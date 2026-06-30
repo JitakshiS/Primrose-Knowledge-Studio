@@ -227,7 +227,7 @@ export default function DashboardPage() {
       <footer className="border-t border-ink/8 mt-16">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 py-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-muted">
           <div className="font-mono text-[10px] tracking-[0.14em] uppercase">
-            Legal information — not legal advice
+            Legal information, not legal advice
           </div>
           <div>© {new Date().getFullYear()} Primrose Watson</div>
         </div>

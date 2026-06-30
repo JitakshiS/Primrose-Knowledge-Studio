@@ -1,5 +1,5 @@
 /*
- * The Porch — sales / conversion page.
+ * The Porch, sales / conversion page.
  *
  * Placeholder copy throughout; intended for Primrose's review pass. Visual
  * structure and rhythm are intentional and locked to the Pillar Stack design
@@ -13,7 +13,7 @@ const pillars = [
     twoLine: "Workplace\nWellness",
     colorClass: "bg-workplace",
     count: "12 videos",
-    blurb: "Your rights at work — contracts, overtime, harassment, leaving well.",
+    blurb: "Your rights at work. Contracts, overtime, harassment, leaving well.",
   },
   {
     num: "02",
@@ -66,18 +66,18 @@ const howSteps = [
     num: "03",
     accent: "text-safety",
     title: "Use it the moment it matters.",
-    body: "Every video comes with a downloadable toolkit — checklists, scripts, and the exact next step you can take.",
+    body: "Every video comes with a downloadable toolkit. Checklists, scripts, and the exact next step you can take.",
   },
 ];
 
 const faqs = [
   {
     q: "Is this legal advice?",
-    a: "No. Everything in the library is legal information, not legal advice. It is meant to help you understand your situation and know what questions to ask — not to replace a lawyer in a live matter. Disclaimers are on every video.",
+    a: "No. Everything in the library is legal information, not legal advice. It is meant to help you understand your situation and know what questions to ask, not to replace a lawyer in a live matter. Disclaimers are on every video.",
   },
   {
     q: "Why $29 a month?",
-    a: "It is enough for Primrose to keep making videos and not enough to gatekeep this from the people who most need it. The library compounds — every month she adds new material. If you only use one video the entire year, it will likely save you more than the membership cost combined.",
+    a: "It is enough for Primrose to keep making videos and not enough to gatekeep this from the people who most need it. The library compounds. Every month she adds new material. If you only use one video the entire year, it will likely save you more than the membership cost combined.",
   },
   {
     q: "Can I cancel anytime?",
@@ -89,7 +89,7 @@ const faqs = [
   },
   {
     q: "Who is Primrose?",
-    a: "A working lawyer based in Ottawa who has spent her career translating Canadian law into things people can actually use. She built the Knowledge Studio for the version of herself in her twenties — the one who did not know what she did not know.",
+    a: "A working lawyer based in Ottawa who has spent her career translating Canadian law into things people can actually use. She built the Knowledge Studio for the version of herself in her twenties, the one who did not know what she did not know.",
   },
 ];
 
@@ -280,7 +280,7 @@ export default function Home() {
       </section>
 
       {/* ============================================================
-          SAMPLE VIDEO CARD — what's inside
+          SAMPLE VIDEO CARD, what's inside
           ============================================================ */}
       <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-24">
         <div className="font-mono text-[11px] tracking-[0.14em] uppercase text-muted mb-4">
@@ -380,13 +380,13 @@ export default function Home() {
             <p className="text-base lg:text-lg leading-relaxed text-muted mb-5 max-w-[58ch]">
               Primrose has spent her career translating Canadian law into things
               people can actually use. She built the Knowledge Studio for the
-              version of herself in her twenties — the one who didn&apos;t know
+              version of herself in her twenties, the one who didn&apos;t know
               what she didn&apos;t know.
             </p>
             <p className="text-base lg:text-lg leading-relaxed text-muted max-w-[58ch]">
               Everything in the library is legal <em>information</em>, not legal
               advice. It is the foundation that helps you ask the right questions
-              if you ever need to call a lawyer in earnest — and that catches the
+              if you ever need to call a lawyer in earnest. And that catches the
               ninety percent of moments where you can handle it yourself.
             </p>
           </div>
@@ -444,9 +444,9 @@ export default function Home() {
             <ul className="space-y-3 mb-8 text-[15px]">
               {[
                 "Every video in all five pillars",
-                "New videos added monthly — no extra charge",
+                "New videos added monthly, no extra charge",
                 "Downloadable toolkit PDF for each video",
-                "Magic-link login — no passwords to manage",
+                "Magic-link login, no passwords to manage",
                 "Cancel anytime, no friction",
                 "First video free before you commit",
               ].map((line) => (
@@ -529,7 +529,7 @@ export default function Home() {
       </section>
 
       {/* ============================================================
-          DESIGN PREVIEW LINK STRIP — remove before launch
+          DESIGN PREVIEW LINK STRIP, remove before launch
           (single block, easy to delete in one edit)
           ============================================================ */}
       <div className="bg-stone/60 border-y border-ink/8">
@@ -585,7 +585,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-6 lg:px-10 py-5 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-muted">
             <div>© {new Date().getFullYear()} Primrose Watson. All rights reserved.</div>
             <div className="font-mono text-[10px] tracking-[0.14em] uppercase">
-              Legal information — not legal advice
+              Legal information, not legal advice
             </div>
           </div>
         </div>

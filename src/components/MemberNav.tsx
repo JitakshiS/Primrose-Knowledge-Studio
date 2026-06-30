@@ -4,7 +4,7 @@ import { PILLAR_META, PILLAR_ORDER, PILLAR_BG_CLASS } from "@/data/placeholder";
 
 /*
  * Top navigation for the member-side pages (Fortress, library, video viewer).
- * Calmer than the Porch nav — this is a product surface, not a sales page.
+ * Calmer than the Porch nav, this is a product surface, not a sales page.
  * Hover state on each pillar reveals its colour.
  */
 export function MemberNav() {

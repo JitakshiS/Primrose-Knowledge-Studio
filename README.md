@@ -1,6 +1,6 @@
 # Primrose Knowledge Studio
 
-A subscription video library for Canadian Gen Z built on the Five Pillars of Wellness — taught by a working lawyer in plain English.
+A subscription video library for Canadian Gen Z built on the Five Pillars of Wellness, taught by a working lawyer in plain English.
 
 Repo for the Phase 1 platform refinement engagement ($8,500 CAD, 3-week build) between **Primrose Watson** (Halifax tax lawyer, client) and **Jitakshi** (contractor).
 
@@ -10,12 +10,12 @@ Repo for the Phase 1 platform refinement engagement ($8,500 CAD, 3-week build) b
 
 Read these in order at the start of any session:
 
-1. [`CLAUDE.md`](./CLAUDE.md) — build context, client constraints, scope, brand language
-2. [`DECISIONS.md`](./DECISIONS.md) — running log of project decisions (most recent at top)
-3. [`ARCHITECTURE.md`](./ARCHITECTURE.md) — Firebase + YouTube technical spec
-4. [`SMOKE-TESTS.md`](./SMOKE-TESTS.md) — pre-production checklist (every key flow, every push)
-5. [`design-system.html`](./design-system.html) — locked visual direction (Pillar Stack)
-6. [`AGENTS.md`](./AGENTS.md) — Next.js 16 working notes
+1. [`CLAUDE.md`](./CLAUDE.md), build context, client constraints, scope, brand language
+2. [`DECISIONS.md`](./DECISIONS.md), running log of project decisions (most recent at top)
+3. [`ARCHITECTURE.md`](./ARCHITECTURE.md), Firebase + YouTube technical spec
+4. [`SMOKE-TESTS.md`](./SMOKE-TESTS.md), pre-production checklist (every key flow, every push)
+5. [`design-system.html`](./design-system.html), locked visual direction (Pillar Stack)
+6. [`AGENTS.md`](./AGENTS.md), Next.js 16 working notes
 
 ---
 
@@ -51,7 +51,7 @@ Not yet wired. See `ARCHITECTURE.md` for the Stripe + Firebase + Resend keys req
 ```
 .
 ├── src/app/              Next.js App Router pages
-│   ├── layout.tsx        Root layout — fonts wired
+│   ├── layout.tsx        Root layout, fonts wired
 │   ├── page.tsx          The Porch (sales home)
 │   └── globals.css       Tailwind v4 + locked design tokens
 ├── public/               Static assets
@@ -65,7 +65,7 @@ Not yet wired. See `ARCHITECTURE.md` for the Stripe + Firebase + Resend keys req
 └── visual-direction*.html  Historical design exploration (kept for trail)
 ```
 
-Client materials (Agreement PDFs, Invoice, source docs from Primrose) sit at root locally but are gitignored — they never get committed.
+Client materials (Agreement PDFs, Invoice, source docs from Primrose) sit at root locally but are gitignored, they never get committed.
 
 ---
 

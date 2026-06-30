@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ============================================================
-   Primrose Knowledge Studio — Design System
+   Primrose Knowledge Studio, Design System
    Pillar Stack · LOCKED 2026-06-29
    Source of truth: ./design-system.html
    ============================================================ */
@@ -70,7 +70,7 @@ body {
 
 /*
  * Anti-orphan rules. text-wrap: balance distributes lines so the last line
- * doesn't end with a single word — applied to every display heading so we
+ * doesn't end with a single word, applied to every display heading so we
  * don't have to remember it per component. text-wrap: pretty does the same
  * for paragraphs but cheaper, preventing single-word last lines on long copy.
  */
