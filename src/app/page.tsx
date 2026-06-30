@@ -541,6 +541,8 @@ export default function Home() {
           <a href="/library/workplace" className="font-mono text-[11px] text-ink hover:text-career transition-colors">/library/workplace</a>
           <a href="/library/safety" className="font-mono text-[11px] text-ink hover:text-career transition-colors">/library/safety</a>
           <a href="/video/reading-the-fine-print-job-offer" className="font-mono text-[11px] text-ink hover:text-career transition-colors">/video/sample</a>
+          <a href="/admin" className="font-mono text-[11px] text-ink hover:text-career transition-colors">/admin</a>
+          <a href="/admin/videos/new" className="font-mono text-[11px] text-ink hover:text-career transition-colors">/admin/videos/new</a>
           <a href="/login" className="font-mono text-[11px] text-ink hover:text-career transition-colors">/login</a>
         </div>
       </div>

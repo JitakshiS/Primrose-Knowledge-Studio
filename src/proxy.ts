@@ -12,11 +12,12 @@ import { SESSION_COOKIE_NAME } from "@/lib/auth/constants";
 
 /*
  * NOTE, design-preview mode. Until Firebase auth is wired and we can test
- * end-to-end, only /admin is gated so Jitakshi can review the Fortress,
- * library, and video templates on the Vercel preview URL. When real data
- * lands, restore the full list: ["/dashboard", "/library", "/video", "/admin"].
+ * end-to-end, ALL paths are open so Jitakshi can review the Fortress,
+ * library, video, and admin templates on the Vercel preview URL. When real
+ * data lands, restore the full list:
+ *   ["/dashboard", "/library", "/video", "/admin"]
  */
-const PROTECTED_PATHS = ["/admin"];
+const PROTECTED_PATHS: string[] = [];
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -35,6 +36,8 @@ export function proxy(request: NextRequest) {
   return NextResponse.redirect(loginUrl);
 }
 
+/* Matcher restricted to a sentinel path that never matches real routes, so
+ * the proxy is effectively a no-op until we restore real gating. */
 export const config = {
-  matcher: ["/admin/:path*"],
+  matcher: ["/__never_matches/:path*"],
 };
