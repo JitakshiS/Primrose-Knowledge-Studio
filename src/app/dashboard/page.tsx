@@ -60,7 +60,7 @@ export default function DashboardPage() {
         >
           <div className="bg-ink text-paper rounded-[24px] p-8 lg:p-12 relative overflow-hidden">
             <div
-              className="absolute inset-0 opacity-30 transition-opacity group-hover:opacity-40"
+              className="absolute inset-0 animate-breathe group-hover:opacity-50 transition-opacity"
               style={{
                 background: `radial-gradient(ellipse at 25% 25%, ${PILLAR_META[newest.pillar].colorVar} 0%, transparent 55%), radial-gradient(ellipse at 75% 75%, var(--pillar-emotional) 0%, transparent 55%)`,
               }}

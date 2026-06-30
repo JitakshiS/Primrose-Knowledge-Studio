@@ -124,7 +124,7 @@ export default function Home() {
         </nav>
         <a
           href="#pricing"
-          className="font-display font-bold text-xs sm:text-sm px-4 py-2.5 rounded-[8px] bg-ink text-paper hover:opacity-90 transition-opacity"
+          className="font-display font-bold text-xs sm:text-sm px-4 py-2.5 rounded-[8px] bg-ink text-paper hover:opacity-90 active:scale-[0.98] transition-all duration-150"
         >
           Become a member
         </a>
@@ -154,7 +154,7 @@ export default function Home() {
             <div className="flex flex-wrap items-center gap-5">
               <a
                 href="#pricing"
-                className="font-display font-extrabold text-base px-7 py-4 rounded-[10px] bg-ink text-paper inline-flex items-center gap-2 hover:opacity-90 transition-opacity"
+                className="font-display font-extrabold text-base px-7 py-4 rounded-[10px] bg-ink text-paper inline-flex items-center gap-2 hover:opacity-90 active:scale-[0.98] transition-all duration-150"
               >
                 Start watching <span aria-hidden>→</span>
               </a>
@@ -251,7 +251,7 @@ export default function Home() {
           {pillars.map((p) => (
             <div
               key={p.num}
-              className={`${p.colorClass} text-paper rounded-[16px] p-5 lg:p-6 aspect-[0.78] flex flex-col justify-between`}
+              className={`${p.colorClass} text-paper rounded-[16px] p-5 lg:p-6 aspect-[0.78] flex flex-col justify-between transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_12px_28px_-12px_rgba(15,15,15,0.25)]`}
             >
               <div className="font-mono text-[11px] tracking-[0.14em] opacity-85">
                 {p.num}
@@ -319,7 +319,7 @@ export default function Home() {
               <div className="flex items-center gap-4">
                 <button
                   type="button"
-                  className="bg-paper text-ink font-display font-extrabold text-sm px-5 py-3 rounded-[8px] inline-flex items-center gap-2 hover:bg-stone transition-colors"
+                  className="bg-paper text-ink font-display font-extrabold text-sm px-5 py-3 rounded-[8px] inline-flex items-center gap-2 hover:bg-stone active:scale-[0.98] transition-all duration-150"
                 >
                   <span className="block w-0 h-0 border-l-[8px] border-l-ink border-y-[5px] border-y-transparent ml-0.5" />
                   Watch (14:32)
@@ -463,7 +463,7 @@ export default function Home() {
             </ul>
             <a
               href="/api/stripe/checkout"
-              className="block w-full bg-paper text-ink font-display font-extrabold text-base text-center px-7 py-4 rounded-[10px] hover:bg-stone transition-colors"
+              className="block w-full bg-paper text-ink font-display font-extrabold text-base text-center px-7 py-4 rounded-[10px] hover:bg-stone active:scale-[0.98] transition-all duration-150"
             >
               Become a member →
             </a>
@@ -524,7 +524,7 @@ export default function Home() {
           </p>
           <a
             href="#pricing"
-            className="inline-flex font-display font-extrabold text-base lg:text-lg px-8 py-4 rounded-[10px] bg-ink text-paper items-center gap-2 hover:opacity-90 transition-opacity"
+            className="inline-flex font-display font-extrabold text-base lg:text-lg px-8 py-4 rounded-[10px] bg-ink text-paper items-center gap-2 hover:opacity-90 active:scale-[0.98] transition-all duration-150"
           >
             Become a member <span aria-hidden>→</span>
           </a>
@@ -547,6 +547,8 @@ export default function Home() {
           <a href="/admin" className="font-mono text-[11px] text-ink hover:text-career transition-colors">/admin</a>
           <a href="/admin/videos/new" className="font-mono text-[11px] text-ink hover:text-career transition-colors">/admin/videos/new</a>
           <a href="/login" className="font-mono text-[11px] text-ink hover:text-career transition-colors">/login</a>
+          <a href="/welcome" className="font-mono text-[11px] text-ink hover:text-career transition-colors">/welcome</a>
+          <a href="/login/callback" className="font-mono text-[11px] text-ink hover:text-career transition-colors">/login/callback</a>
         </div>
       </div>
 

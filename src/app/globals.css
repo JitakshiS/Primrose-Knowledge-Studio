@@ -86,3 +86,50 @@ p, li {
   background: var(--pillar-career);
   color: var(--paper);
 }
+
+/*
+ * Smooth scrolling for in-page anchor links (Porch nav, FAQ jumps, etc.)
+ */
+html {
+  scroll-behavior: smooth;
+}
+
+/*
+ * Focus-visible: subtle but unmistakable. Pillar-career colour at 50% so it
+ * reads across both light and dark surfaces. Hidden on mouse use (focus
+ * without :focus-visible doesn't show the ring) to keep the visual quiet.
+ */
+*:focus { outline: none; }
+
+*:focus-visible {
+  outline: 2px solid var(--pillar-career);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/*
+ * Slow breathing pulse for the Newest Addition card gradient. Opacity
+ * oscillates gently so the colour feels alive without distracting. 9
+ * seconds is slow enough to never feel frantic.
+ */
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.28; }
+  50% { opacity: 0.40; }
+}
+
+.animate-breathe {
+  animation: pulse-slow 9s ease-in-out infinite;
+}
+
+/*
+ * Reduced motion: respect the user's OS preference. Disables the drift and
+ * any other non-essential motion.
+ */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
