@@ -215,13 +215,13 @@ export default function Home() {
           How it works
         </div>
         <h2 className="font-display font-black text-4xl lg:text-5xl tracking-[-0.02em] leading-[0.95] mb-12 max-w-[18ch]">
-          Three steps. No legal jargon.
+          Three steps.<br />No legal jargon.
         </h2>
         <div className="grid md:grid-cols-3 gap-4">
           {howSteps.map((s) => (
             <div
               key={s.num}
-              className="bg-card border border-ink/6 rounded-[16px] p-8 flex flex-col"
+              className="bg-card border border-ink/6 rounded-[16px] p-8 flex flex-col shadow-[0_4px_20px_-6px_rgba(15,15,15,0.08)]"
             >
               <div className={`font-mono text-xs tracking-[0.14em] ${s.accent} mb-5`}>
                 {s.num} · STEP
@@ -287,7 +287,7 @@ export default function Home() {
           What you actually get
         </div>
         <h2 className="font-display font-black text-3xl lg:text-4xl tracking-[-0.015em] leading-[1] mb-10 max-w-[22ch]">
-          15-minute guides. Every one comes with a toolkit.
+          15-minute guides.<br />Every one comes with a toolkit.
         </h2>
         <div className="grid lg:grid-cols-[1fr_0.9fr] gap-6">
           {/* Sample video frame */}
