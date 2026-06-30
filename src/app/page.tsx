@@ -287,7 +287,7 @@ export default function Home() {
           What you actually get
         </div>
         <h2 className="font-display font-black text-3xl lg:text-4xl tracking-[-0.015em] leading-[1] mb-10 max-w-[22ch]">
-          15-minute guides.<br />Every one comes with a toolkit.
+          15-minute guides.<br />Each comes with a toolkit.
         </h2>
         <div className="grid lg:grid-cols-[1fr_0.9fr] gap-6">
           {/* Sample video frame */}
