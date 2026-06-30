@@ -23,10 +23,52 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://primroseknowledgestudio.com";
+const SITE_DESCRIPTION =
+  "A subscription library of in-depth videos on your rights, your money, and your safety. Taught by a working Canadian lawyer in plain English.";
+
 export const metadata: Metadata = {
-  title: "Primrose Knowledge Studio",
-  description:
-    "A subscription library of in-depth videos on your rights, your money, and your safety. Taught by a working Canadian lawyer.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Primrose Studio · The knowledge they didn't teach you",
+    template: "%s · Primrose Studio",
+  },
+  description: SITE_DESCRIPTION,
+  applicationName: "Primrose Studio",
+  authors: [{ name: "Primrose Watson" }],
+  creator: "Primrose Watson",
+  keywords: [
+    "Canadian law",
+    "legal knowledge",
+    "workplace rights",
+    "financial wellness",
+    "personal safety",
+    "Gen Z legal education",
+    "Primrose Watson",
+  ],
+  openGraph: {
+    type: "website",
+    locale: "en_CA",
+    url: "/",
+    siteName: "Primrose Studio",
+    title: "Primrose Studio · The knowledge they didn't teach you",
+    description: SITE_DESCRIPTION,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Primrose Studio · The knowledge they didn't teach you",
+    description: SITE_DESCRIPTION,
+    creator: "@primrosewatson",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
 };
 
 export default function RootLayout({

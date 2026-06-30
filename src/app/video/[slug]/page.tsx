@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MemberNav } from "@/components/MemberNav";
@@ -14,6 +15,21 @@ import {
 } from "@/data/placeholder";
 
 type Params = Promise<{ slug: string }>;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Params;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const video = videoBySlug(slug);
+  if (!video) return { title: "Video", robots: { index: false, follow: false } };
+  return {
+    title: video.title,
+    description: video.description.slice(0, 160),
+    robots: { index: false, follow: false },
+  };
+}
 
 export default async function VideoPage({ params }: { params: Params }) {
   const { slug } = await params;

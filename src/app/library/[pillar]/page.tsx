@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MemberNav } from "@/components/MemberNav";
@@ -14,6 +15,23 @@ import {
 } from "@/data/placeholder";
 
 type Params = Promise<{ pillar: string }>;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Params;
+}): Promise<Metadata> {
+  const { pillar } = await params;
+  if (!PILLARS.includes(pillar as Pillar)) {
+    return { title: "Pillar", robots: { index: false, follow: false } };
+  }
+  const meta = PILLAR_META[pillar as Pillar];
+  return {
+    title: meta.name,
+    description: meta.tagline,
+    robots: { index: false, follow: false },
+  };
+}
 
 export default async function PillarPage({ params }: { params: Params }) {
   const { pillar: pillarParam } = await params;

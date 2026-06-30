@@ -1,3 +1,10 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Admin",
+  robots: { index: false, follow: false, googleBot: { index: false, follow: false } },
+};
+
 export default function AdminPage() {
   return (
     <div className="flex-1 bg-paper text-ink flex items-center justify-center px-6 py-24">

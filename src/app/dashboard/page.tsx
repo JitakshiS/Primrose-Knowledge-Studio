@@ -1,6 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { MemberNav } from "@/components/MemberNav";
 import { DesignPreviewBanner } from "@/components/DesignPreviewBanner";
+
+export const metadata: Metadata = {
+  title: "Library",
+  robots: { index: false, follow: false },
+};
 import {
   PILLAR_META,
   PILLAR_ORDER,
