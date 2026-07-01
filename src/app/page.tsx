@@ -54,13 +54,13 @@ const howSteps = [
     num: "01",
     accent: "text-workplace",
     title: "Join in under a minute.",
-    body: "$29/month, no contracts, cancel anytime. One magic-link login, no passwords to remember.",
+    body: "$29 a month, no contracts, cancel anytime. Magic-link sign-in, no passwords to remember.",
   },
   {
     num: "02",
     accent: "text-career",
     title: "Watch what's on your mind tonight.",
-    body: "Five categories, every video sits inside one. Browse by what you actually want to know right now.",
+    body: "Five pillars, every video belongs to one. Browse by whatever you actually want to know right now.",
   },
   {
     num: "03",
@@ -73,11 +73,11 @@ const howSteps = [
 const faqs = [
   {
     q: "Is this legal advice?",
-    a: "No. Everything in the library is legal information, not legal advice. It is meant to help you understand your situation and know what questions to ask, not to replace a lawyer in a live matter. Disclaimers are on every video.",
+    a: "No. Everything in the library is legal information, not legal advice. It helps you understand your situation and know what to ask. It doesn't replace a lawyer when your situation is actively unfolding. Disclaimers are on every video.",
   },
   {
     q: "Why $29 a month?",
-    a: "It is enough for Primrose to keep making videos and not enough to gatekeep this from the people who most need it. The library compounds. Every month she adds new material. If you only use one video the entire year, it will likely save you more than the membership cost combined.",
+    a: "It's enough for Primrose to keep making videos and not enough to gatekeep this from the people who most need it. The library grows every month with new material. If you only use one video the whole year, it should save you more than a year of membership.",
   },
   {
     q: "Can I cancel anytime?",
@@ -147,9 +147,9 @@ export default function Home() {
               </span>
             </h1>
             <p className="text-base lg:text-lg leading-relaxed text-muted max-w-[46ch] mb-8">
-              A subscription library of in-depth videos organised into the five
-              categories of wellness that actually map to your twenties. Taught by a
-              working Canadian lawyer in plain English.
+              In-depth videos on the legal, financial, and safety knowledge that
+              keeps coming up in your twenties. Taught by a working Canadian lawyer
+              in plain English.
             </p>
             <div className="flex flex-wrap items-center gap-5">
               <a
@@ -312,9 +312,9 @@ export default function Home() {
                 Reading the fine print on your first job offer.
               </h3>
               <p className="text-[15px] leading-relaxed opacity-75 max-w-[42ch] mb-8">
-                What &quot;at-will&quot; really means in Canadian context, the
+                What &quot;at-will&quot; actually means in Canadian context, the
                 non-compete clauses worth pushing back on, and the three signals
-                that an offer is about to get worse, not better.
+                an offer&apos;s about to sour before you accept it.
               </p>
               <div className="flex items-center gap-4">
                 <button
@@ -340,8 +340,8 @@ export default function Home() {
               The fine-print<br />check checklist.
             </h3>
             <p className="text-[15px] leading-relaxed text-muted mb-8">
-              A one-page PDF you can print and walk through before signing. The
-              questions to ask. The clauses to flag. The exact words for the
+              A one-page PDF you can print and walk through before signing.
+              Questions to ask, clauses to flag, and the exact words for the
               follow-up email if something feels off.
             </p>
             <div className="mt-auto flex items-center justify-between gap-4">
@@ -388,9 +388,9 @@ export default function Home() {
             </p>
             <p className="text-base lg:text-lg leading-relaxed text-muted max-w-[58ch]">
               Everything in the library is legal <em>information</em>, not legal
-              advice. It is the foundation that helps you ask the right questions
-              if you ever need to call a lawyer in earnest. And that catches the
-              ninety percent of moments where you can handle it yourself.
+              advice. It gives you the base you need to ask the right questions
+              when you do call a lawyer, and handles the 90% of moments where
+              you don&apos;t.
             </p>
           </div>
           <div className="bg-gradient-to-br from-workplace via-emotional to-safety rounded-[16px] aspect-[4/5] flex items-end p-7 text-paper">
@@ -447,11 +447,11 @@ export default function Home() {
             <ul className="space-y-3 mb-8 text-[15px]">
               {[
                 "Every video in all five pillars",
-                "New videos added monthly, no extra charge",
-                "Downloadable toolkit PDF for each video",
-                "Magic-link login, no passwords to manage",
+                "New videos every month, no extra charge",
+                "Downloadable toolkit PDF with each video",
+                "Magic-link sign-in, no passwords to manage",
                 "Cancel anytime, no friction",
-                "First video free before you commit",
+                "First video free, no card required",
               ].map((line) => (
                 <li key={line} className="flex items-start gap-3">
                   <span className="text-career text-lg leading-none mt-0.5" aria-hidden>
@@ -520,7 +520,7 @@ export default function Home() {
           </h2>
           <p className="text-base lg:text-lg leading-relaxed text-muted mb-8 max-w-[48ch] mx-auto">
             One library. Five pillars. Taught by someone who knows what she&apos;s
-            talking about. Membership is $29/month and you can cancel any time.
+            talking about. Membership is $29 a month and you can cancel anytime.
           </p>
           <a
             href="#pricing"

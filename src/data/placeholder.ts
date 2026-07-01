@@ -132,10 +132,10 @@ export const PLACEHOLDER_VIDEOS: PlaceholderVideo[] = [
   },
   {
     slug: "debt-vs-investing",
-    title: "Debt vs investing: the math, not the vibes",
+    title: "Debt vs investing: run the numbers first",
     pillar: "financial",
     description:
-      "When paying down a credit card beats every investment in the market, when it doesn't, and the simple rule for deciding when both options are competing for your next dollar.",
+      "When paying down a credit card beats every investment in the market, when it doesn't, and a simple rule for deciding which one gets your next dollar.",
     durationSeconds: 11 * 60 + 39,
     publishedAt: "2026-06-08",
     toolkitName: "Debt-vs-invest-worksheet.pdf",
@@ -146,7 +146,7 @@ export const PLACEHOLDER_VIDEOS: PlaceholderVideo[] = [
     title: "Negotiating a first raise: language that lands",
     pillar: "career",
     description:
-      "The exact opening line, the silence after, and the three responses to 'we don't have the budget.' Plus what to do if they ghost the conversation for two weeks.",
+      "The exact opening line, the silence to hold after, and how to respond when someone says 'we don't have the budget.' Plus what to do if they ghost the conversation for two weeks.",
     durationSeconds: 13 * 60 + 51,
     publishedAt: "2026-06-23",
     toolkitName: "Raise-conversation-script.pdf",
@@ -179,7 +179,7 @@ export const PLACEHOLDER_VIDEOS: PlaceholderVideo[] = [
     title: "Accessing support: provincial mental health programs",
     pillar: "emotional",
     description:
-      "Free and low-cost programs by province, what they actually cover, and the wait-time realities. Includes the three questions to ask any first appointment.",
+      "Free and low-cost programs by province, what they actually cover, and honest wait-time expectations. Includes the three questions worth asking at any first appointment.",
     durationSeconds: 14 * 60 + 55,
     publishedAt: "2026-06-05",
     toolkitName: "Support-resources-by-province.pdf",
