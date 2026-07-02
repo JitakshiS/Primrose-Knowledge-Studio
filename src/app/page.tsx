@@ -111,29 +111,56 @@ export default function Home() {
       {/* ============================================================
           NAV
           ============================================================ */}
-      <header className="max-w-7xl mx-auto px-6 lg:px-10 py-6 flex justify-between items-center">
-        <div className="font-display font-black text-lg tracking-tight flex items-center gap-3">
-          <LogoDots />
-          <span>Primrose Studio</span>
+      <header>
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 py-6 flex justify-between items-center">
+          <div className="font-display font-black text-lg tracking-tight flex items-center gap-3">
+            <LogoDots />
+            <span>Primrose Studio</span>
+          </div>
+          <nav className="hidden md:flex gap-7 font-display font-medium text-sm text-muted">
+            <a href="#how" className="hover:text-ink transition-colors">How it works</a>
+            <a href="#pillars" className="hover:text-ink transition-colors">Pillars</a>
+            <a href="#pricing" className="hover:text-ink transition-colors">Pricing</a>
+            <a href="#faq" className="hover:text-ink transition-colors">FAQ</a>
+          </nav>
+          <a
+            href="#pricing"
+            className="font-display font-bold text-xs sm:text-sm px-4 py-2.5 rounded-[8px] bg-ink text-paper hover:opacity-90 active:scale-[0.98] transition-all duration-150"
+          >
+            Become a member
+          </a>
         </div>
-        <nav className="hidden md:flex gap-7 font-display font-medium text-sm text-muted">
-          <a href="#how" className="hover:text-ink transition-colors">How it works</a>
-          <a href="#pillars" className="hover:text-ink transition-colors">Pillars</a>
-          <a href="#pricing" className="hover:text-ink transition-colors">Pricing</a>
-          <a href="#faq" className="hover:text-ink transition-colors">FAQ</a>
-        </nav>
-        <a
-          href="#pricing"
-          className="font-display font-bold text-xs sm:text-sm px-4 py-2.5 rounded-[8px] bg-ink text-paper hover:opacity-90 active:scale-[0.98] transition-all duration-150"
-        >
-          Become a member
-        </a>
+
+        {/* Mobile section nav (below md). <details> keeps it server-rendered. */}
+        <details className="md:hidden group border-y border-ink/8 [&_summary::-webkit-details-marker]:hidden">
+          <summary className="cursor-pointer flex items-center justify-between px-6 py-2.5 list-none">
+            <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-muted">
+              Menu
+            </span>
+            <span
+              className="font-display font-bold text-xl text-muted leading-none transition-transform group-open:rotate-45"
+              aria-hidden
+            >
+              +
+            </span>
+          </summary>
+          <nav className="px-6 pb-4 pt-1 grid grid-cols-2 gap-2">
+            <a href="#how" className="bg-stone/60 rounded-[10px] px-4 py-3 font-display font-bold text-sm">How it works</a>
+            <a href="#pillars" className="bg-stone/60 rounded-[10px] px-4 py-3 font-display font-bold text-sm">Pillars</a>
+            <a href="#pricing" className="bg-stone/60 rounded-[10px] px-4 py-3 font-display font-bold text-sm">Pricing</a>
+            <a href="#faq" className="bg-stone/60 rounded-[10px] px-4 py-3 font-display font-bold text-sm">FAQ</a>
+            <a href="/login" className="col-span-2 bg-ink text-paper rounded-[10px] px-4 py-3 font-display font-extrabold text-sm flex items-center justify-between">
+              <span>Member sign in</span>
+              <span aria-hidden>→</span>
+            </a>
+          </nav>
+        </details>
       </header>
 
       {/* ============================================================
           HERO
           ============================================================ */}
-      <section className="max-w-7xl mx-auto px-6 lg:px-10 pt-12 lg:pt-20 pb-20">
+      <section id="main-content" className="max-w-7xl mx-auto px-6 lg:px-10 pt-12 lg:pt-20 pb-20">
         <div className="grid lg:grid-cols-[1.4fr_1fr] gap-10 lg:gap-14 items-stretch">
           <div className="flex flex-col justify-center">
             <div className="font-mono text-[11px] tracking-[0.14em] uppercase text-career mb-5">
@@ -549,6 +576,7 @@ export default function Home() {
           <a href="/login" className="font-mono text-[11px] text-ink hover:text-career transition-colors">/login</a>
           <a href="/welcome" className="font-mono text-[11px] text-ink hover:text-career transition-colors">/welcome</a>
           <a href="/login/callback" className="font-mono text-[11px] text-ink hover:text-career transition-colors">/login/callback</a>
+          <a href="/account" className="font-mono text-[11px] text-ink hover:text-career transition-colors">/account</a>
         </div>
       </div>
 

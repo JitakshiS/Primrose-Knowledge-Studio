@@ -81,7 +81,15 @@ export default function RootLayout({
       lang="en"
       className={`${outfit.variable} ${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:bg-ink focus:text-paper focus:px-4 focus:py-2.5 focus:rounded-[8px] font-display font-bold text-sm"
+        >
+          Skip to content
+        </a>
+        {children}
+      </body>
     </html>
   );
 }

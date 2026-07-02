@@ -45,13 +45,13 @@ export function MemberNav() {
           >
             Dashboard
           </Link>
-          <button
-            type="button"
-            className="w-9 h-9 rounded-full bg-ink text-paper font-display font-bold text-[13px] flex items-center justify-center"
+          <Link
+            href="/account"
+            className="w-9 h-9 rounded-full bg-ink text-paper font-display font-bold text-[13px] flex items-center justify-center hover:opacity-85 transition-opacity"
             aria-label="Account"
           >
             J
-          </button>
+          </Link>
         </div>
       </div>
 
@@ -89,6 +89,12 @@ export function MemberNav() {
               className="font-mono text-[10px] tracking-[0.14em] uppercase text-muted"
             >
               Dashboard
+            </Link>
+            <Link
+              href="/account"
+              className="font-mono text-[10px] tracking-[0.14em] uppercase text-muted"
+            >
+              Account
             </Link>
             <Link
               href="/login"

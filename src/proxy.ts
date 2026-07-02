@@ -15,7 +15,7 @@ import { SESSION_COOKIE_NAME } from "@/lib/auth/constants";
  * end-to-end, ALL paths are open so Jitakshi can review the Fortress,
  * library, video, and admin templates on the Vercel preview URL. When real
  * data lands, restore the full list:
- *   ["/dashboard", "/library", "/video", "/admin"]
+ *   ["/dashboard", "/library", "/video", "/admin", "/account"]
  */
 const PROTECTED_PATHS: string[] = [];
 
