@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plain Sight — Design Exploration · Primrose Knowledge Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FBFAF6;
+    --card: #FFFFFF;
+    --ink: #16180F;
+    --muted: #5C5F55;
+    --soft: #A9ACA0;
+    --line: rgba(22, 24, 15, 0.10);
+    --line-soft: rgba(22, 24, 15, 0.06);
+
+    /* ONE working accent. Deep forest: stability, signed-off, legal-adjacent. */
+    --accent: #1F5C45;
+    --accent-soft: rgba(31, 92, 69, 0.08);
+
+    /* Pillars demoted to functional tags */
+    --workplace: #2640D9;
+    --financial: #1F5C45;
+    --career: #C7502F;
+    --emotional: #7A4B6E;
+    --safety: #7C3036;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  h1, h2, h3, h4 { text-wrap: balance; font-family: 'Outfit', sans-serif; }
+  p, li { text-wrap: pretty; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+
+  /* ---------- exploration banner ---------- */
+  .explore-note {
+    background: var(--ink);
+    color: var(--paper);
+    text-align: center;
+    padding: 9px 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  /* ---------- nav ---------- */
+  nav.top {
+    position: sticky; top: 0; z-index: 40;
+    background: rgba(251, 250, 246, 0.9);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .nav-row { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo {
+    display: inline-flex; align-items: center; gap: 11px;
+    font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 15.5px;
+    letter-spacing: -0.005em; color: var(--ink); text-decoration: none;
+  }
+  .dots { display: inline-flex; gap: 2.5px; }
+  .dots i { display: block; width: 6px; height: 6px; border-radius: 2px; }
+  .dots i:nth-child(1) { background: var(--workplace); }
+  .dots i:nth-child(2) { background: var(--financial); }
+  .dots i:nth-child(3) { background: var(--career); }
+  .dots i:nth-child(4) { background: var(--emotional); }
+  .dots i:nth-child(5) { background: var(--safety); }
+  .nav-links { display: flex; gap: 26px; }
+  .nav-links a {
+    font-size: 13.5px; font-weight: 500; color: var(--muted);
+    text-decoration: none; transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta {
+    font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 13.5px;
+    background: var(--ink); color: var(--paper);
+    padding: 9px 16px; border-radius: 8px; text-decoration: none;
+    transition: opacity 0.15s;
+  }
+  .nav-cta:hover { opacity: 0.88; }
+  @media (max-width: 800px) { .nav-links { display: none; } }
+
+  /* ---------- hero ---------- */
+  .hero { padding: 84px 0 72px; }
+  .hero-grid {
+    display: grid; grid-template-columns: 1fr 0.95fr; gap: 60px; align-items: center;
+  }
+  @media (max-width: 920px) { .hero-grid { grid-template-columns: 1fr; gap: 44px; } }
+  h1.hero-title {
+    font-weight: 800;
+    font-size: clamp(36px, 4.8vw, 54px);
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    max-width: 15ch;
+  }
+  .hero-sub {
+    font-size: 17px; line-height: 1.65; color: var(--muted);
+    max-width: 48ch; margin-bottom: 30px;
+  }
+  .hero-cta-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 34px; }
+  .btn-primary {
+    font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 15px;
+    background: var(--ink); color: var(--paper);
+    padding: 15px 26px; border-radius: 10px; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 9px;
+    transition: opacity 0.15s, transform 0.12s;
+  }
+  .btn-primary:hover { opacity: 0.88; }
+  .btn-primary:active { transform: scale(0.985); }
+  .btn-ghost {
+    font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 15px;
+    color: var(--ink); text-decoration: none;
+    padding: 15px 20px; border: 1px solid var(--line); border-radius: 10px;
+    background: var(--card);
+    transition: border-color 0.15s;
+  }
+  .btn-ghost:hover { border-color: rgba(22, 24, 15, 0.28); }
+
+  /* Inline trust row under CTAs — credibility before scrolling */
+  .trust-inline { display: flex; gap: 22px; flex-wrap: wrap; }
+  .trust-fact { display: flex; align-items: flex-start; gap: 9px; }
+  .trust-fact .tick {
+    width: 17px; height: 17px; border-radius: 50%;
+    background: var(--accent-soft); color: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700; flex-shrink: 0; margin-top: 2px;
+  }
+  .trust-fact span:last-child { font-size: 13px; color: var(--muted); line-height: 1.45; }
+
+  /* Product preview — the hero shows the ACTUAL product */
+  .product-preview {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    box-shadow: 0 24px 60px -30px rgba(22, 24, 15, 0.18);
+    overflow: hidden;
+  }
+  .pp-chrome {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 13px 18px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .pp-chrome-title {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--soft);
+  }
+  .pp-body { padding: 18px; }
+  .pp-search {
+    display: flex; align-items: center; gap: 9px;
+    background: var(--paper); border: 1px solid var(--line);
+    border-radius: 9px; padding: 10px 14px; margin-bottom: 14px;
+    font-size: 13px; color: var(--soft);
+  }
+  .pp-row {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 12px 10px;
+    border-radius: 10px;
+    transition: background 0.15s;
+  }
+  .pp-row:hover { background: var(--paper); }
+  .pp-row + .pp-row { border-top: 1px solid var(--line-soft); }
+  .pp-row-left { display: flex; align-items: center; gap: 12px; min-width: 0; }
+  .pp-tag {
+    font-family: 'JetBrains Mono', monospace; font-size: 8.5px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 4px 7px; border-radius: 5px; flex-shrink: 0; color: #fff;
+  }
+  .pp-row-title { font-size: 13.5px; font-weight: 600; letter-spacing: -0.005em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pp-row-meta { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--soft); flex-shrink: 0; }
+  .pp-foot {
+    padding: 12px 18px; border-top: 1px solid var(--line-soft);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .pp-foot-note { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--soft); }
+
+  /* ---------- section scaffolding: numbered like a well-organized document ---------- */
+  section.doc { padding: 76px 0; border-top: 1px solid var(--line-soft); }
+  .doc-head { display: grid; grid-template-columns: 64px 1fr; gap: 24px; margin-bottom: 44px; }
+  @media (max-width: 700px) { .doc-head { grid-template-columns: 1fr; gap: 8px; } }
+  .doc-num {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600;
+    letter-spacing: 0.1em; color: var(--accent); padding-top: 9px;
+  }
+  h2.doc-title {
+    font-weight: 800; font-size: clamp(26px, 3.4vw, 36px);
+    letter-spacing: -0.015em; line-height: 1.1; margin-bottom: 10px;
+  }
+  .doc-lede { font-size: 16px; color: var(--muted); max-width: 58ch; }
+  .doc-body { display: grid; grid-template-columns: 64px 1fr; gap: 24px; }
+  @media (max-width: 700px) { .doc-body { grid-template-columns: 1fr; } }
+  .doc-body > .spacer { }
+
+  /* ---------- scenario walkthrough (the flow section) ---------- */
+  .scenario {
+    border-left: 2px solid var(--line);
+    margin-left: 8px;
+    padding-left: 34px;
+    display: flex; flex-direction: column; gap: 34px;
+  }
+  .moment { position: relative; }
+  .moment::before {
+    content: '';
+    position: absolute; left: -41px; top: 5px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--paper);
+    border: 2.5px solid var(--accent);
+  }
+  .moment-time {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent);
+    margin-bottom: 7px;
+  }
+  .moment h3 { font-size: 19px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 7px; }
+  .moment p { font-size: 15px; color: var(--muted); max-width: 56ch; }
+  .moment .artifact {
+    margin-top: 14px;
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 15px 18px;
+    display: flex; align-items: center; gap: 13px;
+    max-width: 430px;
+    box-shadow: 0 10px 26px -18px rgba(22, 24, 15, 0.16);
+  }
+  .artifact .a-icon {
+    width: 36px; height: 36px; border-radius: 9px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700;
+  }
+  .artifact .a-title { font-size: 13.5px; font-weight: 600; }
+  .artifact .a-meta { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--soft); margin-top: 1px; }
+
+  /* ---------- transparent catalogue ---------- */
+  .catalogue { border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: var(--card); }
+  .cat-group-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 20px;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .cat-group-head:not(:first-child) { border-top: 1px solid var(--line-soft); }
+  .cat-group-name { display: flex; align-items: center; gap: 10px; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 14.5px; }
+  .cat-chip { width: 9px; height: 9px; border-radius: 3px; }
+  .cat-count { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--soft); }
+  .cat-row {
+    display: grid; grid-template-columns: 1fr auto auto; gap: 18px; align-items: baseline;
+    padding: 12px 20px;
+  }
+  .cat-row + .cat-row { border-top: 1px solid var(--line-soft); }
+  .cat-title { font-size: 14.5px; font-weight: 500; }
+  .cat-dur { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--soft); }
+  .cat-reviewed {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    color: var(--accent); background: var(--accent-soft);
+    padding: 3px 8px; border-radius: 5px;
+  }
+  @media (max-width: 640px) {
+    .cat-row { grid-template-columns: 1fr; gap: 4px; }
+  }
+  .cat-note {
+    display: flex; gap: 10px; align-items: flex-start;
+    margin-top: 16px; font-size: 13.5px; color: var(--muted); max-width: 62ch;
+  }
+
+  /* ---------- credential card ---------- */
+  .credential {
+    background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+    display: grid; grid-template-columns: 220px 1fr; overflow: hidden;
+  }
+  @media (max-width: 720px) { .credential { grid-template-columns: 1fr; } }
+  .cred-photo {
+    background: linear-gradient(150deg, #E7E3D8 0%, #D7D2C4 100%);
+    min-height: 240px;
+    display: flex; align-items: flex-end; padding: 16px;
+  }
+  .cred-photo span {
+    font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--muted);
+    background: rgba(251, 250, 246, 0.85); padding: 5px 9px; border-radius: 6px;
+  }
+  .cred-body { padding: 30px 34px; }
+  .cred-name { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 24px; letter-spacing: -0.015em; margin-bottom: 4px; }
+  .cred-role { font-size: 14px; color: var(--muted); margin-bottom: 18px; }
+  .cred-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; margin-bottom: 20px; }
+  @media (max-width: 560px) { .cred-facts { grid-template-columns: 1fr; } }
+  .cred-fact .cf-label { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--soft); margin-bottom: 2px; }
+  .cred-fact .cf-value { font-size: 14px; font-weight: 600; }
+  .cred-quote {
+    border-left: 3px solid var(--accent);
+    padding: 4px 0 4px 16px;
+    font-size: 14.5px; color: var(--muted); line-height: 1.6;
+    max-width: 54ch;
+  }
+
+  /* ---------- pricing ---------- */
+  .price-wrap { display: grid; grid-template-columns: 1fr 0.8fr; gap: 16px; }
+  @media (max-width: 860px) { .price-wrap { grid-template-columns: 1fr; } }
+  .price-box {
+    background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 36px;
+  }
+  .price-num-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+  .price-amount { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 52px; letter-spacing: -0.02em; line-height: 1; }
+  .price-per { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--soft); }
+  .price-blurb { font-size: 14.5px; color: var(--muted); margin-bottom: 26px; }
+  .price-includes { list-style: none; margin-bottom: 30px; }
+  .price-includes li {
+    display: flex; gap: 11px; align-items: flex-start;
+    padding: 7px 0; font-size: 14.5px;
+  }
+  .price-includes .tick {
+    width: 17px; height: 17px; border-radius: 50%; flex-shrink: 0; margin-top: 2.5px;
+    background: var(--accent-soft); color: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700;
+  }
+  .cancel-box {
+    background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 36px;
+  }
+  .cancel-box h3 { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 6px; }
+  .cancel-box > p { font-size: 14px; color: var(--muted); margin-bottom: 22px; }
+  .cancel-steps { list-style: none; counter-reset: cs; }
+  .cancel-steps li {
+    counter-increment: cs;
+    display: grid; grid-template-columns: 26px 1fr; gap: 12px;
+    padding: 10px 0; font-size: 14px; color: var(--ink);
+    border-top: 1px solid var(--line-soft);
+  }
+  .cancel-steps li::before {
+    content: counter(cs, decimal-leading-zero);
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--soft);
+    padding-top: 3px;
+  }
+
+  /* ---------- faq ---------- */
+  details.faq {
+    border-top: 1px solid var(--line-soft);
+    padding: 22px 4px;
+  }
+  details.faq:last-of-type { border-bottom: 1px solid var(--line-soft); }
+  details.faq summary {
+    cursor: pointer; list-style: none;
+    display: flex; justify-content: space-between; align-items: flex-start; gap: 16px;
+    font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 16.5px; letter-spacing: -0.005em;
+  }
+  details.faq summary::-webkit-details-marker { display: none; }
+  details.faq summary::after {
+    content: '+'; font-size: 22px; color: var(--soft); line-height: 1;
+    transition: transform 0.18s; flex-shrink: 0;
+  }
+  details.faq[open] summary::after { transform: rotate(45deg); }
+  details.faq p { font-size: 14.5px; color: var(--muted); margin-top: 12px; max-width: 62ch; }
+
+  /* ---------- final ---------- */
+  .final { padding: 90px 0 110px; text-align: left; }
+  .final-box {
+    background: var(--ink); color: var(--paper);
+    border-radius: 20px; padding: 52px;
+    display: grid; grid-template-columns: 1fr auto; gap: 34px; align-items: center;
+  }
+  @media (max-width: 780px) { .final-box { grid-template-columns: 1fr; padding: 36px; } }
+  .final-box h2 { font-weight: 800; font-size: clamp(26px, 3.6vw, 38px); letter-spacing: -0.015em; line-height: 1.08; margin-bottom: 10px; }
+  .final-box p { font-size: 15px; color: rgba(251, 250, 246, 0.66); max-width: 46ch; }
+  .final-box .btn-primary { background: var(--paper); color: var(--ink); white-space: nowrap; }
+
+  footer.site { border-top: 1px solid var(--line-soft); padding: 36px 0 44px; }
+  .footer-grid { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; align-items: flex-start; }
+  .footer-links { display: flex; gap: 22px; flex-wrap: wrap; }
+  .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; }
+  .footer-links a:hover { color: var(--ink); }
+  .footer-legal { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--soft); }
+
+  /* ---------- comparison appendix ---------- */
+  .compare-wrap { background: var(--card); border-top: 1px solid var(--line); padding: 76px 0; }
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 36px; }
+  @media (max-width: 820px) { .compare-grid { grid-template-columns: 1fr; } }
+  .compare-card { background: var(--paper); border: 1px solid var(--line); border-radius: 16px; padding: 28px; }
+  .compare-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 14px; }
+  .compare-card ul { list-style: none; }
+  .compare-card li { font-size: 13.5px; color: var(--muted); padding: 6px 0; display: flex; gap: 10px; }
+  .compare-card li::before { content: '·'; color: var(--accent); font-weight: 900; font-size: 19px; line-height: 1; }
+</style>
+</head>
+<body>
+
+<div class="explore-note">Design exploration · Plain Sight · trust-led, flow-led · for comparison against the current Porch</div>
+
+<!-- NAV -->
+<nav class="top">
+  <div class="container nav-row">
+    <a href="#" class="logo">
+      <span class="dots"><i></i><i></i><i></i><i></i><i></i></span>
+      Primrose Knowledge Studio
+    </a>
+    <div class="nav-links">
+      <a href="#tonight">How it works</a>
+      <a href="#library">The library</a>
+      <a href="#teacher">Your teacher</a>
+      <a href="#pricing">Pricing</a>
+    </div>
+    <a href="#pricing" class="nav-cta">Become a member</a>
+  </div>
+</nav>
+
+<!-- HERO: quiet claim + the actual product -->
+<header class="hero">
+  <div class="container hero-grid">
+    <div>
+      <h1 class="hero-title">Know where you stand.</h1>
+      <p class="hero-sub">
+        A members' library of plain-English videos on your rights, your money,
+        and your safety. Taught by a working Canadian lawyer and organized so
+        you can find the answer the night you actually need it.
+      </p>
+      <div class="hero-cta-row">
+        <a href="#pricing" class="btn-primary">Become a member <span aria-hidden>→</span></a>
+        <a href="#library" class="btn-ghost">Browse the library first</a>
+      </div>
+      <div class="trust-inline">
+        <div class="trust-fact">
+          <span class="tick">✓</span>
+          <span>Taught by a lawyer in<br>good standing, Canadian Bar</span>
+        </div>
+        <div class="trust-fact">
+          <span class="tick">✓</span>
+          <span>Every video shows its<br>last-reviewed date</span>
+        </div>
+        <div class="trust-fact">
+          <span class="tick">✓</span>
+          <span>$29 a month, cancel<br>in two clicks</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- The product itself, in the hero -->
+    <div class="product-preview" aria-label="Preview of the member library">
+      <div class="pp-chrome">
+        <span class="pp-chrome-title">Member library · preview</span>
+        <span class="dots"><i></i><i></i><i></i><i></i><i></i></span>
+      </div>
+      <div class="pp-body">
+        <div class="pp-search">⌕&nbsp; Search: &ldquo;landlord won't return deposit&rdquo;</div>
+        <div class="pp-row">
+          <div class="pp-row-left">
+            <span class="pp-tag" style="background: var(--workplace);">Work</span>
+            <span class="pp-row-title">Reading the fine print on your first job offer</span>
+          </div>
+          <span class="pp-row-meta">14:32</span>
+        </div>
+        <div class="pp-row">
+          <div class="pp-row-left">
+            <span class="pp-tag" style="background: var(--financial);">Money</span>
+            <span class="pp-row-title">How RRSPs actually work: the version nobody explained</span>
+          </div>
+          <span class="pp-row-meta">15:08</span>
+        </div>
+        <div class="pp-row">
+          <div class="pp-row-left">
+            <span class="pp-tag" style="background: var(--safety);">Safety</span>
+            <span class="pp-row-title">Stalking and harassment: when to involve police</span>
+          </div>
+          <span class="pp-row-meta">15:33</span>
+        </div>
+        <div class="pp-row">
+          <div class="pp-row-left">
+            <span class="pp-tag" style="background: var(--career);">Career</span>
+            <span class="pp-row-title">Negotiating a first raise: language that lands</span>
+          </div>
+          <span class="pp-row-meta">13:51</span>
+        </div>
+      </div>
+      <div class="pp-foot">
+        <span class="pp-foot-note">41 videos · 5 pillars</span>
+        <span class="pp-foot-note" style="color: var(--accent);">Toolkit PDF with every video</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- 01 · A REAL TUESDAY NIGHT: the flow is the pitch -->
+<section class="doc" id="tonight">
+  <div class="container">
+    <div class="doc-head">
+      <span class="doc-num">01</span>
+      <div>
+        <h2 class="doc-title">A real Tuesday night.</h2>
+        <p class="doc-lede">
+          The library is built around the moment something happens to you, so
+          here is exactly how it works when it does.
+        </p>
+      </div>
+    </div>
+    <div class="doc-body">
+      <span class="spacer"></span>
+      <div class="scenario">
+        <div class="moment">
+          <div class="moment-time">10:41 PM</div>
+          <h3>Your landlord texts: he's keeping the deposit.</h3>
+          <p>
+            No explanation, no itemized list, just "there were damages." You
+            have no idea if that's even allowed.
+          </p>
+        </div>
+        <div class="moment">
+          <div class="moment-time">10:43 PM</div>
+          <h3>You search the library.</h3>
+          <p>
+            Type "deposit" and the right video surfaces with its length and
+            when the law in it was last reviewed, so you know it's current.
+          </p>
+          <div class="artifact">
+            <div class="a-icon" style="background: var(--accent-soft); color: var(--accent);">▶</div>
+            <div>
+              <div class="a-title">Getting your deposit back, province by province</div>
+              <div class="a-meta">16:04 · Reviewed June 2026</div>
+            </div>
+          </div>
+        </div>
+        <div class="moment">
+          <div class="moment-time">11:00 PM</div>
+          <h3>Sixteen minutes later, you know your position.</h3>
+          <p>
+            What your province requires from a landlord, the deadline he
+            already missed, and what evidence matters if this escalates.
+          </p>
+        </div>
+        <div class="moment">
+          <div class="moment-time">11:02 PM</div>
+          <h3>You download the toolkit and draft one message.</h3>
+          <p>
+            The video's toolkit has the exact wording for a reply that is firm,
+            polite, and cites the rule he's ignoring. You send it and sleep.
+          </p>
+          <div class="artifact">
+            <div class="a-icon" style="background: rgba(124, 48, 54, 0.1); color: var(--safety);">PDF</div>
+            <div>
+              <div class="a-title">Deposit-recovery-scripts.pdf</div>
+              <div class="a-meta">2 pages · reply templates + evidence checklist</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 · THE LIBRARY, IN FULL VIEW -->
+<section class="doc" id="library">
+  <div class="container">
+    <div class="doc-head">
+      <span class="doc-num">02</span>
+      <div>
+        <h2 class="doc-title">The library, in full view.</h2>
+        <p class="doc-lede">
+          Every title, every length, every review date, visible before you pay
+          a dollar. If the list doesn't look useful to you, don't join.
+        </p>
+      </div>
+    </div>
+    <div class="doc-body">
+      <span class="spacer"></span>
+      <div>
+        <div class="catalogue">
+          <div class="cat-group-head">
+            <span class="cat-group-name"><span class="cat-chip" style="background: var(--workplace);"></span> Workplace Wellness</span>
+            <span class="cat-count">12 videos</span>
+          </div>
+          <div class="cat-row">
+            <span class="cat-title">Reading the fine print on your first job offer</span>
+            <span class="cat-dur">14:32</span>
+            <span class="cat-reviewed">Reviewed Jun 2026</span>
+          </div>
+          <div class="cat-row">
+            <span class="cat-title">Overtime laws: when you're owed and when you're not</span>
+            <span class="cat-dur">13:14</span>
+            <span class="cat-reviewed">Reviewed Jun 2026</span>
+          </div>
+          <div class="cat-row">
+            <span class="cat-title">Off-the-clock messaging: what the law actually says</span>
+            <span class="cat-dur">12:47</span>
+            <span class="cat-reviewed">Reviewed May 2026</span>
+          </div>
+
+          <div class="cat-group-head">
+            <span class="cat-group-name"><span class="cat-chip" style="background: var(--financial);"></span> Financial Wellness</span>
+            <span class="cat-count">9 videos</span>
+          </div>
+          <div class="cat-row">
+            <span class="cat-title">How RRSPs actually work: the version nobody explained</span>
+            <span class="cat-dur">15:08</span>
+            <span class="cat-reviewed">Reviewed Jun 2026</span>
+          </div>
+          <div class="cat-row">
+            <span class="cat-title">Filing your first tax return without panic</span>
+            <span class="cat-dur">17:22</span>
+            <span class="cat-reviewed">Reviewed Jun 2026</span>
+          </div>
+
+          <div class="cat-group-head">
+            <span class="cat-group-name"><span class="cat-chip" style="background: var(--career);"></span> Career Wellness</span>
+            <span class="cat-count">7 videos</span>
+          </div>
+          <div class="cat-row">
+            <span class="cat-title">Negotiating a first raise: language that lands</span>
+            <span class="cat-dur">13:51</span>
+            <span class="cat-reviewed">Reviewed Jun 2026</span>
+          </div>
+
+          <div class="cat-group-head">
+            <span class="cat-group-name"><span class="cat-chip" style="background: var(--emotional);"></span> Emotional Wellness</span>
+            <span class="cat-count">5 videos</span>
+          </div>
+          <div class="cat-row">
+            <span class="cat-title">Accessing support: provincial mental health programs</span>
+            <span class="cat-dur">14:55</span>
+            <span class="cat-reviewed">Reviewed May 2026</span>
+          </div>
+
+          <div class="cat-group-head">
+            <span class="cat-group-name"><span class="cat-chip" style="background: var(--safety);"></span> Personal Safety</span>
+            <span class="cat-count">8 videos</span>
+          </div>
+          <div class="cat-row">
+            <span class="cat-title">Domestic situations: the first 48 hours</span>
+            <span class="cat-dur">18:09</span>
+            <span class="cat-reviewed">Reviewed Jun 2026</span>
+          </div>
+          <div class="cat-row">
+            <span class="cat-title">Stalking and harassment: when to involve police</span>
+            <span class="cat-dur">15:33</span>
+            <span class="cat-reviewed">Reviewed Jun 2026</span>
+          </div>
+        </div>
+        <div class="cat-note">
+          <span style="color: var(--accent); font-weight: 700;">→</span>
+          <span>
+            Laws change, so videos carry a last-reviewed date and get re-recorded
+            when the law moves. That date is on every video inside the library too.
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 · WHO'S TEACHING -->
+<section class="doc" id="teacher">
+  <div class="container">
+    <div class="doc-head">
+      <span class="doc-num">03</span>
+      <div>
+        <h2 class="doc-title">Who's teaching you.</h2>
+        <p class="doc-lede">
+          Legal information is only as good as the person giving it. Here are
+          the credentials, in the open.
+        </p>
+      </div>
+    </div>
+    <div class="doc-body">
+      <span class="spacer"></span>
+      <div class="credential">
+        <div class="cred-photo"><span>Photo · Primrose Watson</span></div>
+        <div class="cred-body">
+          <div class="cred-name">Primrose Watson</div>
+          <div class="cred-role">Lawyer, based in Ottawa</div>
+          <div class="cred-facts">
+            <div class="cred-fact">
+              <div class="cf-label">Bar status</div>
+              <div class="cf-value">Member in good standing</div>
+            </div>
+            <div class="cred-fact">
+              <div class="cf-label">Practising since</div>
+              <div class="cf-value">[Year, from Primrose]</div>
+            </div>
+            <div class="cred-fact">
+              <div class="cf-label">Focus</div>
+              <div class="cf-value">Tax and everyday law</div>
+            </div>
+            <div class="cred-fact">
+              <div class="cf-label">Questions answered</div>
+              <div class="cf-value">Within one business day</div>
+            </div>
+          </div>
+          <div class="cred-quote">
+            &ldquo;I built this for the version of me in her twenties, the one who
+            didn't know what she didn't know. Nobody should learn their rights
+            for the first time in the middle of losing them.&rdquo;
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 · PRICING + CANCELLATION IN THE OPEN -->
+<section class="doc" id="pricing">
+  <div class="container">
+    <div class="doc-head">
+      <span class="doc-num">04</span>
+      <div>
+        <h2 class="doc-title">One plan, and the exit is on the label.</h2>
+        <p class="doc-lede">
+          Membership pricing and the cancellation process, side by side. You
+          should know how to leave before you decide to arrive.
+        </p>
+      </div>
+    </div>
+    <div class="doc-body">
+      <span class="spacer"></span>
+      <div class="price-wrap">
+        <div class="price-box">
+          <div class="price-num-row">
+            <span class="price-amount">$29</span>
+            <span class="price-per">CAD / month</span>
+          </div>
+          <p class="price-blurb">Full access to everything, one flat price, no tiers.</p>
+          <ul class="price-includes">
+            <li><span class="tick">✓</span> Every video in all five pillars</li>
+            <li><span class="tick">✓</span> New videos every month, no extra charge</li>
+            <li><span class="tick">✓</span> Downloadable toolkit PDF with each video</li>
+            <li><span class="tick">✓</span> Magic-link sign-in, no passwords to manage</li>
+            <li><span class="tick">✓</span> First video free, no card required</li>
+          </ul>
+          <a href="#" class="btn-primary" style="display: block; text-align: center;">Become a member →</a>
+          <div style="text-align: center; margin-top: 14px;" class="mono">
+            <span style="font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--soft);">Secure checkout via Stripe</span>
+          </div>
+        </div>
+        <div class="cancel-box">
+          <h3>How cancelling works</h3>
+          <p>Spelled out here because most subscriptions hide it.</p>
+          <ol class="cancel-steps">
+            <li>Open your account page, tap Manage billing.</li>
+            <li>Stripe's own portal opens. Tap Cancel. No phone call, no chat with anyone, no guilt screen.</li>
+            <li>You keep full access until the end of the month you already paid for.</li>
+            <li>No further charges. Rejoining later takes one click and your history is kept.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 · STRAIGHT ANSWERS -->
+<section class="doc">
+  <div class="container">
+    <div class="doc-head">
+      <span class="doc-num">05</span>
+      <div>
+        <h2 class="doc-title">Straight answers.</h2>
+      </div>
+    </div>
+    <div class="doc-body">
+      <span class="spacer"></span>
+      <div>
+        <details class="faq" open>
+          <summary>Is this legal advice?</summary>
+          <p>No. Everything in the library is legal information, not legal advice. It helps you understand your situation and know what to ask. It doesn't replace a lawyer when your situation is actively unfolding. Disclaimers are on every video.</p>
+        </details>
+        <details class="faq">
+          <summary>Why $29 a month?</summary>
+          <p>It's enough for Primrose to keep making videos and not enough to gatekeep this from the people who most need it. The library grows every month with new material. If you only use one video the whole year, it should save you more than a year of membership.</p>
+        </details>
+        <details class="faq">
+          <summary>Is this for Canadians only?</summary>
+          <p>The library is written from Canadian law. Most of the workplace and personal safety material applies broadly; the financial material is Canada-specific. If you are outside Canada, the principles still help, but the specifics may not match your jurisdiction.</p>
+        </details>
+        <details class="faq">
+          <summary>What if the law changes after a video is published?</summary>
+          <p>Every video carries a last-reviewed date, and videos get re-recorded when the law moves. If you ever spot something that looks out of date, there's a report link on every video page and Primrose reviews those within a business day.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL -->
+<section class="final">
+  <div class="container">
+    <div class="final-box">
+      <div>
+        <h2>Next time something happens, you'll know where to look.</h2>
+        <p>$29 a month, the whole library, and an exit that takes two clicks. Browse the catalogue above first if you're unsure.</p>
+      </div>
+      <a href="#pricing" class="btn-primary">Become a member →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site">
+  <div class="container footer-grid">
+    <a href="#" class="logo" style="font-size: 14px;">
+      <span class="dots"><i></i><i></i><i></i><i></i><i></i></span>
+      Primrose Knowledge Studio
+    </a>
+    <div class="footer-links">
+      <a href="#">Terms of Service</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Content Disclaimer</a>
+      <a href="#">Contact</a>
+    </div>
+    <span class="footer-legal">Legal information, not legal advice</span>
+  </div>
+</footer>
+
+<!-- COMPARISON APPENDIX -->
+<div class="compare-wrap">
+  <div class="container">
+    <div class="doc-num" style="margin-bottom: 14px;">For Jitakshi · the honest comparison</div>
+    <h2 class="doc-title">Plain Sight vs the current Porch.</h2>
+    <p class="doc-lede" style="margin-top: 8px;">
+      This is a different philosophy, structure changed, sections changed, the
+      argument changed. The current Porch says "this brand is confident."
+      Plain Sight says "this product is trustworthy." Different bets.
+    </p>
+    <div class="compare-grid">
+      <div class="compare-card">
+        <h3>What Plain Sight does differently</h3>
+        <ul>
+          <li>Shows the actual product in the hero (a working library preview) instead of brand mood.</li>
+          <li>Sells through a real scenario timeline ("A real Tuesday night") instead of abstract feature cards. The user flow IS the pitch.</li>
+          <li>Full catalogue visible before paying, with last-reviewed dates on legal content. Radical transparency as the conversion strategy.</li>
+          <li>Credentials structured like a record: bar status, practising since, response time. Verifiable claims over vibes.</li>
+          <li>Cancellation steps printed inside the pricing section. The exit on the label builds more trust than any testimonial.</li>
+          <li>One quiet accent; pillar colours demoted to small functional tags. Restraint reads as institutional confidence.</li>
+        </ul>
+      </div>
+      <div class="compare-card">
+        <h3>What it costs vs the current Porch</h3>
+        <ul>
+          <li>Less scroll-stopping in a TikTok feed. Quiet design converts warm traffic better than cold traffic.</li>
+          <li>The five-colour identity nearly disappears; screenshots are less recognisably "Primrose" at a glance.</li>
+          <li>The last-reviewed-date promise creates a real editorial obligation for Primrose. Powerful, but she has to commit to it.</li>
+          <li>Reads slightly older. Wealthsimple-calm rather than TikTok-native energy.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
