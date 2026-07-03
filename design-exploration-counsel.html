@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Counsel — Design Exploration · Primrose Knowledge Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Counsel identity — ink, bone, brass. One accent, no rainbow. */
+    --ink: #0F1720;
+    --ink-2: #15202C;
+    --ink-3: #1C2938;
+    --bone: #F5F2EB;
+    --bone-card: #FCFAF4;
+    --text-dark: #10161E;
+    --muted: #5B6068;
+    --soft: #9AA0A8;
+    --brass: #A98B50;
+    --brass-bright: #D3B47C;
+    --brass-soft: rgba(169, 139, 80, 0.1);
+    --cream-on-ink: #E9E4D6;
+    --cream-on-ink-60: rgba(233, 228, 214, 0.62);
+    --cream-on-ink-40: rgba(233, 228, 214, 0.4);
+    --line-dark: rgba(233, 228, 214, 0.1);
+    --line-light: rgba(16, 22, 30, 0.1);
+    --line-light-soft: rgba(16, 22, 30, 0.06);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Instrument Sans', -apple-system, sans-serif;
+    background: var(--bone);
+    color: var(--text-dark);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  h1, h2, h3, h4 { text-wrap: balance; }
+  p, li { text-wrap: pretty; }
+  .mono { font-family: 'IBM Plex Mono', monospace; }
+  .container { max-width: 1120px; margin: 0 auto; padding: 0 28px; }
+  .container-narrow { max-width: 880px; margin: 0 auto; padding: 0 28px; }
+
+  /* ---------- exploration banner ---------- */
+  .explore-note {
+    background: var(--brass);
+    color: var(--ink);
+    text-align: center;
+    padding: 9px 20px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  /* ---------- the new mark ---------- */
+  .mark { display: inline-flex; flex-direction: column; gap: 2px; }
+  .mark i { display: block; width: 18px; height: 3px; border-radius: 1.5px; background: currentColor; }
+  .mark i:nth-child(1) { width: 14px; align-self: center; }
+  .mark i:nth-child(5) { width: 22px; margin-left: -2px; }
+  .logo-lockup {
+    display: inline-flex; align-items: center; gap: 13px;
+    text-decoration: none; color: inherit;
+  }
+  .logo-word { line-height: 1; }
+  .logo-word .lw-name {
+    font-weight: 650; font-size: 16.5px; letter-spacing: 0.01em; display: block;
+  }
+  .logo-word .lw-sub {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 8px; letter-spacing: 0.32em; text-transform: uppercase;
+    display: block; margin-top: 3px; opacity: 0.55;
+  }
+
+  /* ---------- nav (on ink) ---------- */
+  .ink-zone { background: var(--ink); color: var(--cream-on-ink); }
+  nav.top {
+    position: sticky; top: 0; z-index: 40;
+    background: rgba(15, 23, 32, 0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line-dark);
+  }
+  .nav-row { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+  .nav-links { display: flex; gap: 30px; }
+  .nav-links a {
+    font-size: 13.5px; font-weight: 500; color: var(--cream-on-ink-60);
+    text-decoration: none; transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--cream-on-ink); }
+  .nav-cta {
+    font-weight: 600; font-size: 13.5px;
+    color: var(--ink); background: var(--brass-bright);
+    padding: 10px 18px; border-radius: 8px; text-decoration: none;
+    transition: filter 0.15s;
+  }
+  .nav-cta:hover { filter: brightness(1.06); }
+  @media (max-width: 820px) { .nav-links { display: none; } }
+
+  /* ---------- hero (ink, storytelling opener) ---------- */
+  .hero {
+    position: relative;
+    padding: 110px 0 0;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 800px 420px at 78% 8%, rgba(169, 139, 80, 0.13) 0%, transparent 55%),
+      radial-gradient(ellipse 600px 400px at 8% 60%, rgba(46, 68, 96, 0.35) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero > .container-narrow { position: relative; text-align: center; }
+  .hero-kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--brass-bright);
+    margin-bottom: 30px;
+    display: inline-block;
+  }
+  h1.hero-title {
+    font-weight: 600;
+    font-size: clamp(40px, 6vw, 68px);
+    line-height: 1.06;
+    letter-spacing: -0.022em;
+    margin: 0 auto 26px;
+    max-width: 17ch;
+  }
+  h1.hero-title em {
+    font-style: italic;
+    color: var(--brass-bright);
+    font-weight: 550;
+  }
+  .hero-sub {
+    font-size: 17.5px; line-height: 1.65;
+    color: var(--cream-on-ink-60);
+    max-width: 52ch;
+    margin: 0 auto 38px;
+  }
+  .hero-cta-row { display: flex; justify-content: center; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 26px; }
+  .btn-brass {
+    font-weight: 600; font-size: 15px;
+    background: var(--brass-bright); color: var(--ink);
+    padding: 15px 28px; border-radius: 10px; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 9px;
+    transition: filter 0.15s, transform 0.12s;
+  }
+  .btn-brass:hover { filter: brightness(1.06); }
+  .btn-brass:active { transform: scale(0.985); }
+  .btn-quiet {
+    font-weight: 550; font-size: 15px;
+    color: var(--cream-on-ink);
+    padding: 15px 22px;
+    border: 1px solid var(--line-dark); border-radius: 10px;
+    text-decoration: none;
+    transition: border-color 0.15s;
+  }
+  .btn-quiet:hover { border-color: rgba(233, 228, 214, 0.3); }
+  .hero-fineprint {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; letter-spacing: 0.1em;
+    color: var(--cream-on-ink-40);
+    margin-bottom: 74px;
+  }
+
+  /* framed product window, half-emerging from the hero */
+  .window {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto -140px;
+    background: var(--bone-card);
+    color: var(--text-dark);
+    border-radius: 14px;
+    border: 1px solid rgba(16, 22, 30, 0.15);
+    box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.55);
+    overflow: hidden;
+    text-align: left;
+  }
+  .win-chrome {
+    display: flex; align-items: center; gap: 14px;
+    padding: 12px 18px;
+    background: #EDE9DF;
+    border-bottom: 1px solid var(--line-light-soft);
+  }
+  .win-dots { display: flex; gap: 6px; }
+  .win-dots i { width: 10px; height: 10px; border-radius: 50%; background: rgba(16, 22, 30, 0.14); display: block; }
+  .win-url {
+    flex: 1; text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10.5px; color: var(--soft);
+    background: rgba(255, 255, 255, 0.65);
+    border-radius: 6px; padding: 5px 12px;
+    max-width: 340px; margin: 0 auto;
+  }
+  .win-body { display: grid; grid-template-columns: 200px 1fr; min-height: 330px; }
+  @media (max-width: 720px) { .win-body { grid-template-columns: 1fr; } }
+  .win-side {
+    border-right: 1px solid var(--line-light-soft);
+    padding: 20px 16px;
+    background: var(--bone);
+  }
+  @media (max-width: 720px) { .win-side { display: none; } }
+  .ws-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--soft); margin-bottom: 12px; display: block;
+  }
+  .ws-item {
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 13px; font-weight: 500;
+    padding: 8px 10px; border-radius: 8px;
+    color: var(--muted);
+  }
+  .ws-item.active { background: var(--ink); color: var(--cream-on-ink); }
+  .ws-item .ws-num { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--brass); }
+  .ws-item.active .ws-num { color: var(--brass-bright); }
+  .win-main { padding: 26px 30px; }
+  .wm-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+  .wm-title { font-weight: 650; font-size: 19px; letter-spacing: -0.01em; }
+  .wm-count { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: var(--soft); }
+  .wm-sub { font-size: 13px; color: var(--muted); margin-bottom: 18px; }
+  .wm-row {
+    display: flex; align-items: center; justify-content: space-between; gap: 14px;
+    padding: 13px 2px;
+    border-top: 1px solid var(--line-light-soft);
+  }
+  .wm-row-title { font-size: 14px; font-weight: 550; }
+  .wm-row-meta { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: var(--soft); display: flex; gap: 14px; align-items: center; flex-shrink: 0; }
+  .wm-reviewed { color: var(--brass); }
+
+  /* ---------- bone zone below hero ---------- */
+  .after-hero { padding-top: 210px; }
+
+  /* chapter scaffolding */
+  .chapter { padding: 88px 0; }
+  .chapter + .chapter { border-top: 1px solid var(--line-light-soft); }
+  .ch-kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--brass);
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .ch-kicker::after { content: ''; height: 1px; width: 48px; background: var(--brass); opacity: 0.4; }
+  h2.ch-title {
+    font-weight: 600;
+    font-size: clamp(28px, 3.8vw, 42px);
+    letter-spacing: -0.018em;
+    line-height: 1.12;
+    margin-bottom: 18px;
+    max-width: 24ch;
+  }
+  .ch-lede { font-size: 16.5px; color: var(--muted); max-width: 56ch; }
+
+  /* Chapter I — the gap (storytelling moments) */
+  .moments { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 48px; }
+  @media (max-width: 860px) { .moments { grid-template-columns: 1fr; } }
+  .moment-card {
+    background: var(--bone-card);
+    border: 1px solid var(--line-light);
+    border-radius: 16px;
+    padding: 30px 28px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .moment-card:hover { transform: translateY(-3px); box-shadow: 0 18px 44px -24px rgba(16, 22, 30, 0.25); }
+  .mc-age {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--brass); margin-bottom: 16px; display: block;
+  }
+  .mc-quote {
+    font-size: 17px; font-weight: 550; line-height: 1.45;
+    letter-spacing: -0.008em;
+    margin-bottom: 14px;
+  }
+  .mc-note { font-size: 13.5px; color: var(--muted); }
+
+  /* Chapter II — the index (pillars, re-presented) */
+  .index-wrap { margin-top: 48px; border: 1px solid var(--line-light); border-radius: 16px; overflow: hidden; background: var(--bone-card); }
+  .index-row {
+    display: grid; grid-template-columns: 88px 1fr auto; gap: 22px; align-items: center;
+    padding: 26px 30px;
+    transition: background 0.15s;
+    text-decoration: none; color: inherit;
+  }
+  .index-row:hover { background: rgba(169, 139, 80, 0.05); }
+  .index-row + .index-row { border-top: 1px solid var(--line-light-soft); }
+  @media (max-width: 640px) { .index-row { grid-template-columns: 56px 1fr; } .index-row .ir-count { display: none; } }
+  .ir-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 22px; font-weight: 500;
+    color: var(--brass);
+    letter-spacing: 0.02em;
+  }
+  .ir-name { font-weight: 650; font-size: 19px; letter-spacing: -0.012em; margin-bottom: 3px; }
+  .ir-desc { font-size: 14px; color: var(--muted); max-width: 58ch; }
+  .ir-count {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; color: var(--soft);
+    text-align: right; white-space: nowrap;
+  }
+  .ir-count b { display: block; font-size: 18px; font-weight: 600; color: var(--text-dark); }
+
+  /* Chapter III — the counsel (credential, on ink) */
+  .counsel-zone {
+    background: var(--ink); color: var(--cream-on-ink);
+    border-radius: 20px;
+    padding: 64px;
+    display: grid; grid-template-columns: 1fr 300px; gap: 56px; align-items: center;
+    position: relative; overflow: hidden;
+    margin-top: 48px;
+  }
+  @media (max-width: 880px) { .counsel-zone { grid-template-columns: 1fr; padding: 40px 28px; } }
+  .counsel-zone::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 500px 400px at 92% 10%, rgba(169, 139, 80, 0.14) 0%, transparent 55%);
+    pointer-events: none;
+  }
+  .counsel-zone > * { position: relative; }
+  .cz-quote {
+    font-size: clamp(20px, 2.6vw, 27px);
+    font-weight: 500;
+    line-height: 1.42;
+    letter-spacing: -0.012em;
+    margin-bottom: 30px;
+  }
+  .cz-quote em { color: var(--brass-bright); font-style: italic; }
+  .cz-facts { display: flex; gap: 36px; flex-wrap: wrap; }
+  .cz-fact .czf-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--cream-on-ink-40); margin-bottom: 4px;
+  }
+  .cz-fact .czf-value { font-size: 14.5px; font-weight: 600; }
+  .cz-photo {
+    aspect-ratio: 3/4;
+    border-radius: 14px;
+    background: linear-gradient(160deg, #223142 0%, #16212E 100%);
+    border: 1px solid var(--line-dark);
+    display: flex; align-items: flex-end; padding: 18px;
+    position: relative;
+  }
+  .cz-photo .seal {
+    position: absolute; top: 16px; right: 16px;
+    width: 62px; height: 62px; border-radius: 50%;
+    border: 1.5px solid rgba(211, 180, 124, 0.55);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 2px;
+  }
+  .cz-photo .seal .s-check { color: var(--brass-bright); font-size: 15px; line-height: 1; }
+  .cz-photo .seal .s-text {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 5.5px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--brass-bright); text-align: center; line-height: 1.5;
+  }
+  .cz-photo-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--cream-on-ink-60);
+    background: rgba(15, 23, 32, 0.6);
+    padding: 5px 9px; border-radius: 6px;
+  }
+
+  /* Chapter IV — the terms */
+  .terms-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 48px; }
+  @media (max-width: 820px) { .terms-grid { grid-template-columns: 1fr; } }
+  .term-card {
+    background: var(--bone-card);
+    border: 1px solid var(--line-light);
+    border-radius: 16px;
+    padding: 38px;
+  }
+  .term-card .tc-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--brass); margin-bottom: 20px; display: block;
+  }
+  .price-line { display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px; }
+  .price-line .amount { font-weight: 650; font-size: 54px; letter-spacing: -0.02em; line-height: 1; }
+  .price-line .per { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--soft); }
+  .term-card > p { font-size: 14.5px; color: var(--muted); margin-bottom: 24px; }
+  .term-list { list-style: none; margin-bottom: 30px; }
+  .term-list li {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 8px 0; font-size: 14.5px;
+    border-top: 1px solid var(--line-light-soft);
+  }
+  .term-list li::before { content: '—'; color: var(--brass); font-weight: 600; }
+  .exit-steps { list-style: none; counter-reset: es; }
+  .exit-steps li {
+    counter-increment: es;
+    display: grid; grid-template-columns: 30px 1fr; gap: 12px;
+    padding: 11px 0; font-size: 14.5px;
+    border-top: 1px solid var(--line-light-soft);
+  }
+  .exit-steps li::before {
+    content: counter(es, upper-roman);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; color: var(--brass); padding-top: 3px;
+  }
+
+  /* epilogue (ink) */
+  .epilogue {
+    position: relative;
+    padding: 120px 0;
+    text-align: center;
+    overflow: hidden;
+  }
+  .epilogue::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 700px 360px at 50% 110%, rgba(169, 139, 80, 0.16) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .epilogue > .container-narrow { position: relative; }
+  .epilogue .ep-mark { color: var(--brass-bright); margin-bottom: 34px; display: inline-flex; transform: scale(1.5); }
+  .epilogue h2 {
+    font-weight: 600;
+    font-size: clamp(34px, 5vw, 56px);
+    letter-spacing: -0.02em;
+    line-height: 1.06;
+    margin-bottom: 20px;
+  }
+  .epilogue h2 em { font-style: italic; color: var(--brass-bright); font-weight: 550; }
+  .epilogue p { font-size: 16.5px; color: var(--cream-on-ink-60); max-width: 46ch; margin: 0 auto 40px; }
+
+  footer.site { border-top: 1px solid var(--line-dark); padding: 40px 0; }
+  .footer-row { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+  .footer-links a { font-size: 13px; color: var(--cream-on-ink-60); text-decoration: none; }
+  .footer-links a:hover { color: var(--cream-on-ink); }
+  .footer-legal {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--cream-on-ink-40);
+  }
+
+  /* comparison appendix */
+  .compare-wrap { background: var(--bone); color: var(--text-dark); border-top: 4px solid var(--brass); padding: 76px 0; }
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 36px; }
+  @media (max-width: 820px) { .compare-grid { grid-template-columns: 1fr; } }
+  .compare-card { background: var(--bone-card); border: 1px solid var(--line-light); border-radius: 16px; padding: 28px; }
+  .compare-card h3 { font-size: 17px; font-weight: 650; margin-bottom: 14px; }
+  .compare-card ul { list-style: none; }
+  .compare-card li { font-size: 13.5px; color: var(--muted); padding: 6px 0; display: flex; gap: 10px; }
+  .compare-card li::before { content: '·'; color: var(--brass); font-weight: 900; font-size: 19px; line-height: 1; }
+</style>
+</head>
+<body>
+
+<div class="explore-note">Design exploration · Counsel · full identity break · new mark, type, palette, pillar system</div>
+
+<div class="ink-zone">
+
+  <!-- NAV -->
+  <nav class="top">
+    <div class="container nav-row">
+      <a href="#" class="logo-lockup">
+        <span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+        <span class="logo-word">
+          <span class="lw-name">Primrose</span>
+          <span class="lw-sub">Knowledge Studio</span>
+        </span>
+      </a>
+      <div class="nav-links">
+        <a href="#gap">Why this exists</a>
+        <a href="#library">The library</a>
+        <a href="#counsel">Your counsel</a>
+        <a href="#terms">Membership</a>
+      </div>
+      <a href="#terms" class="nav-cta">Become a member</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="container-narrow">
+      <span class="hero-kicker">A members&rsquo; library of Canadian legal knowledge</span>
+      <h1 class="hero-title">
+        The law never<br>introduces itself <em>first</em>.
+      </h1>
+      <p class="hero-sub">
+        It shows up mid-crisis: in a job offer you signed too fast, a deposit
+        that never came back, a letter from the CRA. This library exists so the
+        next time it shows up, you already know where you stand.
+      </p>
+      <div class="hero-cta-row">
+        <a href="#terms" class="btn-brass">Become a member <span aria-hidden>→</span></a>
+        <a href="#library" class="btn-quiet">See what's inside</a>
+      </div>
+      <div class="hero-fineprint">$29 / month · taught by a working lawyer · cancel in two clicks</div>
+    </div>
+
+    <!-- The product, framed -->
+    <div class="container">
+      <div class="window" aria-label="Preview of the member library">
+        <div class="win-chrome">
+          <span class="win-dots"><i></i><i></i><i></i></span>
+          <span class="win-url">primroseknowledgestudio.com/library</span>
+          <span style="width: 42px;"></span>
+        </div>
+        <div class="win-body">
+          <aside class="win-side">
+            <span class="ws-label">The five pillars</span>
+            <div class="ws-item active"><span>Workplace</span><span class="ws-num">01</span></div>
+            <div class="ws-item"><span>Financial</span><span class="ws-num">02</span></div>
+            <div class="ws-item"><span>Career</span><span class="ws-num">03</span></div>
+            <div class="ws-item"><span>Emotional</span><span class="ws-num">04</span></div>
+            <div class="ws-item"><span>Personal Safety</span><span class="ws-num">05</span></div>
+          </aside>
+          <div class="win-main">
+            <div class="wm-head">
+              <span class="wm-title">Workplace</span>
+              <span class="wm-count">12 videos</span>
+            </div>
+            <p class="wm-sub">Your rights at work. Contracts, overtime, harassment, leaving well.</p>
+            <div class="wm-row">
+              <span class="wm-row-title">Reading the fine print on your first job offer</span>
+              <span class="wm-row-meta"><span class="wm-reviewed">Reviewed Jun 2026</span><span>14:32</span></span>
+            </div>
+            <div class="wm-row">
+              <span class="wm-row-title">Overtime laws: when you're owed and when you're not</span>
+              <span class="wm-row-meta"><span class="wm-reviewed">Reviewed Jun 2026</span><span>13:14</span></span>
+            </div>
+            <div class="wm-row">
+              <span class="wm-row-title">Off-the-clock messaging: what the law actually says</span>
+              <span class="wm-row-meta"><span class="wm-reviewed">Reviewed May 2026</span><span>12:47</span></span>
+            </div>
+            <div class="wm-row">
+              <span class="wm-row-title">Leaving a job without burning the reference</span>
+              <span class="wm-row-meta"><span class="wm-reviewed">Reviewed Jun 2026</span><span>15:20</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+</div>
+
+<!-- CHAPTER I — THE GAP -->
+<section class="chapter after-hero" id="gap">
+  <div class="container">
+    <div class="ch-kicker">Chapter I · The gap</div>
+    <h2 class="ch-title">Three moments almost everyone meets unprepared.</h2>
+    <p class="ch-lede">
+      School taught you trigonometry. Nobody taught you what happens next.
+    </p>
+    <div class="moments">
+      <div class="moment-card">
+        <span class="mc-age">The first offer · 22</span>
+        <p class="mc-quote">&ldquo;I signed a non-compete because I was excited someone wanted to hire me.&rdquo;</p>
+        <p class="mc-note">The clause followed her to her next two jobs. Fifteen minutes of knowing what to flag would have changed the negotiation.</p>
+      </div>
+      <div class="moment-card">
+        <span class="mc-age">The first apartment · 24</span>
+        <p class="mc-quote">&ldquo;My landlord kept the deposit and I just&hellip; let him. I didn't know there were rules.&rdquo;</p>
+        <p class="mc-note">There are rules. There are deadlines he missed. There's a letter that gets deposits back, and a template of it lives in this library.</p>
+      </div>
+      <div class="moment-card">
+        <span class="mc-age">The first CRA letter · 26</span>
+        <p class="mc-quote">&ldquo;The envelope sat on my counter for nine days because I was scared to open it.&rdquo;</p>
+        <p class="mc-note">Most CRA letters are routine. Knowing which ones aren't, and what the response windows mean, turns panic into a to-do item.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTER II — THE LIBRARY -->
+<section class="chapter" id="library">
+  <div class="container">
+    <div class="ch-kicker">Chapter II · The library</div>
+    <h2 class="ch-title">Five pillars. Every video answers a moment like those.</h2>
+    <p class="ch-lede">
+      In-depth 15-minute videos in plain English, each with a printable toolkit,
+      each carrying the date its law was last reviewed. Organized so the answer
+      is findable the night you need it.
+    </p>
+    <div class="index-wrap">
+      <a href="#" class="index-row">
+        <span class="ir-num">01</span>
+        <span>
+          <span class="ir-name" style="display:block;">Workplace</span>
+          <span class="ir-desc">Your rights at work. Contracts, overtime, harassment, leaving well.</span>
+        </span>
+        <span class="ir-count"><b>12</b> videos</span>
+      </a>
+      <a href="#" class="index-row">
+        <span class="ir-num">02</span>
+        <span>
+          <span class="ir-name" style="display:block;">Financial</span>
+          <span class="ir-desc">The money basics nobody taught you. Taxes, debt, building from zero.</span>
+        </span>
+        <span class="ir-count"><b>9</b> videos</span>
+      </a>
+      <a href="#" class="index-row">
+        <span class="ir-num">03</span>
+        <span>
+          <span class="ir-name" style="display:block;">Career</span>
+          <span class="ir-desc">Negotiating offers, switching fields, the legal side of side hustles.</span>
+        </span>
+        <span class="ir-count"><b>7</b> videos</span>
+      </a>
+      <a href="#" class="index-row">
+        <span class="ir-num">04</span>
+        <span>
+          <span class="ir-name" style="display:block;">Emotional</span>
+          <span class="ir-desc">Recognising harm, accessing support, knowing what's worth pursuing.</span>
+        </span>
+        <span class="ir-count"><b>5</b> videos</span>
+      </a>
+      <a href="#" class="index-row">
+        <span class="ir-num">05</span>
+        <span>
+          <span class="ir-name" style="display:block;">Personal Safety</span>
+          <span class="ir-desc">Domestic situations, stalking, when to involve law enforcement.</span>
+        </span>
+        <span class="ir-count"><b>8</b> videos</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTER III — THE COUNSEL -->
+<section class="chapter" id="counsel">
+  <div class="container">
+    <div class="ch-kicker">Chapter III · Your counsel</div>
+    <h2 class="ch-title">Taught by someone accountable for being right.</h2>
+    <div class="counsel-zone">
+      <div>
+        <p class="cz-quote">
+          &ldquo;I built this for the version of me in her twenties, the one who
+          didn't know what she didn't know. Nobody should learn their rights
+          for the first time <em>in the middle of losing them</em>.&rdquo;
+        </p>
+        <div class="cz-facts">
+          <div class="cz-fact">
+            <div class="czf-label">Name</div>
+            <div class="czf-value">Primrose Watson</div>
+          </div>
+          <div class="cz-fact">
+            <div class="czf-label">Standing</div>
+            <div class="czf-value">Canadian Bar · good standing</div>
+          </div>
+          <div class="cz-fact">
+            <div class="czf-label">Based in</div>
+            <div class="czf-value">Ottawa</div>
+          </div>
+          <div class="cz-fact">
+            <div class="czf-label">Member questions</div>
+            <div class="czf-value">Answered in one business day</div>
+          </div>
+        </div>
+      </div>
+      <div class="cz-photo">
+        <div class="seal" aria-hidden="true">
+          <span class="s-check">✓</span>
+          <span class="s-text">Bar<br>verified</span>
+        </div>
+        <span class="cz-photo-tag">Photo · Primrose Watson</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTER IV — THE TERMS -->
+<section class="chapter" id="terms">
+  <div class="container">
+    <div class="ch-kicker">Chapter IV · The terms</div>
+    <h2 class="ch-title">One membership, and the exit printed beside the entrance.</h2>
+    <div class="terms-grid">
+      <div class="term-card">
+        <span class="tc-label">Membership</span>
+        <div class="price-line">
+          <span class="amount">$29</span>
+          <span class="per">CAD / month</span>
+        </div>
+        <p>Full access to everything, one flat price, no tiers.</p>
+        <ul class="term-list">
+          <li>Every video in all five pillars</li>
+          <li>New videos every month, no extra charge</li>
+          <li>Printable toolkit with each video</li>
+          <li>Magic-link sign-in, no passwords</li>
+          <li>First video free, no card required</li>
+        </ul>
+        <a href="#" class="btn-brass" style="display: block; text-align: center; background: var(--ink); color: var(--bone);">Become a member →</a>
+      </div>
+      <div class="term-card">
+        <span class="tc-label">Leaving</span>
+        <div style="font-weight: 650; font-size: 22px; letter-spacing: -0.012em; margin-bottom: 8px;">How cancelling works</div>
+        <p>Printed here because most subscriptions hide it.</p>
+        <ol class="exit-steps">
+          <li>Open your account page and choose Manage billing.</li>
+          <li>Stripe's own portal opens. Choose Cancel. No phone call, no chat queue, no guilt screen.</li>
+          <li>You keep full access until the end of the month you already paid for.</li>
+          <li>No further charges. Rejoining later takes one click and your history is kept.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EPILOGUE -->
+<div class="ink-zone">
+  <section class="epilogue">
+    <div class="container-narrow">
+      <span class="ep-mark mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+      <h2>Next time, you'll <em>already know</em>.</h2>
+      <p>
+        The library is open, the catalogue is public, and the first video is
+        free. Join when you're ready.
+      </p>
+      <a href="#terms" class="btn-brass">Become a member <span aria-hidden>→</span></a>
+    </div>
+  </section>
+
+  <footer class="site">
+    <div class="container footer-row">
+      <a href="#" class="logo-lockup" style="color: var(--cream-on-ink);">
+        <span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+        <span class="logo-word">
+          <span class="lw-name" style="font-size: 14px;">Primrose</span>
+          <span class="lw-sub">Knowledge Studio</span>
+        </span>
+      </a>
+      <div class="footer-links">
+        <a href="#">Terms of Service</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Content Disclaimer</a>
+        <a href="#">Contact</a>
+      </div>
+      <span class="footer-legal">Legal information, not legal advice</span>
+    </div>
+  </footer>
+</div>
+
+<!-- COMPARISON APPENDIX -->
+<div class="compare-wrap">
+  <div class="container">
+    <div class="ch-kicker">For Jitakshi · the honest comparison</div>
+    <h2 class="ch-title">Would this pass the &ldquo;different person&rdquo; test?</h2>
+    <p class="ch-lede">
+      Yes. Nothing visual carries over: new mark, new type, new palette, new
+      pillar system, new page structure, new voice register. Side by side with
+      the current Porch, these read as two different studios.
+    </p>
+    <div class="compare-grid">
+      <div class="compare-card">
+        <h3>What Counsel changes at the identity level</h3>
+        <ul>
+          <li>Mark: the five-colour dot stack becomes a monochrome column glyph, five bars forming one pillar. Reads institutional, works at 16px, embosses beautifully.</li>
+          <li>Type: Instrument Sans at 500-650 weight replaces Outfit 900. Premium brands whisper; the size does the work, the weight stays calm.</li>
+          <li>Palette: ink navy, bone, one brass accent. Brass carries the legal-seal association and nobody in the space owns it.</li>
+          <li>Pillars: colour-coding removed entirely. A brass-numbered index reads like the contents of a carefully drafted document.</li>
+          <li>Structure: the page is chaptered like a story. Gap, library, counsel, terms, epilogue. Narrative order rather than section order.</li>
+          <li>Trust devices kept from Plain Sight: framed product UI, reviewed dates, credential facts, exit-on-the-label.</li>
+        </ul>
+      </div>
+      <div class="compare-card">
+        <h3>What adopting it would mean</h3>
+        <ul>
+          <li>The locked Pillar Stack system gets retired: Tailwind tokens, favicon, OG image, and all five member surfaces would be rebuilt in this identity. Roughly a week of rework.</li>
+          <li>The five-colour navigation logic inside the Fortress needs a replacement wayfinding system (numbers + position instead of colour).</li>
+          <li>TikTok-first cold traffic trade-off remains: this converts skeptics and readers; the current Porch punches harder in a feed screenshot.</li>
+          <li>Brass/ink photographs beautifully for her content: dark study, warm lamp, brass details. The brand and her filming setup could actually match.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
