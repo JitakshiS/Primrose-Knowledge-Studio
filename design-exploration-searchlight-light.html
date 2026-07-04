@@ -6,7 +6,8 @@
 <title>Searchlight · Daylight — Design Exploration · Primrose Knowledge Studio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@500,700,800&f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
 <style>
   :root {
     --paper: #FAF8F3;
@@ -32,13 +33,20 @@
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
   html { scroll-behavior: smooth; }
   body {
-    font-family: 'Geist', -apple-system, sans-serif;
+    font-family: 'General Sans', -apple-system, sans-serif;
     background: var(--paper);
     color: var(--ink);
     line-height: 1.55;
     overflow-x: hidden;
   }
   h1, h2, h3 { text-wrap: balance; }
+  /* Display face: Cabinet Grotesk carries the big moments; General Sans
+     carries reading and UI. Mono stays Geist Mono. */
+  h1, h2, h3,
+  .ns-time, .pg-amount, .pg-name,
+  .bc-name, .ns-video-title, .logo {
+    font-family: 'Cabinet Grotesk', 'General Sans', sans-serif;
+  }
   p, li { text-wrap: pretty; }
   .mono { font-family: 'Geist Mono', monospace; }
   .container { max-width: 1140px; margin: 0 auto; padding: 0 28px; }
@@ -93,7 +101,7 @@
   .logo {
     display: inline-flex; align-items: center; gap: 12px;
     text-decoration: none; color: var(--ink);
-    font-weight: 650; font-size: 15.5px; letter-spacing: -0.01em;
+    font-weight: 700; font-size: 15.5px; letter-spacing: -0.01em;
   }
   .beam-mark { position: relative; width: 22px; height: 22px; flex-shrink: 0; }
   .beam-mark::before {
@@ -182,7 +190,7 @@
   .search-input {
     flex: 1; min-width: 0;
     background: transparent; border: none; outline: none;
-    font-family: 'Geist', sans-serif;
+    font-family: 'General Sans', sans-serif;
     font-size: clamp(17px, 2.6vw, 24px);
     font-weight: 500;
     letter-spacing: -0.01em;
@@ -270,7 +278,7 @@
   }
 
   h1.hero-title {
-    font-weight: 750;
+    font-weight: 800;
     font-size: clamp(38px, 6.4vw, 76px);
     line-height: 1.0;
     letter-spacing: -0.025em;
@@ -286,7 +294,7 @@
   }
   .hero-cta-row { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
   .btn-ink {
-    font-weight: 650; font-size: 15px;
+    font-weight: 700; font-size: 15px;
     background: var(--ink); color: var(--paper);
     padding: 16px 30px; border-radius: 12px; text-decoration: none;
     display: inline-flex; align-items: center; gap: 10px;
@@ -360,7 +368,7 @@
   @keyframes hint-ring { 0%, 100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.25); opacity: 1; } }
   .lens-field { position: relative; touch-action: pan-y; }
   .lens-line {
-    font-weight: 650;
+    font-weight: 700;
     font-size: clamp(21px, 3.4vw, 38px);
     letter-spacing: -0.02em;
     line-height: 1.3;
@@ -394,7 +402,7 @@
     display: block;
   }
   h2.scene-title {
-    font-weight: 750;
+    font-weight: 800;
     font-size: clamp(32px, 4.6vw, 56px);
     line-height: 1.02;
     letter-spacing: -0.025em;
@@ -653,8 +661,8 @@
   .price-glass > * { position: relative; }
   .pg-top { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; margin-bottom: 36px; flex-wrap: wrap; }
   .pg-label { font-family: 'Geist Mono', monospace; font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--beam); margin-bottom: 10px; }
-  .pg-name { font-weight: 750; font-size: clamp(24px, 3.4vw, 32px); letter-spacing: -0.02em; line-height: 1; }
-  .pg-amount { font-weight: 750; font-size: clamp(46px, 6vw, 62px); letter-spacing: -0.025em; line-height: 0.95; text-align: right; }
+  .pg-name { font-weight: 800; font-size: clamp(24px, 3.4vw, 32px); letter-spacing: -0.02em; line-height: 1; }
+  .pg-amount { font-weight: 800; font-size: clamp(46px, 6vw, 62px); letter-spacing: -0.025em; line-height: 0.95; text-align: right; }
   .pg-per { font-family: 'Geist Mono', monospace; font-size: 11px; color: var(--ink-45); text-align: right; margin-top: 7px; }
   .pg-rows { margin-bottom: 36px; }
   .pg-row {
@@ -701,10 +709,10 @@
   }
   .epilogue h2 {
     position: relative;
-    font-weight: 750;
+    font-weight: 800;
     font-size: clamp(44px, 8vw, 96px);
     line-height: 0.98;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.025em;
     margin-bottom: 30px;
   }
   .epilogue h2 .dim { color: var(--ink-25); }
@@ -763,7 +771,7 @@
   }
   @media (max-width: 880px) { .ns-grid { grid-template-columns: 1fr; gap: 34px; } }
   .ns-time {
-    font-weight: 750;
+    font-weight: 800;
     font-size: clamp(44px, 6vw, 76px);
     letter-spacing: -0.025em;
     line-height: 1;
