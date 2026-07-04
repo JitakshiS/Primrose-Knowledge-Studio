@@ -160,6 +160,7 @@
 
   .search-stage { width: 100%; max-width: 780px; margin-bottom: 44px; position: relative; }
   .search-field {
+    position: relative;
     display: flex; align-items: center; gap: 18px;
     background: var(--card);
     border: 1px solid var(--edge);
@@ -169,7 +170,51 @@
       0 1px 2px rgba(18, 21, 27, 0.04),
       0 28px 70px -28px rgba(18, 21, 27, 0.24);
     text-align: left;
+    transition: border-color 0.25s, box-shadow 0.25s;
+    cursor: text;
   }
+  .search-field:focus-within {
+    border-color: rgba(77, 99, 232, 0.5);
+    box-shadow:
+      0 0 0 4px rgba(77, 99, 232, 0.1),
+      0 28px 70px -28px rgba(18, 21, 27, 0.28);
+  }
+  .search-input {
+    flex: 1; min-width: 0;
+    background: transparent; border: none; outline: none;
+    font-family: 'Geist', sans-serif;
+    font-size: clamp(17px, 2.6vw, 24px);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    caret-color: var(--beam);
+  }
+  .search-input::placeholder { color: var(--ink); opacity: 1; }
+  .search-field.engaged .search-input::placeholder { color: var(--ink-25); }
+  .search-results {
+    position: absolute;
+    left: 0; right: 0; top: calc(100% + 10px);
+    background: var(--card);
+    border: 1px solid var(--edge);
+    border-radius: 14px;
+    box-shadow: 0 30px 70px -24px rgba(18, 21, 27, 0.35);
+    overflow: hidden;
+    z-index: 20;
+    text-align: left;
+    display: none;
+  }
+  .search-results.open { display: block; }
+  .sr-item {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 14px;
+    padding: 15px 20px;
+    cursor: pointer;
+    transition: background 0.12s;
+  }
+  .sr-item + .sr-item { border-top: 1px solid rgba(18, 21, 27, 0.05); }
+  .sr-item:hover, .sr-item.focus { background: var(--paper); }
+  .sr-title { font-size: 14.5px; font-weight: 600; letter-spacing: -0.005em; }
+  .sr-meta { font-family: 'Geist Mono', monospace; font-size: 10px; color: var(--ink-45); white-space: nowrap; }
+  .sr-empty { padding: 15px 20px; font-size: 13.5px; color: var(--ink-45); }
   .search-icon {
     width: 22px; height: 22px; flex-shrink: 0;
     border: 2.5px solid var(--ink-45);
@@ -461,11 +506,24 @@
     text-decoration: none; color: var(--ink);
   }
   @media (max-width: 900px) { .beam-col { min-height: 200px; } }
+  .beam-col {
+    transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(var(--lift, 0px));
+  }
   .beam-col:hover, .beam-col.lit {
-    transform: translateY(-8px);
+    --lift: -8px;
     border-color: var(--edge-bright);
     box-shadow: 0 30px 60px -30px rgba(18, 21, 27, 0.25);
   }
+  /* cursor sheen that follows the pointer across the card */
+  .beam-col::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(260px 260px at var(--px, 50%) var(--py, 50%), rgba(77, 99, 232, 0.1), transparent 65%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+  .beam-col:hover::after { opacity: 1; }
   .beam-col .light {
     position: absolute; top: -30%; left: 50%;
     width: 130px; height: 90%;
@@ -690,10 +748,139 @@
   .ap-card li { font-size: 13.5px; color: var(--ink-70); padding: 7px 0; display: flex; gap: 11px; }
   .ap-card li::before { content: '·'; color: var(--beam); font-weight: 900; font-size: 20px; line-height: 1; }
 
+  /* ---------- night story: pinned scrollytelling scene ---------- */
+  .night-story { height: 380vh; position: relative; }
+  .ns-sticky {
+    position: sticky; top: 0;
+    height: 100svh;
+    display: flex; align-items: center;
+    overflow: hidden;
+  }
+  .ns-grid {
+    display: grid; grid-template-columns: 1fr 420px;
+    gap: 64px; align-items: center;
+    width: 100%;
+  }
+  @media (max-width: 880px) { .ns-grid { grid-template-columns: 1fr; gap: 34px; } }
+  .ns-time {
+    font-weight: 750;
+    font-size: clamp(44px, 6vw, 76px);
+    letter-spacing: -0.025em;
+    line-height: 1;
+    margin: 14px 0 12px;
+    font-variant-numeric: tabular-nums;
+  }
+  .ns-caption {
+    font-size: 17.5px; color: var(--ink-70);
+    max-width: 32ch;
+    min-height: 3.2em;
+    transition: opacity 0.35s;
+  }
+  .ns-caption.fading { opacity: 0; }
+  .ns-dots { display: flex; gap: 8px; margin-top: 26px; }
+  .ns-dots i {
+    display: block; width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(18, 21, 27, 0.14);
+    transition: background 0.3s, transform 0.3s;
+  }
+  .ns-dots i.on { background: var(--beam); transform: scale(1.25); }
+  .ns-hint {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink-25);
+    margin-top: 30px;
+  }
+  .ns-phone { position: relative; height: 440px; width: 100%; max-width: 400px; }
+  @media (max-width: 880px) { .ns-phone { margin: 0 auto; height: 400px; } }
+  .ns-layer {
+    position: absolute; inset: 0;
+    opacity: 0; transform: translateY(22px) scale(0.985);
+    transition: opacity 0.55s cubic-bezier(0.2, 0.6, 0.2, 1), transform 0.55s cubic-bezier(0.2, 0.6, 0.2, 1);
+    pointer-events: none;
+  }
+  .ns-layer.active { opacity: 1; transform: none; }
+  .ns-card {
+    background: var(--card);
+    border: 1px solid var(--edge);
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 1px 2px rgba(18, 21, 27, 0.04), 0 40px 80px -36px rgba(18, 21, 27, 0.35);
+  }
+  .ns-meta {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-45);
+    margin-bottom: 14px;
+    display: flex; justify-content: space-between; gap: 10px;
+  }
+  .bub {
+    max-width: 88%;
+    padding: 12px 15px;
+    border-radius: 15px;
+    font-size: 14px; line-height: 1.45;
+    margin-bottom: 9px;
+  }
+  .bub.in { background: #EEEBE2; border-bottom-left-radius: 5px; }
+  .bub.out { background: var(--beam); color: #fff; margin-left: auto; border-bottom-right-radius: 5px; }
+  .ns-status {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px; color: var(--l-money);
+    margin-top: 12px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .ns-status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--l-money); }
+  .dead-q {
+    font-size: 14.5px; font-weight: 600;
+    padding-bottom: 12px; border-bottom: 1px solid var(--edge);
+    margin-bottom: 4px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .dead-q::before {
+    content: ''; width: 14px; height: 14px; flex-shrink: 0;
+    border: 2px solid var(--ink-45); border-radius: 50%;
+  }
+  .dead {
+    padding: 11px 2px;
+    border-bottom: 1px solid rgba(18, 21, 27, 0.05);
+    font-size: 13px; color: var(--ink-45);
+    display: flex; justify-content: space-between; gap: 10px;
+  }
+  .dead .dead-tag { font-family: 'Geist Mono', monospace; font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-25); white-space: nowrap; }
+  .ns-video-tag { font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--l-money); margin-bottom: 10px; }
+  .ns-video-title { font-weight: 700; font-size: 19px; letter-spacing: -0.015em; line-height: 1.15; margin-bottom: 8px; }
+  .ns-video-meta { font-family: 'Geist Mono', monospace; font-size: 10.5px; color: var(--ink-45); margin-bottom: 16px; }
+  .ns-tk {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--paper);
+    border: 1px solid var(--edge);
+    border-radius: 12px;
+    padding: 12px 14px;
+  }
+  .ns-tk .aw-tk-icon { width: 30px; height: 38px; }
+  .ns-note {
+    font-family: 'Geist Mono', monospace;
+    font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-25);
+    margin-top: 12px;
+    text-align: right;
+  }
+
+  /* ---------- ambient scene tint ---------- */
+  #tintLayer {
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 4;
+    transition: background 1.4s ease;
+    background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(77, 99, 232, 0.05), transparent 70%);
+  }
+
   @media (prefers-reduced-motion: reduce) {
     *, body::after { animation: none !important; transition: none !important; }
     .reveal { opacity: 1; transform: none; }
     #lampLayer { opacity: 0.5; }
+    .ns-layer { opacity: 1; position: relative; margin-bottom: 14px; }
+    .ns-phone { height: auto; }
+    .night-story { height: auto; padding: 90px 0; }
   }
 </style>
 </head>
@@ -728,11 +915,20 @@
   </div>
 
   <div class="search-stage reveal in">
-    <div class="search-field">
+    <div class="search-field" id="searchField">
       <span class="search-icon" aria-hidden="true"></span>
-      <span class="search-text"><span id="typer"></span><span class="caret" aria-hidden="true"></span></span>
+      <input
+        type="text"
+        class="search-input"
+        id="searchInput"
+        autocomplete="off"
+        spellcheck="false"
+        aria-label="Ask a legal question"
+        placeholder=""
+      />
+      <div class="search-results" id="searchResults" role="listbox" aria-label="Matching videos"></div>
     </div>
-    <div class="search-under">Searched into the void tonight · <b>you're never the only one</b></div>
+    <div class="search-under">Try it, it actually answers · <b>type or pick a question below</b></div>
     <div class="ask-row" role="group" aria-label="Try a question">
       <button type="button" class="ask-chip" data-ask="deposit">my deposit</button>
       <button type="button" class="ask-chip" data-ask="noncompete">my non-compete</button>
@@ -777,6 +973,66 @@
     <span class="mq-item">what counts as constructive dismissal</span>
   </div>
 </div>
+
+<!-- NIGHT STORY: pinned scrollytelling scene. Scroll drives one night. -->
+<!-- NOTE: this vignette is illustrative narrative, flagged in-card. All
+     legal wording requires Primrose's sign-off before shipping. -->
+<section class="night-story" id="story">
+  <div class="ns-sticky">
+    <div class="container ns-grid">
+      <div class="ns-left">
+        <span class="scene-kicker">Scene 00 · One night, hour by hour</span>
+        <div class="ns-time" id="nsTime">10:41 PM</div>
+        <p class="ns-caption" id="nsCaption">The text arrives, and it reads like a wall.</p>
+        <div class="ns-dots" id="nsDots"><i class="on"></i><i></i><i></i><i></i></div>
+        <div class="ns-hint">Keep scrolling · the night moves</div>
+      </div>
+      <div class="ns-phone">
+        <div class="ns-layer active">
+          <div class="ns-card">
+            <div class="ns-meta"><span>Mark · Landlord</span><span>10:41 PM</span></div>
+            <div class="bub in">Hey, I'm keeping your deposit. There were damages.</div>
+            <div class="bub in">It's in the lease.</div>
+            <div class="ns-note">Illustrative story</div>
+          </div>
+        </div>
+        <div class="ns-layer">
+          <div class="ns-card">
+            <div class="ns-meta"><span>Search · 4 tabs open</span><span>2:47 AM</span></div>
+            <div class="dead-q">getting deposit back ontario</div>
+            <div class="dead"><span>Forum thread, 47 replies, no answer</span><span class="dead-tag">2014</span></div>
+            <div class="dead"><span>DepositLaw Pros™, "act now!"</span><span class="dead-tag">Ad</span></div>
+            <div class="dead"><span>"lol good luck with that"</span><span class="dead-tag">Reddit</span></div>
+            <div class="ns-note">Illustrative story</div>
+          </div>
+        </div>
+        <div class="ns-layer">
+          <div class="ns-card">
+            <div class="ns-meta"><span>Primrose Studio · Library</span><span>2:53 AM</span></div>
+            <div class="ns-video-tag">02 · Financial · Reviewed Jun 2026</div>
+            <div class="ns-video-title">Getting your deposit back, province by province.</div>
+            <div class="ns-video-meta">16:04 · plain English · watched in bed</div>
+            <div class="ns-tk">
+              <span class="aw-tk-icon">PDF</span>
+              <span>
+                <span class="aw-tk-name" style="display:block;">Deposit-recovery-scripts.pdf</span>
+                <span class="aw-tk-meta">the exact wording for tomorrow</span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="ns-layer">
+          <div class="ns-card">
+            <div class="ns-meta"><span>To: Mark</span><span>7:12 AM</span></div>
+            <div class="bub out">Hi Mark. You were required to send an itemized statement within the deadline, and that didn't happen. I expect the full deposit returned by Friday.</div>
+            <div class="ns-status">Sent calmly, before coffee</div>
+            <div class="ns-note">Illustrative story</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- LENS BAND -->
 <!-- NOTE: the statements below are DRAFT copy for mood only. Every legal
@@ -1048,14 +1304,70 @@
   </div>
 </div>
 
+<div id="tintLayer" aria-hidden="true"></div>
 <div id="lampLayer" aria-hidden="true"></div>
 <div id="timeChip" aria-hidden="true">2:47 AM</div>
 
 <script>
-  /* Typewriter */
+  /* Shared answer data — one source for chips, live search, and the window */
+  const PKS = {
+    deposit: {
+      tag: "02 · Financial", color: "var(--l-money)", dur: "16:04",
+      title: "Getting your deposit back, province by province.",
+      desc: "What your province requires from a landlord, the deadline he likely already missed, and the letter that gets deposits returned.",
+      tk: "Deposit-recovery-scripts.pdf", beam: ".bc-2",
+      keys: ["deposit", "landlord", "rent", "lease", "damage"],
+    },
+    noncompete: {
+      tag: "01 · Workplace", color: "var(--l-work)", dur: "14:32",
+      title: "Reading the fine print on your first job offer.",
+      desc: "What \"at-will\" actually means in Canadian context, the non-compete clauses worth pushing back on, and the three signals an offer's about to sour.",
+      tk: "Fine-print-check.pdf", beam: ".bc-1",
+      keys: ["non-compete", "noncompete", "compete", "contract", "offer", "job", "sign"],
+    },
+    cra: {
+      tag: "02 · Financial", color: "var(--l-money)", dur: "15:40",
+      title: "What a CRA letter actually means.",
+      desc: "Which letters are routine, which ones aren't, and the response windows that turn panic into a to-do item.",
+      tk: "CRA-response-windows.pdf", beam: ".bc-2",
+      keys: ["cra", "tax", "letter", "audit", "review"],
+    },
+    texts: {
+      tag: "01 · Workplace", color: "var(--l-work)", dur: "12:47",
+      title: "Off-the-clock messaging: what the law actually says.",
+      desc: "When your boss texts at 10pm, what your obligations actually are, and the language for setting a boundary without burning the relationship.",
+      tk: "After-hours-scripts.pdf", beam: ".bc-1",
+      keys: ["text", "boss", "message", "hours", "overtime", "10pm", "work"],
+    },
+    stalking: {
+      tag: "05 · Personal Safety", color: "var(--l-safety)", dur: "15:33",
+      title: "Stalking and harassment: when to involve police.",
+      desc: "What counts as criminal harassment in Canada, the threshold for a protection order, and what to bring to the station.",
+      tk: "Police-station-prep.pdf", beam: ".bc-5",
+      keys: ["stalk", "harass", "police", "safe", "protection", "report", "follow"],
+    },
+  };
+
+  function applyAnswer(a, scroll) {
+    document.getElementById('awTag').textContent = a.tag;
+    document.getElementById('awTag').style.color = a.color;
+    document.getElementById('awTitle').textContent = a.title;
+    document.getElementById('awDesc').textContent = a.desc;
+    document.getElementById('awDur').textContent = a.dur;
+    document.getElementById('awTkName').textContent = a.tk;
+    document.querySelectorAll('.beam-col').forEach((b) => b.classList.remove('lit'));
+    const beam = document.querySelector(a.beam);
+    if (beam) beam.classList.add('lit');
+    if (scroll !== false) {
+      document.getElementById('answer').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  /* Typewriter idles in the placeholder until the visitor engages */
   (function () {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const el = document.getElementById('typer');
+    const input = document.getElementById('searchInput');
+    const field = document.getElementById('searchField');
     const questions = [
       "can my landlord keep my deposit?",
       "is my non-compete actually enforceable?",
@@ -1063,23 +1375,78 @@
       "can my boss text me at 10pm?",
       "how do I report a stalker?",
     ];
-    if (reduced) { el.textContent = questions[0]; return; }
+    let engaged = false;
+    input.addEventListener('focus', () => {
+      engaged = true;
+      field.classList.add('engaged');
+      input.placeholder = "type your question…";
+    });
+    if (reduced) { input.placeholder = questions[0]; return; }
     let qi = 0, ci = 0, deleting = false;
     function tick() {
+      if (engaged) return;
       const q = questions[qi];
       if (!deleting) {
         ci++;
-        el.textContent = q.slice(0, ci);
+        input.placeholder = q.slice(0, ci);
         if (ci === q.length) { deleting = true; setTimeout(tick, 1900); return; }
         setTimeout(tick, 42 + Math.random() * 46);
       } else {
         ci--;
-        el.textContent = q.slice(0, ci);
+        input.placeholder = q.slice(0, ci);
         if (ci === 0) { deleting = false; qi = (qi + 1) % questions.length; setTimeout(tick, 420); return; }
         setTimeout(tick, 17);
       }
     }
     setTimeout(tick, 600);
+  })();
+
+  /* Live search — type, see matches, Enter or click to be answered */
+  (function () {
+    const input = document.getElementById('searchInput');
+    const box = document.getElementById('searchResults');
+    let matches = [];
+    function scoreMatches(q) {
+      q = q.toLowerCase().trim();
+      if (!q) return [];
+      return Object.values(PKS)
+        .map((a) => ({ a, score: a.keys.reduce((s, k) => s + (q.includes(k) || k.includes(q) ? 1 : 0), 0) }))
+        .filter((m) => m.score > 0)
+        .sort((x, y) => y.score - x.score)
+        .slice(0, 3)
+        .map((m) => m.a);
+    }
+    function render() {
+      if (!input.value.trim()) { box.classList.remove('open'); box.innerHTML = ''; return; }
+      matches = scoreMatches(input.value);
+      if (!matches.length) {
+        box.innerHTML = '<div class="sr-empty">Nothing matched that yet, try "deposit", "CRA", or "non-compete", or pick a chip below.</div>';
+      } else {
+        box.innerHTML = matches.map((a, i) =>
+          `<div class="sr-item${i === 0 ? ' focus' : ''}" data-i="${i}" role="option">
+            <span class="sr-title">${a.title}</span>
+            <span class="sr-meta">${a.dur} · watch inside</span>
+          </div>`).join('');
+        box.querySelectorAll('.sr-item').forEach((el) => {
+          el.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+            pick(matches[Number(el.dataset.i)]);
+          });
+        });
+      }
+      box.classList.add('open');
+    }
+    function pick(a) {
+      box.classList.remove('open');
+      input.blur();
+      applyAnswer(a);
+    }
+    input.addEventListener('input', render);
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && matches.length) { e.preventDefault(); pick(matches[0]); }
+      if (e.key === 'Escape') { box.classList.remove('open'); input.blur(); }
+    });
+    input.addEventListener('blur', () => setTimeout(() => box.classList.remove('open'), 120));
   })();
 
   /* Scroll reveals */
@@ -1110,58 +1477,114 @@
     }, { passive: true });
   })();
 
-  /* Ask it something */
+  /* Chips answer you too */
   (function () {
-    const ANSWERS = {
-      deposit: {
-        tag: "02 · Financial", color: "var(--l-money)", dur: "16:04",
-        title: "Getting your deposit back, province by province.",
-        desc: "What your province requires from a landlord, the deadline he likely already missed, and the letter that gets deposits returned.",
-        tk: "Deposit-recovery-scripts.pdf", beam: ".bc-2",
-      },
-      noncompete: {
-        tag: "01 · Workplace", color: "var(--l-work)", dur: "14:32",
-        title: "Reading the fine print on your first job offer.",
-        desc: "What \"at-will\" actually means in Canadian context, the non-compete clauses worth pushing back on, and the three signals an offer's about to sour.",
-        tk: "Fine-print-check.pdf", beam: ".bc-1",
-      },
-      cra: {
-        tag: "02 · Financial", color: "var(--l-money)", dur: "15:40",
-        title: "What a CRA letter actually means.",
-        desc: "Which letters are routine, which ones aren't, and the response windows that turn panic into a to-do item.",
-        tk: "CRA-response-windows.pdf", beam: ".bc-2",
-      },
-      texts: {
-        tag: "01 · Workplace", color: "var(--l-work)", dur: "12:47",
-        title: "Off-the-clock messaging: what the law actually says.",
-        desc: "When your boss texts at 10pm, what your obligations actually are, and the language for setting a boundary without burning the relationship.",
-        tk: "After-hours-scripts.pdf", beam: ".bc-1",
-      },
-      stalking: {
-        tag: "05 · Personal Safety", color: "var(--l-safety)", dur: "15:33",
-        title: "Stalking and harassment: when to involve police.",
-        desc: "What counts as criminal harassment in Canada, the threshold for a protection order, and what to bring to the station.",
-        tk: "Police-station-prep.pdf", beam: ".bc-5",
-      },
-    };
     const chips = document.querySelectorAll('.ask-chip');
     chips.forEach((chip) => {
       chip.addEventListener('click', () => {
-        const a = ANSWERS[chip.dataset.ask];
+        const a = PKS[chip.dataset.ask];
         if (!a) return;
         chips.forEach((c) => c.classList.remove('active'));
         chip.classList.add('active');
-        document.getElementById('awTag').textContent = a.tag;
-        document.getElementById('awTag').style.color = a.color;
-        document.getElementById('awTitle').textContent = a.title;
-        document.getElementById('awDesc').textContent = a.desc;
-        document.getElementById('awDur').textContent = a.dur;
-        document.getElementById('awTkName').textContent = a.tk;
-        document.querySelectorAll('.beam-col').forEach((b) => b.classList.remove('lit'));
-        const beam = document.querySelector(a.beam);
-        if (beam) beam.classList.add('lit');
-        document.getElementById('answer').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        applyAnswer(a);
       });
+    });
+  })();
+
+  /* Night story — scroll drives one night, hour by hour */
+  (function () {
+    const sec = document.getElementById('story');
+    if (!sec) return;
+    const layers = sec.querySelectorAll('.ns-layer');
+    const dots = sec.querySelectorAll('.ns-dots i');
+    const timeEl = document.getElementById('nsTime');
+    const capEl = document.getElementById('nsCaption');
+    const TIMES = ['10:41 PM', '2:47 AM', '2:53 AM', '7:12 AM'];
+    const CAPS = [
+      'The text arrives, and it reads like a wall.',
+      "Sleep isn't happening. The internet isn't helping.",
+      'The library answers in sixteen minutes.',
+      'One calm message, written before coffee.',
+    ];
+    let current = 0;
+    function setStep(i) {
+      if (i === current) return;
+      current = i;
+      layers.forEach((l, li) => l.classList.toggle('active', li === i));
+      dots.forEach((d, di) => d.classList.toggle('on', di === i));
+      timeEl.textContent = TIMES[i];
+      capEl.classList.add('fading');
+      setTimeout(() => { capEl.textContent = CAPS[i]; capEl.classList.remove('fading'); }, 180);
+    }
+    addEventListener('scroll', () => {
+      const total = sec.offsetHeight - innerHeight;
+      const p = Math.min(1, Math.max(0, -sec.getBoundingClientRect().top / total));
+      setStep(Math.min(3, Math.floor(p * 4)));
+    }, { passive: true });
+  })();
+
+  /* Pillar cards tilt toward the pointer, with a travelling sheen */
+  (function () {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!window.matchMedia('(hover: hover)').matches) return;
+    document.querySelectorAll('.beam-col').forEach((card) => {
+      card.addEventListener('pointermove', (e) => {
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width;
+        const py = (e.clientY - r.top) / r.height;
+        card.style.setProperty('--ry', ((px - 0.5) * 7).toFixed(2) + 'deg');
+        card.style.setProperty('--rx', ((0.5 - py) * 7).toFixed(2) + 'deg');
+        card.style.setProperty('--px', (px * 100) + '%');
+        card.style.setProperty('--py', (py * 100) + '%');
+      });
+      card.addEventListener('pointerleave', () => {
+        card.style.setProperty('--rx', '0deg');
+        card.style.setProperty('--ry', '0deg');
+      });
+    });
+  })();
+
+  /* Magnetic primary buttons */
+  (function () {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!window.matchMedia('(hover: hover)').matches) return;
+    document.querySelectorAll('.btn-ink, .pg-cta, .nav-cta').forEach((btn) => {
+      btn.addEventListener('pointermove', (e) => {
+        const r = btn.getBoundingClientRect();
+        const dx = (e.clientX - (r.left + r.width / 2)) * 0.12;
+        const dy = (e.clientY - (r.top + r.height / 2)) * 0.18;
+        btn.style.transform = `translate(${dx.toFixed(1)}px, ${dy.toFixed(1)}px)`;
+      });
+      btn.addEventListener('pointerleave', () => { btn.style.transform = ''; });
+    });
+  })();
+
+  /* Ambient tint — the world's colour follows the scene you're in */
+  (function () {
+    const layer = document.getElementById('tintLayer');
+    if (!layer) return;
+    const TINTS = [
+      ['.hero', 'rgba(77, 99, 232, 0.05)'],
+      ['#story', 'rgba(30, 41, 92, 0.07)'],
+      ['.lens-band', 'rgba(255, 205, 92, 0.06)'],
+      ['#answer', 'rgba(77, 99, 232, 0.05)'],
+      ['#pillars', 'rgba(20, 138, 92, 0.05)'],
+      ['#guide', 'rgba(224, 106, 60, 0.06)'],
+      ['#pricing', 'rgba(77, 99, 232, 0.05)'],
+      ['.epilogue', 'rgba(255, 205, 92, 0.12)'],
+    ];
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        const hit = TINTS.find(([sel]) => e.target.matches(sel));
+        if (hit) {
+          layer.style.background = `radial-gradient(ellipse 80% 60% at 50% 35%, ${hit[1]}, transparent 70%)`;
+        }
+      });
+    }, { threshold: 0.4 });
+    TINTS.forEach(([sel]) => {
+      const el = document.querySelector(sel);
+      if (el) io.observe(el);
     });
   })();
 
