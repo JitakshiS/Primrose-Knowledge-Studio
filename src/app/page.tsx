@@ -614,6 +614,16 @@ export default function Home() {
                 <a href="/login" className="block text-muted hover:text-ink transition-colors">Sign in</a>
               </div>
             </div>
+            <div>
+              <div className="font-mono text-[10px] tracking-[0.14em] uppercase text-soft mb-2">
+                Legal
+              </div>
+              <div className="space-y-1.5">
+                <a href="/terms" className="block text-muted hover:text-ink transition-colors">Terms of Service</a>
+                <a href="/privacy" className="block text-muted hover:text-ink transition-colors">Privacy Policy</a>
+                <a href="/disclaimer" className="block text-muted hover:text-ink transition-colors">Content Disclaimer</a>
+              </div>
+            </div>
           </div>
         </div>
         <div className="border-t border-ink/8">

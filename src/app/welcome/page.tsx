@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LogoDots } from "@/components/LogoDots";
+import { ResendLinkButton } from "@/components/ResendLinkButton";
 
 export const metadata: Metadata = {
   title: "Welcome",
@@ -110,12 +111,7 @@ export default async function WelcomePage({
               .
             </div>
           </div>
-          <button
-            type="button"
-            className="bg-ink text-paper font-display font-bold text-sm px-5 py-3 rounded-[10px] hover:opacity-90 active:scale-[0.98] transition-all flex-shrink-0"
-          >
-            Resend the link
-          </button>
+          <ResendLinkButton email={email === "your inbox" ? undefined : email} />
         </div>
       </main>
 
