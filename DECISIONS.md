@@ -6,6 +6,25 @@ Claude updates this file whenever a meaningful choice is made or revised. Read a
 
 ---
 
+## 2026-07-10, Client CONFIRMED Direction A: Pillar Stack
+
+Primrose reviewed both directions on a video call (moodboard deck: A = Pillar Stack, the built platform; B = Searchlight, the immersive exploration) and chose **Pillar Stack**. The locked 2026-06-29 design direction stands, now with explicit client sign-off. No rework required; the existing build on `main` is the confirmed product.
+
+**What this settles:**
+- The live Pillar Stack build (Porch, Fortress, video viewer, pillar library, admin, account, error/loading states) continues as-is.
+- Instrument Sans stays exploration-only. Production type remains Outfit + Inter + Geist/JetBrains Mono per the locked system.
+- The Searchlight exploration files (`design-exploration-*.html`, `Primrose-Studio-Preview/`) are archived design-trail. Do not port their styling.
+
+**Optional enhancements surfaced during exploration, direction-agnostic, to offer separately (not styling, all UX/trust devices):**
+- "Last reviewed" dates on videos (strong trust device for legal content; creates a maintenance obligation Primrose must agree to)
+- Cancellation steps printed beside pricing ("the exit on the label")
+- Full catalogue visible before paying
+- The interactive "ask a question, get answered" hero search
+
+**Still pending to unblock the build finish:** kickoff payment, Firebase project creation (KICKOFF.md checklist), Primrose's headshot, and her copy-approval pass.
+
+---
+
 ## 2026-06-29 (later), Next.js scaffold complete; design system baked into Tailwind
 
 Scaffolded Next.js 16 + React 19 + Tailwind v4 (CSS-first) + TypeScript at the project root via `create-next-app`. Notes worth remembering:
